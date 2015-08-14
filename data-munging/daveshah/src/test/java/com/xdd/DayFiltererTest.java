@@ -12,13 +12,13 @@ import static org.junit.Assert.assertEquals;
  *
  * @author shah, @date 8/13/15 8:29 PM
  */
-public class DayFinderTest {
+public class DayFiltererTest {
 
     @Test public void itFindsTheDayNumberWithTheSmallestTemperatureSpread() throws IOException {
-        DayProvider dayProvider = new DayProvider("data/weather.dat");
-        DayFinder dayFinder = new DayFinder(dayProvider);
+        FileSystemDayProvider fileSystemDayProvider = new FileSystemDayProvider("data/weather.dat");
+        DayFilterer dayFilterer = new DayFilterer(fileSystemDayProvider);
 
-        Day day = dayFinder.getDayWithSmallestTemperatureSpread();
+        Day day = dayFilterer.getDayWithSmallestTemperatureSpread();
 
         assertEquals("14",day.getNumericDay());
     }

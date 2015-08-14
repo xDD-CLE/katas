@@ -9,13 +9,13 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by shah on 8/14/15.
  */
-public class DayProviderTest {
+public class FileSystemDayProviderTest {
 
     @Test
     public void itProvidesDaysFromAFile() throws Exception {
-        DayProvider provider = new DayProvider("data/weather.dat");
+        FileSystemDayProvider provider = new FileSystemDayProvider("data/weather.dat");
 
-        List<Day> days = provider.getDays();
+        List<Day> days = provider.getValidDays();
 
         assertEquals(31,days.size());
     }

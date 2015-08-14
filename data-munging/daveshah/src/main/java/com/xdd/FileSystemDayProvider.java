@@ -10,15 +10,15 @@ import java.util.stream.Stream;
 /**
  * Created by shah on 8/14/15.
  */
-public class DayProvider {
+public class FileSystemDayProvider {
     private final List<Day> days;
 
-    public DayProvider(String dayFilePath) throws IOException {
+    public FileSystemDayProvider(String dayFilePath) throws IOException {
         Stream<String> lines = Files.lines(Paths.get(dayFilePath));
         this.days = lines.map(s -> new Day(s)).filter(Day::isValid).collect(Collectors.toList());
     }
 
-    public List<Day> getDays() {
+    public List<Day> getValidDays() {
         return days;
     }
 }
