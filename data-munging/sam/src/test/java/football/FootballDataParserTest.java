@@ -22,8 +22,9 @@ public class FootballDataParserTest {
 
         FootballData aFootballData = aFootballDataParser.getSmallestGoalDifference();
         assertNotNull(aFootballData);
-        assertEquals("", aFootballData.getName());
-        assertEquals(1, aFootballData.getAgainstGoals());
-        assertEquals(1, aFootballData.getForGoals());
+        assertEquals("Aston_Villa", aFootballData.getTeam());
+        assertEquals(47, aFootballData.getAgainstGoals());
+        assertEquals(46, aFootballData.getForGoals());
+        assertEquals(1, aFootballData.getGoalDifference());
     }
 }

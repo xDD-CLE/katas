@@ -2,8 +2,6 @@ package football;
 
 import shared.AbstractDataParser;
 
-import java.util.Map;
-
 /**
  * Created by sam on 8/14/15.
  */
@@ -14,12 +12,12 @@ public class FootballDataParser extends AbstractDataParser<FootballData> {
 
     @Override
     protected String getDelimiter() {
-        return "\\W{2,}";
+        return "\\W+";
     }
 
     @Override
-    protected void readDataLine(Map<String, Integer> theHeaders, String[] theLine) {
-        getData().add(new FootballData(theLine, theHeaders));
+    protected void readDataLine(String[] theLine) {
+        getData().add(new FootballData(theLine));
     }
 
     public FootballData getSmallestGoalDifference() {

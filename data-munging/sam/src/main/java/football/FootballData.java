@@ -2,55 +2,52 @@ package football;
 
 import shared.AbstractData;
 
-import java.util.Map;
-
 /**
  * Created by sam on 8/14/15.
  */
 public class FootballData extends AbstractData{
     @Override
     protected String cleanValue(String theValue) {
-        return theValue.replaceAll("\\d+\\.\\w", "");
+        return theValue;
     }
 
     enum Column {
-        NAME("Team"),
-        FOR_GOALS("F"),
-        AGAINST_GOALS("A");
+        TEAM(2),
+        FOR_GOALS(7),
+        AGAINST_GOALS(8);
 
-        private final String fHeaderText;
+        private final int fColumnPosition;
 
-        public String getHeaderText() {
-            return fHeaderText;
+        public int getColumnPosition() {
+            return fColumnPosition;
         }
 
-        Column(String theHeaderText) {
-            fHeaderText = theHeaderText;
+        Column(int theColumnPosition) {
+            fColumnPosition = theColumnPosition;
 
         }
-
     }
 
-    private String fName;
+    private String fTeam;
     private int fAgainstGoals;
     private int fForGoals;
 
-    public FootballData(String[] theLine, Map<String, Integer> theHeaders) {
-        setName(getColumnValue(Column.NAME.getHeaderText(), theLine, theHeaders));
-        setAgainstGoals(Integer.parseInt(getColumnValue(Column.AGAINST_GOALS.getHeaderText(), theLine, theHeaders)));
-        setForGoals(Integer.parseInt(getColumnValue(Column.FOR_GOALS.getHeaderText(), theLine, theHeaders)));
+    public FootballData(String[] theLine) {
+        setTeam(getColumnValue(Column.TEAM.getColumnPosition(), theLine));
+        setAgainstGoals(Integer.parseInt(getColumnValue(Column.AGAINST_GOALS.getColumnPosition(), theLine)));
+        setForGoals(Integer.parseInt(getColumnValue(Column.FOR_GOALS.getColumnPosition(), theLine)));
     }
 
     public int getGoalDifference() {
         return Math.abs(getAgainstGoals() - getForGoals());
     }
 
-    public String getName() {
-        return fName;
+    public String getTeam() {
+        return fTeam;
     }
 
-    public void setName(String theName) {
-        fName = theName;
+    public void setTeam(String theTeam) {
+        fTeam = theTeam;
     }
 
     public int getAgainstGoals() {

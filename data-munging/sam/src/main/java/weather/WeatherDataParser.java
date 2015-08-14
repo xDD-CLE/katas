@@ -19,8 +19,8 @@ public class WeatherDataParser extends AbstractDataParser<WeatherData> {
     }
 
     @Override
-    protected void readDataLine(Map<String, Integer> theHeaders, String[] theLine) {
-        getData().add(new WeatherData(theLine, theHeaders));
+    protected void readDataLine(String[] theLine) {
+        getData().add(new WeatherData(theLine));
     }
 
     public WeatherData getSmallestSpread() {

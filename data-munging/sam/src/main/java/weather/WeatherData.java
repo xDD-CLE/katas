@@ -1,7 +1,5 @@
 package weather;
 
-import java.util.Map;
-
 /**
  * Created by sam on 8/14/15.
  */
@@ -16,25 +14,25 @@ public class WeatherData extends shared.AbstractData {
     }
 
     enum Column {
-        DAY("Dy"),
-        MIN_TEMP("MnT"),
-        MAX_TEMP("MxT");
+        DAY(1),
+        MAX_TEMP(2),
+        MIN_TEMP(3);
 
-        private final String fHeaderText;
+        private final int fColumnPosition;
 
-        public String getHeaderText() {
-            return fHeaderText;
+        public int getColumnPosition() {
+            return fColumnPosition;
         }
 
-        Column(String theHeaderText) {
-            fHeaderText = theHeaderText;
+        Column(int theHeaderPosition) {
+            fColumnPosition = theHeaderPosition;
         }
 
     }
-    public WeatherData(String[] theLine, Map<String, Integer> theHeaders) {
-        setDay(getColumnValue(Column.DAY.getHeaderText(), theLine, theHeaders));
-        setMinTemp(Integer.parseInt(getColumnValue(Column.MIN_TEMP.getHeaderText(), theLine, theHeaders)));
-        setMaxTemp(Integer.parseInt(getColumnValue(Column.MAX_TEMP.getHeaderText(), theLine, theHeaders)));
+    public WeatherData(String[] theLine) {
+        setDay(getColumnValue(Column.DAY.getColumnPosition(), theLine));
+        setMinTemp(Integer.parseInt(getColumnValue(Column.MIN_TEMP.getColumnPosition(), theLine)));
+        setMaxTemp(Integer.parseInt(getColumnValue(Column.MAX_TEMP.getColumnPosition(), theLine)));
     }
 
     public String getDay() {
