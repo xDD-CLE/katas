@@ -3,6 +3,7 @@ package com.xdd;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.*;
 
@@ -16,8 +17,8 @@ public class FileSystemTeamProviderTest {
 
         FileSystemTeamProvider fileSystemTeamProvider = new FileSystemTeamProvider("data/football.dat");
 
-        List<Team> teams = fileSystemTeamProvider.getValidTeams();
+        Stream<Team> teams = fileSystemTeamProvider.getValidTeams();
 
-        assertEquals(20,teams.size());
+        assertEquals(20,teams.count());
     }
 }

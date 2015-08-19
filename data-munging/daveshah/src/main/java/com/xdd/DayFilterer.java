@@ -1,5 +1,6 @@
 package com.xdd;
 
+import java.io.IOException;
 import java.util.Optional;
 
 /**
@@ -13,8 +14,8 @@ public class DayFilterer {
         this.fileSystemDayProvider = fileSystemDayProvider;
     }
 
-    public Day getDayWithSmallestTemperatureSpread() {
-        Optional<Day> max = fileSystemDayProvider.getValidDays().stream().max((day1, day2) -> (int) day2.getDifference() - (int) day1.getDifference());
+    public Day getDayWithSmallestTemperatureSpread() throws IOException {
+        Optional<Day> max = fileSystemDayProvider.getValidDays().max((day1, day2) -> (int) day2.getDifference() - (int) day1.getDifference());
         return max.orElse(new Day("invalidDay"));
     }
 }

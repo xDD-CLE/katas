@@ -3,6 +3,7 @@ package com.xdd;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,8 +16,8 @@ public class FileSystemDayProviderTest {
     public void itProvidesDaysFromAFile() throws Exception {
         FileSystemDayProvider provider = new FileSystemDayProvider("data/weather.dat");
 
-        List<Day> days = provider.getValidDays();
+        Stream<Day> days = provider.getValidDays();
 
-        assertEquals(31,days.size());
+        assertEquals(31,days.count());
     }
 }

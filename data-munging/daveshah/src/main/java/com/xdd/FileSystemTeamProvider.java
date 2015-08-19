@@ -3,8 +3,6 @@ package com.xdd;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -17,8 +15,8 @@ public class FileSystemTeamProvider {
         this.fileLocation = fileLocation;
     }
 
-    public List<Team> getValidTeams() throws IOException {
+    public Stream<Team> getValidTeams() throws IOException {
         Stream<String> lines = Files.lines(Paths.get(fileLocation));
-        return lines.map(line -> new Team(line)).filter(Team::isValid).collect(Collectors.toList());
+        return lines.map(line -> new Team(line)).filter(Team::isValid);
     }
 }
