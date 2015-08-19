@@ -14,11 +14,9 @@ public class Day extends ColumnData {
     private final double minTemp;
     private final double maxTemp;
     private boolean isValid;
-    private String input;
 
     public Day(String input) {
         super(input);
-        this.input = input;
         Pattern pattern = Pattern.compile(".+\\d+\\s+");
         Matcher matcher = pattern.matcher(input);
         isValid = matcher.find();
