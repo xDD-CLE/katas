@@ -1,5 +1,7 @@
 package com.xdd;
 
+import com.xdd.data.models.ColumnData;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -11,14 +13,14 @@ import java.util.stream.Stream;
  */
 public class FileSystemDataProvider<T extends ColumnData> {
 
-    private final String dayFilePath;
+    private final Function<String, T> constructor;
 
-    public FileSystemDataProvider(String dayFilePath) {
-        this.dayFilePath = dayFilePath;
+    public FileSystemDataProvider(Function<String,T> constructor) {
+        this.constructor = constructor;
     }
 
-    public Stream<T> getValidColumnData(Function<String,T> constructor) throws IOException {
-        Stream<String> lines = Files.lines(Paths.get(dayFilePath));
+    public Stream<T> getValidColumnData(String fileLocation) throws IOException {
+        Stream<String> lines = Files.lines(Paths.get(fileLocation));
         return lines.map(constructor).filter(T::isValid);
     }
 }

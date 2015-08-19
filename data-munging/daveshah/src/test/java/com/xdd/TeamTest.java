@@ -1,5 +1,6 @@
 package com.xdd;
 
+import com.xdd.data.models.Team;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -25,9 +26,9 @@ public class TeamTest {
     @Test
     public void itCalculatesItsDifferenceInGoals() throws Exception {
         String validTeam = "        1. Arsenal         38    26   9   3    79  -  36    87";
-        int expectedDifferenceInGoals = 79 - 36;
+        double expectedDifferenceInGoals = 79 - 36;
 
-        assertEquals(expectedDifferenceInGoals,new Team(validTeam).getDifferenceInGoals());
+        assertEquals(expectedDifferenceInGoals, new Team(validTeam).getDifference(), 0.1);
     }
 
     @Test
@@ -35,5 +36,26 @@ public class TeamTest {
         String validTeam = "        1. Arsenal         38    26   9   3    79  -  36    87";
 
         assertEquals("Arsenal",new Team(validTeam).getName());
+    }
+
+    @Test
+    public void itComparesBasedOnGreatestTemperatureDifference() {
+        Team greaterTeam = new Team("") {
+            @Override
+            public double getDifference() {
+                return 22;
+            }
+        };
+
+        Team lesserTeam = new Team("") {
+            @Override
+            public double getDifference() {
+                return 21;
+            }
+        };
+
+        assertEquals(1, greaterTeam.compareTo(lesserTeam));
+        assertEquals(-1, lesserTeam.compareTo(greaterTeam));
+        assertEquals(0, greaterTeam.compareTo(greaterTeam));
     }
 }

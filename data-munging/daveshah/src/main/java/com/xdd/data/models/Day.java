@@ -1,4 +1,4 @@
-package com.xdd;
+package com.xdd.data.models;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,7 +45,13 @@ public class Day extends ColumnData {
         return numericDay;
     }
 
+    @Override
     public double getDifference() {
         return Math.abs(this.maxTemp - this.minTemp);
+    }
+
+    @Override
+    public int compareTo(ColumnData o) {
+        return (int) (this.getDifference() - o.getDifference());
     }
 }

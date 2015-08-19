@@ -1,8 +1,9 @@
-package com.xdd;
+package com.xdd.data.models;
 
+
+import com.xdd.data.models.ColumnData;
 
 import static java.lang.Integer.parseInt;
-import static java.lang.Integer.sum;
 
 /**
  * Created by shah on 8/17/15.
@@ -39,7 +40,13 @@ public class Team extends ColumnData {
         return valid;
     }
 
-    public int getDifferenceInGoals() {
+    @Override
+    public double getDifference() {
         return differenceInGoals;
+    }
+
+    @Override
+    public int compareTo(ColumnData o) {
+        return (int) (this.getDifference() - o.getDifference());
     }
 }

@@ -1,9 +1,9 @@
-package com.xdd;
+package com.xdd.data.models;
 
 /**
  * Created by shah on 8/18/15.
  */
-public class ColumnData {
+public abstract class ColumnData implements Comparable<ColumnData> {
 
     protected String input;
 
@@ -15,4 +15,5 @@ public class ColumnData {
         return false;
     }
 
+    abstract double getDifference();
 }
