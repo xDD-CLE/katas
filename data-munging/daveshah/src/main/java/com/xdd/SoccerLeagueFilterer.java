@@ -9,15 +9,15 @@ import java.util.stream.Stream;
  */
 public class SoccerLeagueFilterer {
 
-    private FileSystemTeamProvider fileSystemTeamProvider;
+    private FileSystemDataProvider<Team> fileSystemTeamProvider;
 
-    public SoccerLeagueFilterer(FileSystemTeamProvider fileSystemTeamProvider) {
+    public SoccerLeagueFilterer(FileSystemDataProvider<Team> fileSystemTeamProvider) {
         this.fileSystemTeamProvider = fileSystemTeamProvider;
     }
 
     public Team getTeamWithTheSmallestDifferenceInGoals() throws IOException {
-        Stream<Team> validTeams = this.fileSystemTeamProvider.getValidTeams();
-        Optional<Team> max = validTeams.min((t1, t2) -> t1.getDifferenceInGoals() - t2.getDifferenceInGoals());
+        Stream<Team> validTeams = fileSystemTeamProvider.getValidColumnData(Team::new);
+        Optional<Team> max = validTeams.min((team1, team2) -> team1.getDifferenceInGoals() - team2.getDifferenceInGoals());
         return max.orElse(new Team(""));
     }
 }

@@ -2,11 +2,12 @@ package com.xdd;
 
 
 import static java.lang.Integer.parseInt;
+import static java.lang.Integer.sum;
 
 /**
  * Created by shah on 8/17/15.
  */
-public class Team {
+public class Team extends ColumnData {
     public static final int NUMBER_OF_COLUMNS = 9;
     public static final int POSITION_OF_NAME = 1;
     public static final int POSITION_OF_GOALS_FOR = 6;
@@ -16,6 +17,7 @@ public class Team {
     private final int differenceInGoals;
 
     public Team(String input) {
+        super(input);
         if (input != null) {
             String[] split = input.replaceFirst("\\W+", "").split("\\W+");
             this.valid = split.length == NUMBER_OF_COLUMNS;
@@ -32,6 +34,7 @@ public class Team {
         return name;
     }
 
+    @Override
     public boolean isValid() {
         return valid;
     }

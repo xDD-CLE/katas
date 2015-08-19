@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 /**
  * Created by shah on 8/14/15.
  */
-public class Day {
+public class Day extends ColumnData {
     private static final int NUMERIC_DAY_POSITION = 1;
     private static final int MIN_TEMP_POSITION = 2;
     private static final int MAX_TEMP_POSITION = 3;
@@ -17,6 +17,7 @@ public class Day {
     private String input;
 
     public Day(String input) {
+        super(input);
         this.input = input;
         Pattern pattern = Pattern.compile(".+\\d+\\s+");
         Matcher matcher = pattern.matcher(input);
@@ -37,6 +38,7 @@ public class Day {
         return input.replaceAll("[^0-9.]", "");
     }
 
+    @Override
     public boolean isValid() {
         return isValid;
     }

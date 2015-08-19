@@ -12,7 +12,7 @@ public class SoccerLeagueFiltererTest {
     @Test
     public void itPrintsProvidesTheTeamWithTheSmallestDifferenceInGoals() throws Exception {
 
-        SoccerLeagueFilterer filterer = new SoccerLeagueFilterer(new FileSystemTeamProvider("data/football.dat"));
+        SoccerLeagueFilterer filterer = new SoccerLeagueFilterer(new FileSystemDataProvider<>("data/football.dat"));
 
         Team team = filterer.getTeamWithTheSmallestDifferenceInGoals();
 

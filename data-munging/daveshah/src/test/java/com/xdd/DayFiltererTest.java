@@ -15,8 +15,7 @@ import static org.junit.Assert.assertEquals;
 public class DayFiltererTest {
 
     @Test public void itFindsTheDayNumberWithTheSmallestTemperatureSpread() throws IOException {
-        FileSystemDayProvider fileSystemDayProvider = new FileSystemDayProvider("data/weather.dat");
-        DayFilterer dayFilterer = new DayFilterer(fileSystemDayProvider);
+        DayFilterer dayFilterer = new DayFilterer(new FileSystemDataProvider<>("data/weather.dat"));
 
         Day day = dayFilterer.getDayWithSmallestTemperatureSpread();
 
