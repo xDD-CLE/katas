@@ -6,34 +6,32 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class StringCalculatorTokenizer {
+public class StringTokenizer {
 
     private final String fString;
-    private Integer fValue = null;
 
     private StringBuilder fTokenBuffer = new StringBuilder();
     private static final List<Character> DEFAULT_DELIMITERS = Arrays.asList(',', '\n');
     private List<Character> fDelimiters = DEFAULT_DELIMITERS;
     private List<String> fNegativeNumbers = new ArrayList<String>();
 
-    public StringCalculatorTokenizer(String theString) {
+    public StringTokenizer(String theString) {
         fString = theString;
     }
 
-    public int calculate(CalculateObject theCalculateObject) {
+    public void tokenize(FlushBufferAction theFlushBufferAction) {
         if (null != fString) {
             for (int i = 0; i < fString.length(); i++) {
                 char token = fString.charAt(i);
                 if (isDelimiter(token)) {
-                    flushToken(theCalculateObject);
+                    flushToken(theFlushBufferAction);
                 } else {
                     appendToken(token);
                 }
             }
-            flushToken(theCalculateObject);
+            flushToken(theFlushBufferAction);
             checkNegatives();
         }
-        return fValue != null ? fValue : 0;
     }
 
     private void checkNegatives() throws NumberFormatException {
@@ -47,16 +45,11 @@ public class StringCalculatorTokenizer {
         return fDelimiters.contains(token);
     }
 
-    protected void flushToken(CalculateObject theCalculateObject) {
+    protected void flushToken(FlushBufferAction theFlushBufferAction) {
         updateDelimiters();
         captureNegative();
         if (fTokenBuffer.length() > 0) {
-            Integer aTokenValue = Integer.valueOf(fTokenBuffer.toString());
-            if (fValue == null) {
-                fValue = aTokenValue;
-            } else {
-                fValue = theCalculateObject.calculate(fValue, aTokenValue);
-            }
+            theFlushBufferAction.flush(fTokenBuffer.toString());
             fTokenBuffer = new StringBuilder();
         }
     }

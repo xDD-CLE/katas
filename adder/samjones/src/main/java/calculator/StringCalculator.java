@@ -1,28 +1,41 @@
 package calculator;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class StringCalculator {
 
-    private final StringCalculatorTokenizer fStringCalculatorTokenizer;
+    private final StringTokenizer fStringTokenizer;
 
     public StringCalculator(String theString) {
-        fStringCalculatorTokenizer = new StringCalculatorTokenizer(theString);
+        fStringTokenizer = new StringTokenizer(theString);
     }
 
     public int add() {
-        return fStringCalculatorTokenizer.calculate(new CalculateObject() {
+        final AtomicInteger aValue = new AtomicInteger(0);
+        fStringTokenizer.tokenize(new FlushBufferAction() {
             @Override
-            public int calculate(int theCurrentValue, int theTokenValue) {
-                return theCurrentValue + theTokenValue;
+            public void flush(String theToken) {
+                aValue.set(aValue.get() + Integer.valueOf(theToken));
             }
         });
+        return aValue.get();
     }
 
     public int subtract() {
-        return fStringCalculatorTokenizer.calculate(new CalculateObject() {
+        final AtomicInteger aValue = new AtomicInteger(0);
+        final AtomicBoolean aFirstElement = new AtomicBoolean(false);
+        fStringTokenizer.tokenize(new FlushBufferAction() {
             @Override
-            public int calculate(int theCurrentValue, int theTokenValue) {
-                return theCurrentValue - theTokenValue;
+            public void flush(String theToken) {
+                Integer aTokenValue = Integer.valueOf(theToken);
+                if (!aFirstElement.get()) {
+                    aValue.set(aTokenValue); // Give an initial value
+                    aFirstElement.set(true);
+                }
+                aValue.set(aValue.get() - aTokenValue);
             }
         });
+        return aValue.get();
     }
 }
