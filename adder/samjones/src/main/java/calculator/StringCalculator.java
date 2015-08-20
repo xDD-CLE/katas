@@ -1,15 +1,28 @@
 package calculator;
 
-import org.apache.commons.lang3.StringUtils;
-
-
 public class StringCalculator {
 
-    public int add(String stringValue) {
-        if (StringUtils.isEmpty(stringValue)) {
-            return 0;
-        } else {
-            return new AdditionTokenizer(stringValue).calculate();
-        }
+    private final StringCalculatorTokenizer fStringCalculatorTokenizer;
+
+    public StringCalculator(String theString) {
+        fStringCalculatorTokenizer = new StringCalculatorTokenizer(theString);
+    }
+
+    public int add() {
+        return fStringCalculatorTokenizer.calculate(new CalculateObject() {
+            @Override
+            public int calculate(int theCurrentValue, int theTokenValue) {
+                return theCurrentValue + theTokenValue;
+            }
+        });
+    }
+
+    public int subtract() {
+        return fStringCalculatorTokenizer.calculate(new CalculateObject() {
+            @Override
+            public int calculate(int theCurrentValue, int theTokenValue) {
+                return theCurrentValue - theTokenValue;
+            }
+        });
     }
 }
