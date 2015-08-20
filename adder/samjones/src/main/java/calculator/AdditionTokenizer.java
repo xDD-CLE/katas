@@ -1,5 +1,7 @@
 package calculator;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,9 +14,9 @@ public class AdditionTokenizer {
     private final String stringValue;
     private int calculatedValue = 0;
     private StringBuilder tokenBuffer = new StringBuilder();
-
     private static final List<Character> DEFAULT_DELIMITERS = Arrays.asList(',', '\n');
     private List<Character> delimiters = DEFAULT_DELIMITERS;
+    private List<String> negativeNumbers = new ArrayList<>();
 
     public AdditionTokenizer(String stringValue) {
         this.stringValue = stringValue;
@@ -30,7 +32,15 @@ public class AdditionTokenizer {
             }
         }
         flushToken();
+        checkNegatives();
         return calculatedValue;
+    }
+
+    private void checkNegatives() throws NumberFormatException {
+        if (negativeNumbers.size() > 0) {
+            throw new NumberFormatException("negative numbers not allowed: " + StringUtils.join(negativeNumbers, ", "));
+        }
+
     }
 
     private boolean isDelimiter(char token) {
@@ -39,8 +49,16 @@ public class AdditionTokenizer {
 
     protected void flushToken() {
         updateDelimiters();
+        captureNegative();
         if (tokenBuffer.length() > 0) {
             calculatedValue += Integer.parseInt(tokenBuffer.toString());
+            tokenBuffer = new StringBuilder();
+        }
+    }
+
+    private void captureNegative() {
+        if (tokenBuffer.toString().startsWith("-")) {
+            negativeNumbers.add(tokenBuffer.toString());
             tokenBuffer = new StringBuilder();
         }
     }
