@@ -37,4 +37,11 @@ public class StringCalculatorTest {
         assertEquals(124750, calculator.add(stringValue.toString()));
 
     }
+
+    @Test
+    public void step3() throws Exception {
+        StringCalculator calculator = new StringCalculator();
+
+        assertEquals(10, calculator.add("1\n2,3,4"));
+    }
 }
