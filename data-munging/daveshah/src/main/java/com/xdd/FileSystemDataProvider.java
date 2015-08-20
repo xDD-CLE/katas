@@ -13,13 +13,7 @@ import java.util.stream.Stream;
  */
 public class FileSystemDataProvider<T extends ColumnData> {
 
-    private final Function<String, T> constructor;
-
-    public FileSystemDataProvider(Function<String,T> constructor) {
-        this.constructor = constructor;
-    }
-
-    public Stream<T> getValidColumnData(String fileLocation) throws IOException {
+    public Stream<T> createFromLinesInFile(String fileLocation, Function<String, T> constructor) throws IOException {
         Stream<String> lines = Files.lines(Paths.get(fileLocation));
         return lines.map(constructor).filter(T::isValid);
     }

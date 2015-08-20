@@ -11,13 +11,12 @@ import static org.junit.Assert.assertEquals;
  */
 public class SmallestColumnDataTypeFiltererTest {
 
-
     @Test
     public void itCanGiveMeTheDayWithTheSmallestTemperatureDifference() throws Exception {
 
-        SmallestColumnDataTypeFilterer<Day> smallestColumnDataTypeFilterer = new SmallestColumnDataTypeFilterer<>(new FileSystemDataProvider<>(Day::new));
+        SmallestColumnDataTypeFilterer<Day> smallestColumnDataTypeFilterer = new SmallestColumnDataTypeFilterer<>(new FileSystemDataProvider<>());
 
-        Day day = smallestColumnDataTypeFilterer.getDayWithTheSmallestTemperatureSpreadFrom("data/weather.dat").get();
+        Day day = smallestColumnDataTypeFilterer.smallestFromFile("data/weather.dat", Day::new).get();
 
         assertEquals("14",day.getNumericDay());
     }
@@ -25,9 +24,9 @@ public class SmallestColumnDataTypeFiltererTest {
     @Test
     public void itCanGiveMeTheTeamWithTheSmallestForOrAgainstDifference() throws Exception {
 
-        SmallestColumnDataTypeFilterer<Team> smallestColumnDataTypeFilterer = new SmallestColumnDataTypeFilterer<>(new FileSystemDataProvider<>(Team::new));
+        SmallestColumnDataTypeFilterer<Team> smallestColumnDataTypeFilterer = new SmallestColumnDataTypeFilterer<>(new FileSystemDataProvider<>());
 
-        Team team = smallestColumnDataTypeFilterer.getDayWithTheSmallestTemperatureSpreadFrom("data/football.dat").get();
+        Team team = smallestColumnDataTypeFilterer.smallestFromFile("data/football.dat", Team::new).get();
 
         assertEquals("Leicester", team.getName());
     }

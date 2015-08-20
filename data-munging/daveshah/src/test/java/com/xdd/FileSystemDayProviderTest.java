@@ -15,15 +15,15 @@ public class FileSystemDayProviderTest {
 
     @Test
     public void itProvidesDaysFromAFile() throws Exception {
-        FileSystemDataProvider<Day> provider = new FileSystemDataProvider<>(Day::new);
-        Stream<Day> days = provider.getValidColumnData("data/weather.dat");
+        FileSystemDataProvider<Day> provider = new FileSystemDataProvider<>();
+        Stream<Day> days = provider.createFromLinesInFile("data/weather.dat", Day::new);
         assertEquals(31,days.count());
     }
 
     @Test
     public void itProvidesTeamsFromAFile() throws Exception {
-        FileSystemDataProvider<Team> provider2 = new FileSystemDataProvider<>(Team::new);
-        Stream<Team> teams = provider2.getValidColumnData("data/football.dat");
+        FileSystemDataProvider<Team> provider = new FileSystemDataProvider<>();
+        Stream<Team> teams = provider.createFromLinesInFile("data/football.dat", Team::new);
         assertEquals(20, teams.count());
     }
 }

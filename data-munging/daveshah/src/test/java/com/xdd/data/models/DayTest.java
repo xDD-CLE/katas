@@ -1,4 +1,4 @@
-package com.xdd;
+package com.xdd.data.models;
 
 import com.xdd.data.models.Day;
 import org.junit.Test;
