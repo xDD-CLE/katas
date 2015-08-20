@@ -58,6 +58,6 @@ public class StringCalculatorTest {
 
     @Test
     public void subtract() throws Exception {
-        assertEquals(1, new StringCalculator("3,2").subtract());
+        assertEquals(-5, new StringCalculator("3,2").subtract());
     }
 }

@@ -1,5 +1,5 @@
 package calculator;
 
-public abstract class FlushBufferAction {
-    public abstract void flush(String theToken);
+public interface FlushBufferAction {
+    public void flush(String theToken);
 }
