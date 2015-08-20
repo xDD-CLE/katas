@@ -18,14 +18,14 @@ public class StringCalculatorTest {
 
         assertEquals(2, calculator.add("1,1"));
         assertEquals(5, calculator.add("2,3"));
-        assertEquals(6, calculator.add("1,2,3"));
+        assertEquals(16, calculator.add("11,2,3"));
     }
 
     @Test
     public void step2() throws Exception {
         StringCalculator calculator = new StringCalculator();
 
-        assertEquals(10, calculator.add("1,2,3,4"));
+        assertEquals(37, calculator.add("1,2,30,4"));
 
         StringBuilder stringValue = new StringBuilder();
         for (int i = 0; i < 500; i++) {
