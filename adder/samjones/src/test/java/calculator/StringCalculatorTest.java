@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class StringCalculatorTest {
 
     @Test
-    public void stepOne() throws Exception {
+    public void step1() throws Exception {
         StringCalculator calculator = new StringCalculator();
 
         assertEquals(0, calculator.add(null));
@@ -43,5 +43,12 @@ public class StringCalculatorTest {
         StringCalculator calculator = new StringCalculator();
 
         assertEquals(10, calculator.add("1\n2,3,4"));
+    }
+
+    @Test
+    public void step4() throws Exception {
+        StringCalculator calculator = new StringCalculator();
+
+        assertEquals(3, calculator.add("//;\n1;2"));
     }
 }
