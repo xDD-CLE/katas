@@ -1,24 +1,27 @@
 package weather;
 
+import common.HasSpread;
+import common.RowFactory;
 import io.TabbedFileReader;
 
 import java.io.FileNotFoundException;
 import java.util.Iterator;
 
-public class WeatherDayIterator implements Iterator<WeatherDay> {
+public class MyIterator implements Iterator<HasSpread> {
 
     private final TabbedFileReader fReader;
-    private final WeatherDayFactory fFactory;
-    private WeatherDay fCache;
+    private final RowFactory fFactory;
+    private HasSpread fCache;
 
-    public WeatherDayIterator(TabbedFileReader theReader) {
+    public MyIterator(TabbedFileReader theReader, RowFactory theFactory) {
         fReader = theReader;
         try {
             fReader.open();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        fFactory = new WeatherDayFactory(fReader.next());
+        fFactory = theFactory;
+        fReader.next(); //skip blank line
         fReader.next(); //skip blank line
     }
 
@@ -31,11 +34,11 @@ public class WeatherDayIterator implements Iterator<WeatherDay> {
     }
 
     @Override
-    public WeatherDay next() {
+    public HasSpread next() {
         if (fCache == null) {
-            fCache = fFactory.createDay(fReader.next());
+            fCache = fFactory.create(fReader.next());
         }
-        WeatherDay aNext = fCache;
+        HasSpread aNext = fCache;
         fCache = null;
         return aNext;
     }

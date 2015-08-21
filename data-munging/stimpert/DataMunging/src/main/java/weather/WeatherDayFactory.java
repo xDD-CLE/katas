@@ -1,6 +1,8 @@
 package weather;
 
-public class WeatherDayFactory {
+import common.RowFactory;
+
+public class WeatherDayFactory implements RowFactory {
 
     private final String[] fHeaders;
 
@@ -8,7 +10,8 @@ public class WeatherDayFactory {
         fHeaders = theHeaders;
     }
 
-    public WeatherDay createDay(String... theValues) {
+    @Override
+    public WeatherDay create(String... theValues) {
         WeatherDay aWeatherDay = null;
         try {
             aWeatherDay = new WeatherDay(getDay(theValues), getMaxTemp(theValues), getMinTemp(theValues));

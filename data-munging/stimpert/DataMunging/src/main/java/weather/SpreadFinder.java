@@ -1,10 +1,12 @@
 package weather;
 
-public class SpreadFinder {
-    private final WeatherDayIterator fIt;
-    private WeatherDay fMinDay = null;
+import common.HasSpread;
 
-    public SpreadFinder(WeatherDayIterator theIt) {
+public class SpreadFinder {
+    private final MyIterator fIt;
+    private HasSpread fMinSpread = null;
+
+    public SpreadFinder(MyIterator theIt) {
         fIt = theIt;
 
     }
@@ -13,16 +15,16 @@ public class SpreadFinder {
         int aMinSpread = Integer.MAX_VALUE;
 
         while (fIt.hasNext()) {
-            WeatherDay aNext = fIt.next();
+            HasSpread aNext = fIt.next();
             int aSpread = aNext.getSpread();
             if (aSpread < aMinSpread) {
                 aMinSpread = aSpread;
-                fMinDay = aNext;
+                fMinSpread = aNext;
             }
         }
     }
 
-    public WeatherDay getSmallestDay() {
-        return fMinDay;
+    public HasSpread getSmallestSpread() {
+        return fMinSpread;
     }
 }

@@ -1,6 +1,8 @@
 package weather;
 
-public class WeatherDay {
+import common.HasSpread;
+
+public class WeatherDay implements HasSpread {
     private final int fDayNum;
     private final int fMaxTemp;
     private final int fMinTemp;
@@ -23,6 +25,7 @@ public class WeatherDay {
         return fMinTemp;
     }
 
+    @Override
     public int getSpread() {
         return getMaxTemp() - getMinTemp();
     }

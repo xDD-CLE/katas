@@ -16,9 +16,9 @@ public class WeatherDayIteratorTest {
                 new String[]{"Dy", "MxT", "MnT", "AvT"},
                 new String[]{"1", "88", "59", "74"});
 
-        WeatherDayIterator aIt = new WeatherDayIterator(aReader);
+        MyIterator aIt = new MyIterator(aReader, new WeatherDayFactory(aReader.next()));
 
-        WeatherDay aDay = aIt.next();
+        WeatherDay aDay = (WeatherDay) aIt.next();
 
         assertEquals(1, aDay.getDayNum());
     }
