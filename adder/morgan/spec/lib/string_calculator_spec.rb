@@ -10,10 +10,15 @@ describe 'string calculator' do
           expect(adder.add("")).to eq 0
         end
 
-        it 'should not allow negative numbers' do
-            expect{adder.add("1,-2")}.to raise_error(ArgumentError)
-        end
+        context 'should not allow negative numbers' do
+          it 'should raise error' do
+              expect{adder.add("1,-2")}.to raise_error(ArgumentError)
+          end
 
+          it 'should contain the negative numbers in error message' do
+              expect{adder.add("1,-2,-5")}.to raise_error(ArgumentError, "Negatives not allowed: [-2,-5]")
+          end
+        end
         context 'should handle single addends' do
           [
             {input: "1", expected: 1},
