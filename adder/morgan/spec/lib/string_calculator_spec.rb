@@ -18,8 +18,15 @@ describe 'string calculator' do
           end
         end
 
-        it "should return 3 from \"1,2\"" do
-          expect(Adder.add("1,2")).to eq 3
+        context 'should handle multiple addends' do
+          [
+            {input: "1,2", expected: 3},
+            {input: "5,6,8", expected: 19},
+          ].each do |test_case|
+            it "should return #{test_case[:input]} from \"1\"" do
+              expect(Adder.add(test_case[:input])).to eq test_case[:expected]
+            end
+          end
         end
 
       end
