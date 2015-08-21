@@ -17,6 +17,11 @@ describe 'string calculator' do
             end
           end
         end
+
+        it "should return 3 from \"1,2\"" do
+          expect(Adder.add("1,2")).to eq 3
+        end
+
       end
   end
 end
