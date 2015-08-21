@@ -2,6 +2,6 @@ class Adder
 
   def self.add(addends)
     return 0 if addends == ""
-    1
+    addends.to_i
   end
 end
