@@ -29,14 +29,20 @@ describe 'string calculator' do
           end
         end
 
-        context 'should handle valid delimiter' do
+        context 'should handle valid delimiters' do
           it 'should handle new line delimiter' do
             expect(Adder.add("4\n4")).to eq 8
           end
+
           it 'should handle comma delimiter' do
             expect(Adder.add("4,4")).to eq 8
           end
         end
       end
+
+      it 'should allow for delimiter to be overridden ' do
+          expect(Adder.add("//;\n1;2")).to eq 3
+      end
+
   end
 end
