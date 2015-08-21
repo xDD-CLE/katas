@@ -1,1 +1,7 @@
-#String Calculator Kata
+# String Calculator Kata
+
+## Run the specs
+
+  `$ bundle install`
+
+  `$ rake spec`
