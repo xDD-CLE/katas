@@ -1,11 +1,17 @@
 class Adder
 
   ADDITION = lambda {|addend,sum| sum += addend }
-
+  NEGATIVE_NUMBER = lambda {|num| num < 0}
+  
   def self.add(string_of_addends)
     return 0 if string_of_addends.empty?
     addends = normalize(string_of_addends)
-    addends.map(&:to_i).inject(0, &ADDITION)
+
+    addends_as_numbers = addends.map(&:to_i)
+
+    raise ArgumentError.new if addends_as_numbers.any?(&NEGATIVE_NUMBER)
+
+    addends_as_numbers.inject(0, &ADDITION)
   end
 
   def self.normalize(string_of_addends)
