@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-
 describe 'string calculator' do
   describe 'addition' do
     it 'is true' do
