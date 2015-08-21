@@ -7,6 +7,10 @@ describe 'string calculator' do
           expect(Adder.add("")).to eq 0
         end
 
+        it 'should not allow negative numbers' do
+            expect{Adder.add("1,-2")}.to raise_error(ArgumentError)
+        end
+
         context 'should handle single addends' do
           [
             {input: "1", expected: 1},
