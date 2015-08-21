@@ -5,7 +5,7 @@
 
   `$ git checkout c1ce5b059959b5d2e28547f8d0e9b50e25160371`
 
-  `git crawl 85f29daf1dccd5e646a66e5680651b12b2e9065b`
+  `$ git crawl 85f29daf1dccd5e646a66e5680651b12b2e9065b`
 
 ## TODO
   - Move normalizing functionality tests.
