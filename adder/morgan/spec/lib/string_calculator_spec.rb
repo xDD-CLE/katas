@@ -29,9 +29,12 @@ describe 'string calculator' do
           end
         end
 
-        context 'should handle new line character as delimiter' do
-          it 'should return 8 from \"4\n4\"' do
+        context 'should handle valid delimiter' do
+          it 'should handle new line delimiter' do
             expect(Adder.add("4\n4")).to eq 8
+          end
+          it 'should handle comma delimiter' do
+            expect(Adder.add("4,4")).to eq 8
           end
         end
       end
