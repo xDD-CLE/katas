@@ -10,15 +10,6 @@ describe 'string calculator' do
           expect(adder.add("")).to eq 0
         end
 
-        context 'should not allow negative numbers' do
-          it 'should raise error' do
-              expect{adder.add("1,-2")}.to raise_error(ArgumentError)
-          end
-
-          it 'should contain the negative numbers in error message' do
-              expect{adder.add("1,-2,-5")}.to raise_error(ArgumentError, "Negatives not allowed: [-2,-5]")
-          end
-        end
         context 'should handle single addends' do
           [
             {input: "1", expected: 1},
@@ -49,10 +40,25 @@ describe 'string calculator' do
           it 'should handle comma delimiter' do
             expect(adder.add("4,4")).to eq 8
           end
-        end
-        it 'should allow for delimiter to be overridden ' do
+
+          it 'should allow for delimiter to be overridden ' do
             expect(adder.add("//;\n1;2")).to eq 3
+          end
         end
-      end
+
+        context 'should not allow negative numbers' do
+          it 'should raise error' do
+            expect{adder.add("1,-2")}.to raise_error(ArgumentError)
+          end
+
+          it 'should contain the negative numbers in error message' do
+            expect{adder.add("1,-2,-5")}.to raise_error(ArgumentError, "Negatives not allowed: [-2,-5]")
+          end
+        end
+
+        it 'should not include numbers greater than or equal to 1000 in sum' do
+          expect(adder.add("2,1000")).to eq 2
+        end
+    end
   end
 end
