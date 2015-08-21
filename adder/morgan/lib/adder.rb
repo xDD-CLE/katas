@@ -1,10 +1,11 @@
 class Adder
 
   ADDITION = lambda {|addend,sum| sum += addend }
+  DELIMITERS = /[,\n]/
 
   def self.add(string_of_addends)
     return 0 if string_of_addends.empty?
-    addends = string_of_addends.split(',')
+    addends = string_of_addends.split(DELIMITERS)
     addends.map(&:to_i).inject(0, &ADDITION)
   end
 end
