@@ -3,6 +3,6 @@
  */
 case class Calculator(contents :String) {
 
-  def add() : Int = 0
+  def add() : Int = if (contents == "") 0 else contents.toInt
 
 }
