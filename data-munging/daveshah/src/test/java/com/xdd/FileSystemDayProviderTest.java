@@ -1,8 +1,10 @@
 package com.xdd;
 
+import com.xdd.data.models.Day;
+import com.xdd.data.models.Team;
 import org.junit.Test;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 
@@ -13,10 +15,15 @@ public class FileSystemDayProviderTest {
 
     @Test
     public void itProvidesDaysFromAFile() throws Exception {
-        FileSystemDayProvider provider = new FileSystemDayProvider("data/weather.dat");
+        FileSystemDataProvider<Day> provider = new FileSystemDataProvider<>();
+        Stream<Day> days = provider.createFromLinesInFile("data/weather.dat", Day::new);
+        assertEquals(31,days.count());
+    }
 
-        List<Day> days = provider.getValidDays();
-
-        assertEquals(31,days.size());
+    @Test
+    public void itProvidesTeamsFromAFile() throws Exception {
+        FileSystemDataProvider<Team> provider = new FileSystemDataProvider<>();
+        Stream<Team> teams = provider.createFromLinesInFile("data/football.dat", Team::new);
+        assertEquals(20, teams.count());
     }
 }

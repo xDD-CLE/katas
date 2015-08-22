@@ -1,5 +1,6 @@
-package com.xdd;
+package com.xdd.data.models;
 
+import com.xdd.data.models.Day;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
@@ -39,9 +40,30 @@ public class DayTest {
         String validDay2 = "  mo  82.9  60.5  71.7    16  58.8       0.00              6.9          5.3";
         String validDay3 = "    9  86    32*   59       6  61.5       0.00         240  7.6 220  12  6.0  78 46 1018.6";
 
-        assertEquals(29.0,new Day(validDay).getDifference());
-        assertEquals(22.400000000000006,new Day(validDay2).getDifference());
-        assertEquals(54.0,new Day(validDay3).getDifference());
+        assertEquals(29.0, new Day(validDay).getDifference());
+        assertEquals(22.400000000000006, new Day(validDay2).getDifference());
+        assertEquals(54.0, new Day(validDay3).getDifference());
+    }
+
+    @Test
+    public void itComparesBasedOnGreatestTemperatureDifference() {
+        Day greaterDay = new Day("") {
+            @Override
+            public double getDifference() {
+                return 22;
+            }
+        };
+
+        Day lesserDay = new Day("") {
+            @Override
+            public double getDifference() {
+                return 21;
+            }
+        };
+
+        assertEquals(1,greaterDay.compareTo(lesserDay));
+        assertEquals(-1,lesserDay.compareTo(greaterDay));
+        assertEquals(0, greaterDay.compareTo(greaterDay));
     }
 
 }

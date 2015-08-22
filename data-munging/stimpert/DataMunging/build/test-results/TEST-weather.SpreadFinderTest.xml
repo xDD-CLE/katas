@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="weather.SpreadFinderTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2015-08-15T15:59:26" hostname="Daves-MacBook-Pro.local" time="0.129">
+  <properties/>
+  <testcase name="shouldFindSmallestSpreadMock" classname="weather.SpreadFinderTest" time="0.119"/>
+  <testcase name="shouldFindSmallestSpreadReal" classname="weather.SpreadFinderTest" time="0.01"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

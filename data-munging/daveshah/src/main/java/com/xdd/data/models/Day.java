@@ -1,4 +1,4 @@
-package com.xdd;
+package com.xdd.data.models;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 /**
  * Created by shah on 8/14/15.
  */
-public class Day {
+public class Day extends ColumnData {
     private static final int NUMERIC_DAY_POSITION = 1;
     private static final int MIN_TEMP_POSITION = 2;
     private static final int MAX_TEMP_POSITION = 3;
@@ -14,10 +14,9 @@ public class Day {
     private final double minTemp;
     private final double maxTemp;
     private boolean isValid;
-    private String input;
 
     public Day(String input) {
-        this.input = input;
+        super(input);
         Pattern pattern = Pattern.compile(".+\\d+\\s+");
         Matcher matcher = pattern.matcher(input);
         isValid = matcher.find();
@@ -37,6 +36,7 @@ public class Day {
         return input.replaceAll("[^0-9.]", "");
     }
 
+    @Override
     public boolean isValid() {
         return isValid;
     }
@@ -45,7 +45,13 @@ public class Day {
         return numericDay;
     }
 
+    @Override
     public double getDifference() {
         return Math.abs(this.maxTemp - this.minTemp);
+    }
+
+    @Override
+    public int compareTo(ColumnData o) {
+        return (int) (this.getDifference() - o.getDifference());
     }
 }
