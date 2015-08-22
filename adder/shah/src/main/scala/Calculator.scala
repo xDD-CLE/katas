@@ -3,6 +3,8 @@
  */
 case class Calculator(numbers :String) {
 
-  def add() : Int = if (numbers == "") 0 else numbers.replace("\n",",").split(",").map(_.toInt).sum
+  private val DELIMITER = ","
+
+  def add : Int = if (numbers == "") 0 else numbers.replace("\n",DELIMITER).split(DELIMITER).map(_.toInt).sum
 
 }
