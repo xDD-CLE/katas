@@ -18,4 +18,19 @@ class StringCalculatorSpec extends FlatSpec {
     result should be (1)
   }
 
+  "A string calculator" should "return the sum of two comma separated numbers" in {
+    val result = Calculator("1,2").add()
+
+    result should be (3)
+  }
+
+  "A string calculator" should "return the sum of many comma separated numbers" in {
+    val result = Calculator("1,2,3,7").add()
+
+    result should be (13)
+  }
+
+
+
+
 }
