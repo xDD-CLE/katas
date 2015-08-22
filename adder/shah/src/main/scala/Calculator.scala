@@ -6,6 +6,7 @@ case class Calculator(numbers :String) {
   private val DELIMITER = ","
   private val NEW_LINE = "\n"
   private val CUSTOM_DELIMITER_MARKER = "//"
+  private val MAXIMUM_ADDEND= 1000
 
   def add : Int = {
     if (numbers == "") {
@@ -16,9 +17,12 @@ case class Calculator(numbers :String) {
         .split(DELIMITER)
         .filterNot(_.isEmpty)
         .map(toNonNegativeInt)
+        .filter( _ <= MAXIMUM_ADDEND)
         .sum
     }
   }
+
+
 
   def toNonNegativeInt(string : String): Int = {
     val int = string.toInt
