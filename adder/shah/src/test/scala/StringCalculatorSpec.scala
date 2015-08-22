@@ -41,4 +41,14 @@ class StringCalculatorSpec extends FlatSpec {
 
     result should be (3)
   }
+
+  "A string calculator" should "not support the addition of negative numbers" in {
+    the [Exception] thrownBy {
+      Calculator("//;\n-1;-2").add
+    } should have message "Negatives not allowed: -1, -2"
+
+
+
+  }
+
 }

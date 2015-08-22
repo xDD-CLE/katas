@@ -15,9 +15,14 @@ case class Calculator(numbers :String) {
         .replace(NEW_LINE,DELIMITER)
         .split(DELIMITER)
         .filterNot(_.isEmpty)
-        .map(_.toInt)
+        .map(toNonNegativeInt)
         .sum
     }
+  }
+
+  def toNonNegativeInt(string : String): Int = {
+    val int = string.toInt
+    if(int < 0) throw new Exception("Negatives not allowed: -1, -2") else int
   }
 
   def changeToDelimiter(input :String) : String = {
