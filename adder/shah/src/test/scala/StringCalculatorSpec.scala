@@ -30,7 +30,9 @@ class StringCalculatorSpec extends FlatSpec {
     result should be (13)
   }
 
+  "A string calculator" should "Allow the Add method to handle new lines between numbers (instead of commas)" in {
+    val result = Calculator("1\n2,3").add()
 
-
-
+    result should be (6)
+  }
 }

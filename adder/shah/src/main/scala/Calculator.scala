@@ -3,6 +3,6 @@
  */
 case class Calculator(numbers :String) {
 
-  def add() : Int = if (numbers == "") 0 else numbers.split(",").map(_.toInt).sum
+  def add() : Int = if (numbers == "") 0 else numbers.replace("\n",",").split(",").map(_.toInt).sum
 
 }
