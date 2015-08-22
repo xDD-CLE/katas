@@ -35,4 +35,10 @@ class StringCalculatorSpec extends FlatSpec {
 
     result should be (6)
   }
+
+  "A string calculator" should "Support different delimiters for the addition of numbers" in {
+    val result = Calculator("//;\n1;2").add
+
+    result should be (3)
+  }
 }
