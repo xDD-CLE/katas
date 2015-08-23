@@ -34,7 +34,11 @@ class StringCalculatorSpec extends FlatSpec {
   it should "not support the addition of negative numbers" in {
     the[Exception] thrownBy {
       Calculator("//;\n-1;-2").add
-    } should have message "Negatives not allowed: -1, -2"
+    } should have message "Negatives not allowed: -1,-2"
+
+    the[Exception] thrownBy {
+      Calculator("//;\n-3;-2").add
+    } should have message "Negatives not allowed: -3,-2"
   }
 
   it should "ignore numbers bigger than 1000" in {
