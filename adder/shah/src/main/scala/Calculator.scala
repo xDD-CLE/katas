@@ -1,42 +1,35 @@
-/**
- * Created by shah on 8/21/15.
- */
-case class Calculator(numbers :String) {
+case class Calculator(input: String) {
 
-  private val DELIMITER = ","
-  private val NEW_LINE = "\n"
-  private val CUSTOM_DELIMITER_MARKER = "//"
-  private val MAXIMUM_ADDEND= 1000
+  val DEFAULT_DELIMITER = ","
+  val NEW_LINE = "\n"
+  val CUSTOM_DELIMITER_MARKER = "//"
+  val MAXIMUM_ADDEND = 1000
 
-  def add : Int = {
-    if (numbers == "") {
-      0
-    } else {
-      changeToDelimiter(numbers)
-        .replace(NEW_LINE,DELIMITER)
-        .split(DELIMITER)
-        .filterNot(_.isEmpty)
-        .map(toNonNegativeInt)
-        .filter( _ <= MAXIMUM_ADDEND)
-        .sum
-    }
+  def add: Int = if (input == "") 0 else numbersFrom(input) sum
+
+  def numbersFrom(input: String): Seq[Int] = {
+    changeToDelimiter(input)
+      .replace(NEW_LINE, DEFAULT_DELIMITER)
+      .split(DEFAULT_DELIMITER)
+      .filterNot(_.isEmpty)
+      .map(toNonNegativeInt)
+      .filter(_ <= MAXIMUM_ADDEND)
   }
 
-
-
-  def toNonNegativeInt(string : String): Int = {
+  def toNonNegativeInt(string: String): Int = {
     val int = string.toInt
-    if(int < 0) throw new Exception("Negatives not allowed: -1, -2") else int
+    if (int < 0) throw new Exception("Negatives not allowed: -1, -2") else int
   }
 
-  def changeToDelimiter(input :String) : String = {
+  def changeToDelimiter(input: String): String = {
     val potentialDelimiter = input.stripPrefix(CUSTOM_DELIMITER_MARKER).charAt(0)
-    if(potentialDelimiter.isDigit){
+    if (potentialDelimiter.isDigit) {
       input
-    } else {
-      input
-        .stripPrefix(CUSTOM_DELIMITER_MARKER + potentialDelimiter)
-        .replaceAll(potentialDelimiter.toString,DELIMITER)
+    } else if(potentialDelimiter == '[') {
+      val delim = input.stripPrefix(CUSTOM_DELIMITER_MARKER + potentialDelimiter).takeWhile(_ != ']')
+      input.stripPrefix(CUSTOM_DELIMITER_MARKER + potentialDelimiter).replace(delim, DEFAULT_DELIMITER).replace("]","")
+    }else{
+      input.stripPrefix(CUSTOM_DELIMITER_MARKER + potentialDelimiter).replace(potentialDelimiter.toString, DEFAULT_DELIMITER)
     }
   }
 }
