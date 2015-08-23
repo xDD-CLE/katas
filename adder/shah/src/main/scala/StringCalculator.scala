@@ -1,4 +1,4 @@
-case class Calculator(input: String) {
+case class StringCalculator(input: String) {
 
   val DEFAULT_DELIMITER = ","
   val NEW_LINE = "\n"
