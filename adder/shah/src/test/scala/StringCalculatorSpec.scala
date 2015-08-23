@@ -41,4 +41,8 @@ class StringCalculatorSpec extends FlatSpec {
     Calculator("1001,2").add should be(2)
   }
 
+  it should "Allow delimeters of any length" in {
+    Calculator("//[***]\n1***2***3").add should be(6)
+  }
+
 }
