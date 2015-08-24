@@ -51,7 +51,7 @@ public class StringCalculatorTest {
         result = calculator.add("//&\n2&2");
         assertEquals("Two plus two (with & delimiter) should be 4", 4, result);
 
-        result = calculator.add("//=n2=2");
+        result = calculator.add("//=\n2=2");
         assertEquals("Two plus two (with a + delimiter) should be 4", 4, result);
 
         result = calculator.add("//;\n2;2\n2");
@@ -78,5 +78,14 @@ public class StringCalculatorTest {
 
         result = calculator.add("2,1001");
         assertEquals("Two plus one thousand and one should be", 2, result);
+    }
+
+    @Test
+    public void shouldAcceptDelimiterOfArbitraryLength() {
+        int result = calculator.add("//;;;\n2;;;2");
+        assertEquals("Two plus two (with a ;;; delimiter) should be 4", 4, result);
+
+        result = calculator.add("//DELIM\n2DELIM2");
+        assertEquals("Two plus two (with a DELIM delimiter) should be 4", 4, result);
     }
 }
