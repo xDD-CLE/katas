@@ -11,7 +11,11 @@ namespace katas.AdderKata
     {
         public int Add(string commaSeparatedNumbers)
         {
-            return 0;
+            if (string.IsNullOrWhiteSpace(commaSeparatedNumbers))
+            {
+                return 0;
+            }
+            return int.Parse(commaSeparatedNumbers);
         }
     }
 }
