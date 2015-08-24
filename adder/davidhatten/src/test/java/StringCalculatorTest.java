@@ -1,4 +1,3 @@
-import kata.adder.Calculator;
 import kata.adder.StringCalculator;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,12 +6,7 @@ import static org.junit.Assert.assertEquals;
 
 public class StringCalculatorTest {
 
-    Calculator calculator;
-
-    @Before
-    public void setUp() {
-        calculator = new StringCalculator();
-    }
+    StringCalculator calculator = StringCalculator.INSTANCE;
 
     @Test
     public void shouldAddNoNumbers() {

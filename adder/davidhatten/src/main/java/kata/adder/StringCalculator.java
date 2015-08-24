@@ -3,12 +3,13 @@ package kata.adder;
 /**
  * Created by david on 8/24/15.
  */
-public class StringCalculator implements Calculator {
+public enum StringCalculator {
 
-    private String rawInput = "";
+    INSTANCE;
 
-    @Override
-    public int add(String input) {
+    private static String rawInput = "";
+
+    public static int add(String input) {
         int calculatedValue = 0;
         rawInput = input;
 
@@ -24,11 +25,11 @@ public class StringCalculator implements Calculator {
         return calculatedValue;
     }
 
-    private boolean inputIsNotEmpty() {
+    private static boolean inputIsNotEmpty() {
         return !"".equals(rawInput); //normally I would check for null, but the kata says don't worry about it
     }
 
-    private String determineAndStripDelimiter() {
+    private static String determineAndStripDelimiter() {
         String result = ",|\n"; //The instructions implied that even with a new delimeter, I would have to handle the other cases
         if (rawInput.startsWith("//")) {
             rawInput = rawInput.substring(2);
