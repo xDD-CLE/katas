@@ -34,5 +34,16 @@ namespace katas.AdderKata
         {
             return adder.Add(theNumberPassedIn);
         }
+
+        [TestCase("0,0", Result = 0)]
+        [TestCase("0,1", Result = 1)]
+        [TestCase("1,0", Result = 1)]
+        [TestCase("1,1", Result = 2)]
+        [TestCase("11,22", Result = 33)]
+        [TestCase("100,200", Result = 300)]
+        public int ItReturnsTheSumOfTwoNumbers(string commaSeparatedNumberList)
+        {
+            return adder.Add(commaSeparatedNumberList);
+        }
     }
 }
