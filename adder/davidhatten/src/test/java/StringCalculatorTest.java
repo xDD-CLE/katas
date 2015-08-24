@@ -47,4 +47,10 @@ public class StringCalculatorTest {
         assertEquals("One plus two plus three (with a newline) should be 6", 6, result);
     }
 
+    @Test
+    public void shouldBeAbleToSetDelimeter() {
+        int result = calculator.add("//;\n2;2");
+        assertEquals("Two plus two (with a semicolon delimeter) should be 4", 4, result);
+    }
+
 }
