@@ -6,19 +6,20 @@ package kata.adder;
 public class StringCalculator implements Calculator {
     @Override
     public int add(String input) {
+        int calculatedValue = 0;
 
-        if ("".equals(input)) {
-            return 0;
-        } else {
+        if (inputIsNotEmpty(input)) {
             String[] inputStrings = input.split(",");
 
-            int result = 0;
-
             for (int i = 0; i < inputStrings.length; i++) {
-                result += Integer.valueOf(inputStrings[i]);
+                calculatedValue += Integer.valueOf(inputStrings[i]);
             }
-            
-            return result;
         }
+
+        return calculatedValue;
+    }
+
+    private boolean inputIsNotEmpty(String input) {
+        return !"".equals(input); //normally I would check for null, but the kata says don't worry about it
     }
 }
