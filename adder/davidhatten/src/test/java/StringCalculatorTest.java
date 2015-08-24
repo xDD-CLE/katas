@@ -51,6 +51,9 @@ public class StringCalculatorTest {
 
         result = calculator.add("//=n2=2");
         assertEquals("Two plus two (with a + delimiter) should be 4", 4, result);
+
+        result = calculator.add("//;\n2;2\n2");
+        assertEquals("two plus two plus two (with a ; delimeter and a newline delimeter) should be 6", 6, result);
     }
 
 }
