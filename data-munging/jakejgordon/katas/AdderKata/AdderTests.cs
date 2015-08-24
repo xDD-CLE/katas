@@ -46,6 +46,8 @@ namespace katas.AdderKata
             return adder.Add(commaSeparatedNumberList);
         }
 
+        //TODO discuss the fact that this test never failed. The amount of code to satisfy the previous test AND this one at the same time
+        // was less than the code to satisfy only the first.
         [TestCase("0,0,0", Result = 0)]
         [TestCase("1,2,3", Result = 6)]
         [TestCase("1,2,3,4,5,6,7", Result = 28)]
@@ -62,6 +64,8 @@ namespace katas.AdderKata
             Assert.That(result, Is.EqualTo(2));
         }
 
+        //TODO discuss the fact that this test never failed. The amount of code to satisfy the previous test AND this one at the same time
+        // was less than the code to satisfy only the first.
         [Test]
         public void ItAcceptsBothNewlineAndCommaDelimitersAtTheSameTime()
         {
