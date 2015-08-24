@@ -1,6 +1,7 @@
-#The BIG GOAL of this Kata - focus on VERY small steps.
-
+#The String Calulcator Kata!
 This kata can be found [here](http://osherove.com/tdd-kata-1/)
+
+##The BIG GOAL of this Kata - focus on VERY small steps.
 
 Feel free to add your project to this directory in the repo so that others can share in the learnage!  
 
