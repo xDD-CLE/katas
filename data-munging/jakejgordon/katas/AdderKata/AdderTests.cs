@@ -45,5 +45,13 @@ namespace katas.AdderKata
         {
             return adder.Add(commaSeparatedNumberList);
         }
+
+        [TestCase("0,0,0", Result = 0)]
+        [TestCase("1,2,3", Result = 6)]
+        [TestCase("1,2,3,4,5,6,7", Result = 28)]
+        public int ItReturnsTheSumOfAllNumbersPassedInRegardlessOfHowMany(string commaSeparatedNumberList)
+        {
+            return adder.Add(commaSeparatedNumberList);
+        }
     }
 }
