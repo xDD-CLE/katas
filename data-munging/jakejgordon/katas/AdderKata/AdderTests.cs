@@ -53,5 +53,21 @@ namespace katas.AdderKata
         {
             return adder.Add(commaSeparatedNumberList);
         }
+
+        [Test]
+        public void ItAcceptsNewlineDelimitedNumbers()
+        {
+            var result = adder.Add("1\n1");
+
+            Assert.That(result, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void ItAcceptsBothNewlineAndCommaDelimitersAtTheSameTime()
+        {
+            var result = adder.Add("1\n1,1");
+
+            Assert.That(result, Is.EqualTo(3)); 
+        }
     }
 }

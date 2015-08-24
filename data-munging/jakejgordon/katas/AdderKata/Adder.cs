@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace katas.AdderKata
 {
@@ -11,7 +12,7 @@ namespace katas.AdderKata
                 return 0;
             }
 
-            return commaSeparatedNumbers.Split(',').Select(int.Parse).Sum();
+            return Regex.Split(commaSeparatedNumbers, @"[,\n]").Select(int.Parse).Sum();
         }
     }
 }
