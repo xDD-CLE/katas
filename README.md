@@ -1,4 +1,6 @@
 # xDD CLE Code Katas
+
+[![Join the chat at https://gitter.im/xDD-CLE/katas](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/xDD-CLE/katas?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 ![Bruce Lee](http://www.gifbin.com/bin/072010/1279705075_bruce-lee-nunchucks.gif)
 
 "There are no limits. There are only plateaus, and you must not stay there, you must go beyond them."   
