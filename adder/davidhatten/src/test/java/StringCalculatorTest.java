@@ -1,6 +1,8 @@
 import kata.adder.StringCalculator;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -56,4 +58,12 @@ public class StringCalculatorTest {
         assertEquals("two plus two plus two (with a ; delimeter and a newline delimeter) should be 6", 6, result);
     }
 
+    @Rule
+    public ExpectedException expected = ExpectedException.none();
+    @Test
+    public void shouldNotBeAbleToAddNegativeNumbers() {
+        expected.expect(RuntimeException.class);
+        expected.expectMessage("Unable to add negative numbers: -1");
+        calculator.add("1,-1");
+    }
 }
