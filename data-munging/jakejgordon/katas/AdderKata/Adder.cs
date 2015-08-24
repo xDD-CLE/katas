@@ -21,6 +21,17 @@ namespace katas.AdderKata
             }
 
             string delimetersRegex = "[,\n]";
+            commaSeparatedNumbers = HandleExplicitDelimiter(commaSeparatedNumbers, ref delimetersRegex);
+
+            int sum = Regex.Split(commaSeparatedNumbers, delimetersRegex).Select(number => HandleIndividualValues(int.Parse(number))).Sum();
+
+            this.ValidateWhetherThereWereNegatives();
+
+            return sum;
+        }
+
+        private static string HandleExplicitDelimiter(string commaSeparatedNumbers, ref string delimetersRegex)
+        {
             if (Adder.DELIMITER_SPECIFIER_REGEX.IsMatch(commaSeparatedNumbers))
             {
                 int indexOfFirstNewline = commaSeparatedNumbers.IndexOf('\n');
@@ -30,12 +41,7 @@ namespace katas.AdderKata
                 delimetersRegex = specifiedDelimeter;
                 commaSeparatedNumbers = commaSeparatedNumbers.Substring(indexOfFirstNewline);
             }
-
-            int sum = Regex.Split(commaSeparatedNumbers, delimetersRegex).Select(number => HandleIndividualValues(int.Parse(number))).Sum();
-
-            this.ValidateWhetherThereWereNegatives();
-
-            return sum;
+            return commaSeparatedNumbers;
         }
 
         private void ValidateWhetherThereWereNegatives()
