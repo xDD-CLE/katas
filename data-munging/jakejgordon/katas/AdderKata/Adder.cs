@@ -8,7 +8,7 @@ namespace katas.AdderKata
 {
     public class Adder
     {
-        private const string DELIMETER_SPECIFIER = @"//.*\n";
+        public const int NUMBER_THRESHOLD_BEFORE_THEY_ARE_IGNORED = 999;
         private static readonly Regex DELIMITER_SPECIFIER_REGEX = new Regex(@"//.*\n");
 
         private readonly List<int> negativeNumbers = new List<int>();
@@ -51,6 +51,11 @@ namespace katas.AdderKata
             if (number < 0)
             {
                 negativeNumbers.Add(number);
+            }
+
+            if (number > NUMBER_THRESHOLD_BEFORE_THEY_ARE_IGNORED)
+            {
+                return 0;
             }
             return number;
         }

@@ -109,5 +109,13 @@ namespace katas.AdderKata
             Assert.That(actualException.Message, Is.EqualTo(expectedException.Message));
         }
 
+        [Test]
+        public void ItTreatsNumbersGreaterThan1000As0()
+        {
+            var result = adder.Add("1000,2000,3000,999,0");
+
+            Assert.That(result, Is.EqualTo(999));
+        }
+
     }
 }
