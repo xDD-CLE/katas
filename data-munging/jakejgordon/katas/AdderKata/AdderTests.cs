@@ -26,15 +26,13 @@ namespace katas.AdderKata
             Assert.That(result, Is.EqualTo(0));
         }
 
-        [TestCase("0")]
-        [TestCase("1")]
-        [TestCase("2")]
-        [TestCase("99")]
-        public void ItReturnsTheNumberThatWasPassedInIfThereIsOnlyOneNumber(string theNumberPassedIn)
+        [TestCase("0", Result = 0)]
+        [TestCase("1", Result = 1)]
+        [TestCase("2", Result = 2)]
+        [TestCase("99", Result = 99)]
+        public int ItReturnsTheNumberThatWasPassedInIfThereIsOnlyOneNumber(string theNumberPassedIn)
         {
-            var result = adder.Add(theNumberPassedIn);
-
-            Assert.That(result, Is.EqualTo(int.Parse(theNumberPassedIn)));
+            return adder.Add(theNumberPassedIn);
         }
     }
 }
