@@ -40,6 +40,12 @@ public enum StringCalculator {
         String result = ",|\n"; //The instructions implied that even with a new delimeter, I would have to handle the other cases
         if (rawInput.startsWith("//")) {
             rawInput = rawInput.substring(2);
+            while (rawInput.startsWith("[")) {
+                int endIndex = rawInput.indexOf("]");
+                result+=("|" + rawInput.substring(1, endIndex));
+                rawInput = rawInput.substring(endIndex);
+            }
+
             int delimEndIndex = rawInput.indexOf("\n");
             result+=("|" + rawInput.substring(0, delimEndIndex));
             rawInput = rawInput.substring(delimEndIndex+1); //have to move past the delimeter and the newline
