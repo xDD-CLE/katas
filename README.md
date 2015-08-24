@@ -23,5 +23,7 @@ One of my favorite [leadership principles](http://www.fastcompany.com/3032699/hi
 # How this works.
 Right now, we're trying to tackle a new Kata each week. Each directory in here corresponds to one of these katas. If you'd like to work through this weeks kata, checkout this repository and create a subdirectory under the kata that corresponds to your github handle. For example, if I wanted to work on the 'data-munging' kata, I'd add a directory ```./data-munging/daveshah``` and if I wanted to work on the 'adder' kata, I'd create ```./adder/daveshah```.  If you take a look at some of these, you can get an idea of what folks have done. 
 
-Feel free to comment on code as well. Again, the goal of this is learning and getting feedback from others always helps!  
+If you have any problems, feel free to open up a Github issue or, for quicker feedback, post something here: [![Join the chat at https://gitter.im/xDD-CLE/katas](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/xDD-CLE/katas?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge).
+
+Feel free to comment on code others have commited as well! Again, the goal of this is learning and getting feedback from others always helps!  
 
