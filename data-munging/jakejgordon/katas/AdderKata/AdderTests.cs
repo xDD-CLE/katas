@@ -73,5 +73,24 @@ namespace katas.AdderKata
 
             Assert.That(result, Is.EqualTo(3)); 
         }
+
+        [Test]
+        public void ItSupportsSpecifyingADelimiter()
+        {
+            var result = adder.Add("//p\n1p1p1");
+
+            Assert.That(result, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void ItSupportsDelimitersThatAreMultipleCharacters()
+        {
+            var result = adder.Add("//foobar\n1foobar2foobar3");
+
+            Assert.That(result, Is.EqualTo(6));
+        }
+
+
+
     }
 }
