@@ -41,4 +41,10 @@ public class StringCalculatorTest {
         assertEquals("Three plus four plus five plus 6 should be 18", 18, result);
     }
 
+    @Test
+    public void shouldAddWithNewlineSeparators() {
+        int result = calculator.add("1,2\n3");
+        assertEquals("One plus two plus three (with a newline) should be 6", 6, result);
+    }
+
 }

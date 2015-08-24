@@ -9,7 +9,7 @@ public class StringCalculator implements Calculator {
         int calculatedValue = 0;
 
         if (inputIsNotEmpty(input)) {
-            String[] inputStrings = input.split(",");
+            String[] inputStrings = input.split(",|\n");
 
             for (int i = 0; i < inputStrings.length; i++) {
                 calculatedValue += Integer.valueOf(inputStrings[i]);
