@@ -56,6 +56,8 @@ public enum StringCalculator {
         int opNumber = Integer.valueOf(operand);
         if (opNumber < 0) {
             invalidInputs.add(opNumber);
+        } else if (opNumber > 1000){
+            opNumber = 0;
         }
 
         return opNumber;

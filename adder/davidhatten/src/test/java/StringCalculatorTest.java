@@ -70,4 +70,13 @@ public class StringCalculatorTest {
         expected.expectMessage(errorMessageBase + "-1 -2");
         calculator.add("-1,-2");
     }
+
+    @Test
+    public void shouldIgnoreNumbersLargerThan1000() {
+        int result = calculator.add("2,1000");
+        assertEquals("Two plus one thousand should be", 1002, result);
+
+        result = calculator.add("2,1001");
+        assertEquals("Two plus one thousand and one should be", 2, result);
+    }
 }
