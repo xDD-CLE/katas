@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace katas
+namespace Katas.Kata04
 {
 	[TestFixture]
     public class Kata04Tests

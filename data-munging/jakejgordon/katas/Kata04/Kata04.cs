@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Data.Common;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace katas
+namespace Katas.Kata04
 {
     public class Kata04
     {
@@ -18,9 +16,9 @@ namespace katas
         {
             var fileContents = File.ReadAllText(@"Data\weather.dat");
 
-            var tableRows = GetTableRows(fileContents);
+            var tableRows = this.GetTableRows(fileContents);
             RemoveAnyRowsThatArentForADayOfTheMonth(tableRows);
-            var table = GetTableWithRowsAndColumns(tableRows);
+            var table = this.GetTableWithRowsAndColumns(tableRows);
             var temperatureSpreads = this.GetTemperatureSpreads(table);
             var dayWithLowestTemperatureSpread = this.GetDayWithLowestTemperatureSpread(temperatureSpreads);
             Debug.WriteLine(string.Format("The day with the lowest temperature spread is day {0}", dayWithLowestTemperatureSpread));
