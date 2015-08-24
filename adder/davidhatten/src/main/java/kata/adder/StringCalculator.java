@@ -6,6 +6,10 @@ package kata.adder;
 public class StringCalculator implements Calculator {
     @Override
     public int add(String input) {
-        return 0;
+        if ("".equals(input)) {
+            return 0;
+        } else {
+            return Integer.valueOf(input);
+        }
     }
 }
