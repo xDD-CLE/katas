@@ -1,5 +1,8 @@
 package kata.adder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by david on 8/24/15.
  */
@@ -8,6 +11,7 @@ public enum StringCalculator {
     INSTANCE;
 
     private static String rawInput = "";
+    private static List<Integer> invalidInputs = new ArrayList();
 
     public static int add(String input) {
         int calculatedValue = 0;
@@ -18,11 +22,33 @@ public enum StringCalculator {
             String[] inputStrings = rawInput.split(delimiter);
 
             for (int i = 0; i < inputStrings.length; i++) {
-                calculatedValue += Integer.valueOf(inputStrings[i]);
+                calculatedValue += parseAddend(inputStrings[i]);
             }
         }
 
+        if (!invalidInputs.isEmpty()) {
+            StringBuilder exceptionText = new StringBuilder();
+            exceptionText.append("Unable to add negative numbers: ");
+            for (int badInput : invalidInputs) {
+                exceptionText.append(badInput);
+                exceptionText.append(" ");
+            }
+
+            invalidInputs.clear();
+
+            throw new RuntimeException(exceptionText.toString());
+        }
+
         return calculatedValue;
+    }
+
+    private static int parseAddend(String operand) {
+        int opNumber = Integer.valueOf(operand);
+        if (opNumber < 0) {
+            invalidInputs.add(opNumber);
+        }
+
+        return opNumber;
     }
 
     private static boolean inputIsNotEmpty() {

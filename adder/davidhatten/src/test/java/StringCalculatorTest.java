@@ -62,8 +62,12 @@ public class StringCalculatorTest {
     public ExpectedException expected = ExpectedException.none();
     @Test
     public void shouldNotBeAbleToAddNegativeNumbers() {
+        String errorMessageBase = "Unable to add negative numbers: ";
         expected.expect(RuntimeException.class);
-        expected.expectMessage("Unable to add negative numbers: -1");
+        expected.expectMessage(errorMessageBase + "-1");
         calculator.add("1,-1");
+
+        expected.expectMessage(errorMessageBase + "-1 -2");
+        calculator.add("-1,-2");
     }
 }
