@@ -19,37 +19,18 @@ public enum StringCalculator {
 
         if (inputIsNotEmpty()) {
             String delimiter = determineAndStripDelimiter();
-            String[] inputStrings = rawInput.split(delimiter);
+            String[] inputStrings = splitRawInputOn(delimiter);
 
             for (int i = 0; i < inputStrings.length; i++) {
                 calculatedValue += parseAddend(inputStrings[i]);
             }
         }
 
-        if (!invalidInputs.isEmpty()) {
-            StringBuilder exceptionText = new StringBuilder();
-            exceptionText.append("Unable to add negative numbers: ");
-            for (int badInput : invalidInputs) {
-                exceptionText.append(badInput);
-                exceptionText.append(" ");
-            }
-
-            invalidInputs.clear();
-
-            throw new RuntimeException(exceptionText.toString());
-        }
+        validateResults();
 
         return calculatedValue;
     }
 
-    private static int parseAddend(String operand) {
-        int opNumber = Integer.valueOf(operand);
-        if (opNumber < 0) {
-            invalidInputs.add(opNumber);
-        }
-
-        return opNumber;
-    }
 
     private static boolean inputIsNotEmpty() {
         return !"".equals(rawInput); //normally I would check for null, but the kata says don't worry about it
@@ -64,5 +45,34 @@ public enum StringCalculator {
         }
 
         return result;
+    }
+
+    private static String[] splitRawInputOn(String delimiter) {
+        String[] result = rawInput.split(delimiter);
+        return result;
+    }
+
+    private static int parseAddend(String operand) {
+        int opNumber = Integer.valueOf(operand);
+        if (opNumber < 0) {
+            invalidInputs.add(opNumber);
+        }
+
+        return opNumber;
+    }
+
+    private static void validateResults() {
+        if (!invalidInputs.isEmpty()) {
+            StringBuilder exceptionText = new StringBuilder();
+            exceptionText.append("Unable to add negative numbers: ");
+            for (int badInput : invalidInputs) {
+                exceptionText.append(badInput);
+                exceptionText.append(" ");
+            }
+
+            invalidInputs.clear();
+
+            throw new RuntimeException(exceptionText.toString());
+        }
     }
 }
