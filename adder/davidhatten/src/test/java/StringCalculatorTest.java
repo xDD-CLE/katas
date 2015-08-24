@@ -88,4 +88,10 @@ public class StringCalculatorTest {
         result = calculator.add("//[DELIM]\n2DELIM2");
         assertEquals("Two plus two (with a DELIM delimiter) should be 4", 4, result);
     }
+
+    @Test
+    public void shouldAcceptMultipleDelimitersOfArbitraryLength() {
+        int result = calculator.add("//[;;;][==][&]\n3;;;3==3&3");
+        assertEquals("Three plus three plus three plus 3 with mult-arbi-delimiters should be 12", 12, result);
+    }
 }

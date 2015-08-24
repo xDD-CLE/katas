@@ -43,11 +43,15 @@ public enum StringCalculator {
             while (rawInput.startsWith("[")) {
                 int endIndex = rawInput.indexOf("]");
                 result+=("|" + rawInput.substring(1, endIndex));
-                rawInput = rawInput.substring(endIndex);
+                rawInput = rawInput.substring(endIndex+1);
             }
 
             int delimEndIndex = rawInput.indexOf("\n");
-            result+=("|" + rawInput.substring(0, delimEndIndex));
+            if (delimEndIndex > 0) {
+                //if delimiters don't have have [], it still needs to get added
+                //But if delimiters do have [], it will add an empty string here
+                result += ("|" + rawInput.substring(0, delimEndIndex));
+            }
             rawInput = rawInput.substring(delimEndIndex+1); //have to move past the delimeter and the newline
         }
 
