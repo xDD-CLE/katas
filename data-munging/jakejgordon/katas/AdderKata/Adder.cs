@@ -1,6 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
+using NUnit.Framework;
 
 namespace katas.AdderKata
 {
@@ -8,6 +10,8 @@ namespace katas.AdderKata
     {
         private const string DELIMETER_SPECIFIER = @"//.*\n";
         private static readonly Regex DELIMITER_SPECIFIER_REGEX = new Regex(@"//.*\n");
+
+        private readonly List<int> negativeNumbers = new List<int>();
 
         public int Add(string commaSeparatedNumbers)
         {
@@ -27,14 +31,26 @@ namespace katas.AdderKata
                 commaSeparatedNumbers = commaSeparatedNumbers.Substring(indexOfFirstNewline);
             }
 
-            return Regex.Split(commaSeparatedNumbers, delimetersRegex).Select(number => HandleIndividualValues(int.Parse(number))).Sum();
+            int sum = Regex.Split(commaSeparatedNumbers, delimetersRegex).Select(number => HandleIndividualValues(int.Parse(number))).Sum();
+
+            this.ValidateWhetherThereWereNegatives();
+
+            return sum;
+        }
+
+        private void ValidateWhetherThereWereNegatives()
+        {
+            if (this.negativeNumbers.Count > 0)
+            {
+                throw new NegativesNotAllowedException(this.negativeNumbers.ToArray());
+            }
         }
 
         private int HandleIndividualValues(int number)
         {
             if (number < 0)
             {
-                throw new NegativesNotAllowedException(number);
+                negativeNumbers.Add(number);
             }
             return number;
         }

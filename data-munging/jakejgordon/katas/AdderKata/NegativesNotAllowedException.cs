@@ -9,7 +9,7 @@ namespace katas.AdderKata
     {
         const string MESSAGE_FORMAT = "Negatives are not allowed. You tried to pass: '{0}'";
 
-        public NegativesNotAllowedException(int number) : base(string.Format(MESSAGE_FORMAT, number))
+        public NegativesNotAllowedException(params int[] negativeNumbers) : base(string.Format(MESSAGE_FORMAT, string.Join(",", negativeNumbers)))
         {
             
         }

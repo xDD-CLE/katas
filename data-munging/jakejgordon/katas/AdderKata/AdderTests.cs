@@ -99,6 +99,15 @@ namespace katas.AdderKata
             Assert.That(actualException.Message, Is.EqualTo(EXPECTED_MESSAGE));
         }
 
+        [Test]
+        public void ItHandlesMultipleNegatives()
+        {
+            var expectedException = new NegativesNotAllowedException(-1, -2, -3);
+
+            var actualException = Assert.Throws<NegativesNotAllowedException>(() => adder.Add("-1,-2,-3"));
+
+            Assert.That(actualException.Message, Is.EqualTo(expectedException.Message));
+        }
 
     }
 }
