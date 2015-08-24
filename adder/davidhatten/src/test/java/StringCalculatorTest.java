@@ -51,6 +51,12 @@ public class StringCalculatorTest {
     public void shouldBeAbleToSetDelimeter() {
         int result = calculator.add("//;\n2;2");
         assertEquals("Two plus two (with a semicolon delimeter) should be 4", 4, result);
+
+        result = calculator.add("//&\n2&2");
+        assertEquals("Two plus two (with & delimiter) should be 4", 4, result);
+
+        result = calculator.add("//=n2=2");
+        assertEquals("Two plus two (with a + delimiter) should be 4", 4, result);
     }
 
 }
