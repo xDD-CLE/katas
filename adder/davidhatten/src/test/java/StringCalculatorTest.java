@@ -29,7 +29,16 @@ public class StringCalculatorTest {
     @Test
     public void shouldAddTwoNumbers() {
         int result = calculator.add("2,2");
-        assertEquals("Two Plus Two should be 4", 4, result);
+        assertEquals("Two plus two should be 4", 4, result);
+    }
+
+    @Test
+    public void shouldAddAnyNumbers() {
+        int result = calculator.add("1,2,3");
+        assertEquals("One plus two plus three should be 6", 6, result);
+
+        result = calculator.add("3,4,5,6");
+        assertEquals("Three plus four plus five plus 6 should be 18", 18, result);
     }
 
 }
