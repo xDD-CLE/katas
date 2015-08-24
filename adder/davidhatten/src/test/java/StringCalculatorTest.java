@@ -1,8 +1,9 @@
 import kata.adder.Calculator;
 import kata.adder.StringCalculator;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class StringCalculatorTest {
 
@@ -16,13 +17,19 @@ public class StringCalculatorTest {
     @Test
     public void shouldAddNoNumbers() {
         int result = calculator.add("");
-        Assert.assertEquals("Adding an empty string should result in 0", 0, result);
+        assertEquals("Adding an empty string should result in 0", 0, result);
     }
 
     @Test
     public void shouldAddOneNumber() {
         int result = calculator.add("1");
-        Assert.assertEquals("One added with nothing should be 1", 1, result);
+        assertEquals("One added with nothing should be 1", 1, result);
+    }
+
+    @Test
+    public void shouldAddTwoNumbers() {
+        int result = calculator.add("2,2");
+        assertEquals("Two Plus Two should be 4", 4, result);
     }
 
 }
