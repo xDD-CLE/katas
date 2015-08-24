@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="AdderKata\Adder.cs" />
     <Compile Include="AdderKata\AdderTests.cs" />
+    <Compile Include="AdderKata\NegativesNotAllowedException.cs" />
     <Compile Include="Kata04\Kata04.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

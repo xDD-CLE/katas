@@ -27,7 +27,16 @@ namespace katas.AdderKata
                 commaSeparatedNumbers = commaSeparatedNumbers.Substring(indexOfFirstNewline);
             }
 
-            return Regex.Split(commaSeparatedNumbers, delimetersRegex).Select(int.Parse).Sum();
+            return Regex.Split(commaSeparatedNumbers, delimetersRegex).Select(number => HandleIndividualValues(int.Parse(number))).Sum();
+        }
+
+        private int HandleIndividualValues(int number)
+        {
+            if (number < 0)
+            {
+                throw new NegativesNotAllowedException(number);
+            }
+            return number;
         }
     }
 }

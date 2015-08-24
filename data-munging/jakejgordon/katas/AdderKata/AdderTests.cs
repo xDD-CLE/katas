@@ -90,6 +90,14 @@ namespace katas.AdderKata
             Assert.That(result, Is.EqualTo(6));
         }
 
+        [Test]
+        public void ItThrowsANegativesNotAllowedExceptionIfOneOfTheNumbersAreNegative()
+        {
+            const string EXPECTED_MESSAGE = "Negatives are not allowed. You tried to pass: '-1'";
+            var actualException = Assert.Throws<NegativesNotAllowedException>(() => adder.Add("-1"));
+
+            Assert.That(actualException.Message, Is.EqualTo(EXPECTED_MESSAGE));
+        }
 
 
     }
