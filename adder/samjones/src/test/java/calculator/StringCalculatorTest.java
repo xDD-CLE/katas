@@ -50,7 +50,7 @@ public class StringCalculatorTest {
 
     @Test
     public void step5() throws Exception {
-        expectedException.expect(NumberFormatException.class);
+        expectedException.expect(RuntimeException.class);
         expectedException.expectMessage("negative numbers not allowed: -1, -3");
 
         new StringCalculator().shouldValidateNegatives().add("-1,2,-3");

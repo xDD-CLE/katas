@@ -4,7 +4,14 @@ package calculator;
 import token.StringTokenizer;
 import token.Token;
 
-import java.util.stream.Collectors;
+import java.util.Collections;
+import java.util.Set;
+import java.util.StringJoiner;
+import java.util.function.BiConsumer;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Collector;
 
 
 public class StringCalculator {
@@ -27,12 +34,7 @@ public class StringCalculator {
 
     private void validateNegs(String theValue) {
         if (fShouldValidateNegatives) {
-            new StringTokenizer(theValue).stream().filter(Token::isNegativeInt).map(Token::stringValue).collect(Collectors.collectingAndThen(Collectors.joining(", "), theError -> {
-                if (!theError.isEmpty()) {
-                    throw new NumberFormatException("negative numbers not allowed: " + theError);
-                }
-                return theError;
-            }));
+            new StringTokenizer(theValue).stream().filter(Token::isNegativeInt).collect(new ErrorCollector("negative numbers not allowed: "));
         }
     }
 
@@ -48,5 +50,44 @@ public class StringCalculator {
 
     public int getValue() {
         return fValue;
+    }
+
+    public static class ErrorCollector implements Collector<Token, StringJoiner, String> {
+
+        private final String fPrefix;
+
+        public ErrorCollector(String thePrefix) {
+            fPrefix = thePrefix;
+        }
+
+        @Override
+        public Supplier<StringJoiner> supplier() {
+            return () -> new StringJoiner(", ");
+        }
+
+        @Override
+        public BiConsumer<StringJoiner, Token> accumulator() {
+            return (theStringJoiner, theToken) -> theStringJoiner.add(theToken.stringValue());
+        }
+
+        @Override
+        public BinaryOperator<StringJoiner> combiner() {
+            return StringJoiner::merge;
+        }
+
+        @Override
+        public Function<StringJoiner, String> finisher() {
+            return theStringJoiner -> {
+                if (theStringJoiner.length() > 0) {
+                    throw new RuntimeException(fPrefix + theStringJoiner.toString());
+                }
+                return null;
+            };
+        }
+
+        @Override
+        public Set<Characteristics> characteristics() {
+            return Collections.emptySet();
+        }
     }
 }
