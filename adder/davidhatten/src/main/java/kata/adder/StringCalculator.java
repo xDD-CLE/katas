@@ -37,25 +37,28 @@ public enum StringCalculator {
     }
 
     private static String determineAndStripDelimiter() {
-        String result = ",|\n"; //The instructions implied that even with a new delimeter, I would have to handle the other cases
+        List<String> result = new ArrayList<>();
+        result.add(",");
+        result.add("\n");
+
         if (rawInput.startsWith("//")) {
-            rawInput = rawInput.substring(2);
+            rawInput = rawInput.substring(2); //consume the slashes
             while (rawInput.startsWith("[")) {
                 int endIndex = rawInput.indexOf("]");
-                result+=("|" + rawInput.substring(1, endIndex));
-                rawInput = rawInput.substring(endIndex+1);
+                result.add(rawInput.substring(1, endIndex));
+                rawInput = rawInput.substring(endIndex+1); //consume the delimiter and closing bracket
             }
 
             int delimEndIndex = rawInput.indexOf("\n");
             if (delimEndIndex > 0) {
                 //if delimiters don't have have [], it still needs to get added
-                //But if delimiters do have [], it will add an empty string here
-                result += ("|" + rawInput.substring(0, delimEndIndex));
+                //But if delimiters do have [], it will add an empty string here, so have to avoid that
+                result.add(rawInput.substring(0, delimEndIndex));
             }
-            rawInput = rawInput.substring(delimEndIndex+1); //have to move past the delimeter and the newline
+            rawInput = rawInput.substring(delimEndIndex+1); //consume the newline
         }
 
-        return result;
+        return String.join("|", result);
     }
 
     private static String[] splitRawInputOn(String delimiter) {
