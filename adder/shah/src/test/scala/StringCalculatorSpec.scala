@@ -45,8 +45,12 @@ class StringCalculatorSpec extends FlatSpec {
     StringCalculator("1001,2").add should be(2)
   }
 
-  it should "Allow delimeters of any length" in {
+  it should "allow delimiters of any length" in {
     StringCalculator("//[***]\n1***2***3").add should be(6)
+  }
+
+  it should "allow multiple delimiters of any length" in {
+    StringCalculator("//[*][%]\n1*2%3").add should be(6)
   }
 
 }

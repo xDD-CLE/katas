@@ -30,10 +30,14 @@ case class StringCalculator(input: String) {
     if (potentialDelimiter.isDigit) {
       input
     } else if (potentialDelimiter == '[') {
-      val delim = input.stripPrefix(CUSTOM_DELIMITER_MARKER + potentialDelimiter).takeWhile(_ != ']')
-      input.stripPrefix(CUSTOM_DELIMITER_MARKER + potentialDelimiter).replace(delim, DEFAULT_DELIMITER).replace("]", "")
+      val cleanedInput = (input::findAllCustomDelimitersIn(input)). map(removeBracketsFrom).reduce[String]((acc,next) => acc.replace(next,","))
+      removeBracketsFrom(cleanedInput).replace(CUSTOM_DELIMITER_MARKER,"")
     } else {
-      input.stripPrefix(CUSTOM_DELIMITER_MARKER + potentialDelimiter).replace(potentialDelimiter.toString, DEFAULT_DELIMITER)
+      input.stripPrefix(CUSTOM_DELIMITER_MARKER + potentialDelimiter).replace(potentialDelimiter.toString,DEFAULT_DELIMITER)
     }
   }
+
+  def findAllCustomDelimitersIn(input :String) : List[String] = """\[[^\]]+\]""".r findAllIn input toList
+
+  def removeBracketsFrom(input :String) = input.replace("]","").replace("[","")
 }
