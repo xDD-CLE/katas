@@ -5,8 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 import token.StringTokenizer;
 import token.Token;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class StringCalculator {
@@ -22,17 +22,18 @@ public class StringCalculator {
     }
 
     public StringCalculator add(String theValue) {
-        List<String> aNegatives = new ArrayList<>();
-        new StringTokenizer(theValue).filter(Token::isInt).forEach(theToken -> {
-            fValue += theToken.intValue();
-            if (theToken.isNegativeInt()) {
-                aNegatives.add(theToken.stringValue());
-            }
-        });
-        if (fShouldValidateNegatives && !aNegatives.isEmpty()) {
-            throw new NumberFormatException("negative numbers not allowed: " + StringUtils.join(aNegatives, ", "));
-        }
+        validateNegs(theValue);
+        new StringTokenizer(theValue).filter(Token::isInt).forEach(theToken -> fValue += theToken.intValue());
         return this;
+    }
+
+    private void validateNegs(String theValue) {
+        if (fShouldValidateNegatives) {
+            List<String> aNegatives = new StringTokenizer(theValue).filter(Token::isNegativeInt).map(Token::stringValue).collect(Collectors.toList());
+            if (!aNegatives.isEmpty()) {
+                throw new NumberFormatException("negative numbers not allowed: " + StringUtils.join(aNegatives, ", "));
+            }
+        }
     }
 
     public StringCalculator subtract(String theValue) {
