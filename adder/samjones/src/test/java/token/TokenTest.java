@@ -19,6 +19,15 @@ public class TokenTest {
     }
 
     @Test
+    public void shouldNotBeIntToken() throws Exception {
+        Token aToken = new Token();
+        aToken.append('a');
+        assertFalse(aToken.isInt());
+        assertFalse(aToken.isNegativeInt());
+        assertFalse(aToken.isPositiveInt());
+    }
+
+    @Test
     public void shouldMakeIntToken() throws Exception {
         Token aToken = new Token();
         aToken.append('1');

@@ -57,6 +57,11 @@ public class StringCalculatorTest {
     }
 
     @Test
+    public void step5ValidationPasses() throws Exception {
+        assertEquals(6, new StringCalculator().shouldValidateNegatives().add("1,2,3").getValue());
+    }
+
+    @Test
     public void step5NoValidation() throws Exception {
         assertEquals(-2, new StringCalculator().add("-1,2,-3").getValue());
     }

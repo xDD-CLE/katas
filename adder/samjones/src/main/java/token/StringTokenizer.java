@@ -1,13 +1,13 @@
 package token;
 
-import javax.xml.stream.StreamFilter;
-import javax.xml.stream.XMLStreamReader;
-import java.util.*;
-import java.util.function.Predicate;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-public class StringTokenizer implements Iterable<Token>, Iterator<Token>, StreamFilter {
+public class StringTokenizer implements Iterable<Token>, Iterator<Token> {
 
     private final String fValue;
     private int fIndex = 0;
@@ -58,16 +58,12 @@ public class StringTokenizer implements Iterable<Token>, Iterator<Token>, Stream
         return !getDelimiters().contains(fValue.charAt(fIndex));
     }
 
-    public Stream<Token> filter(Predicate<Token> thePredicate) {
-        return StreamSupport.stream(this.spliterator(), false).filter(thePredicate);
+    public Stream<Token> stream() {
+        return StreamSupport.stream(this.spliterator(), false);
     }
 
-    @Override
-    public boolean accept(XMLStreamReader reader) {
-        return false;
-    }
-
-    public void setDelimiters(Character... theDelimiters) {
+    public StringTokenizer setDelimiters(Character... theDelimiters) {
         fDelimiters = new HashSet<>(Arrays.asList(theDelimiters));
+        return this;
     }
 }
