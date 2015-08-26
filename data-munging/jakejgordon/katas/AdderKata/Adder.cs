@@ -9,7 +9,6 @@ namespace katas.AdderKata
     public class Adder
     {
         public const int NUMBER_THRESHOLD_BEFORE_THEY_ARE_IGNORED = 999;
-        private static readonly Regex DELIMITER_SPECIFIER_REGEX = new Regex(@"//.*\n");
 
         private readonly List<int> negativeNumbers = new List<int>();
 
@@ -20,28 +19,56 @@ namespace katas.AdderKata
                 return 0;
             }
 
-            string delimetersRegex = "[,\n]";
-            commaSeparatedNumbers = HandleExplicitDelimiter(commaSeparatedNumbers, ref delimetersRegex);
+            var delimetersRegex = "[,\n]";
+            commaSeparatedNumbers = HandleExplicitDelimiters(commaSeparatedNumbers, ref delimetersRegex);
 
-            int sum = Regex.Split(commaSeparatedNumbers, delimetersRegex).Select(number => HandleIndividualValues(int.Parse(number))).Sum();
+            var sum = SumUpValidNumbersAndCheckForInvalidOnes(commaSeparatedNumbers, delimetersRegex);
 
             this.ValidateWhetherThereWereNegatives();
 
             return sum;
         }
 
-        private static string HandleExplicitDelimiter(string commaSeparatedNumbers, ref string delimetersRegex)
+        private static string HandleExplicitDelimiters(string commaSeparatedNumbers, ref string delimitersRegex)
         {
-            if (Adder.DELIMITER_SPECIFIER_REGEX.IsMatch(commaSeparatedNumbers))
+            var delimiterSpecifierRegex = new Regex(@"//.*\n");
+            if (delimiterSpecifierRegex.IsMatch(commaSeparatedNumbers))
             {
-                int indexOfFirstNewline = commaSeparatedNumbers.IndexOf('\n');
+                var indexOfFirstNewline = commaSeparatedNumbers.IndexOf('\n');
                 const int NUMBER_OF_NEWLINE_SLASHES = 2;
-                int numberOfCharactersOfTheDelimiter = indexOfFirstNewline - NUMBER_OF_NEWLINE_SLASHES;
-                string specifiedDelimeter = commaSeparatedNumbers.Substring(NUMBER_OF_NEWLINE_SLASHES, numberOfCharactersOfTheDelimiter);
-                delimetersRegex = specifiedDelimeter;
+                var numberOfCharactersOfTheDelimiter = indexOfFirstNewline - NUMBER_OF_NEWLINE_SLASHES;
+                var allDelimitersString = commaSeparatedNumbers.Substring(NUMBER_OF_NEWLINE_SLASHES, numberOfCharactersOfTheDelimiter);
+                var individualDelimiterRegex = new Regex(@"\[[^\]*]\]");
+                var listOfRegexes =
+                    individualDelimiterRegex.Matches(allDelimitersString)
+                                            .Cast<Match>()
+                                            .Select(match => match.Value)
+                                            .Select(BuildIndividualRegex)
+                                            .ToList();
+
+                if (listOfRegexes.Count > 0)
+                {
+                    const string REGEX_OR = "|";
+                    delimitersRegex = string.Join(REGEX_OR, listOfRegexes);
+                }
+                else
+                {
+                    delimitersRegex = allDelimitersString;
+                }
+
                 commaSeparatedNumbers = commaSeparatedNumbers.Substring(indexOfFirstNewline);
             }
             return commaSeparatedNumbers;
+        }
+
+        private static string BuildIndividualRegex(string delimiterWithSquareBrackets)
+        {
+            return Regex.Escape(delimiterWithSquareBrackets.Replace("[", string.Empty).Replace("]", string.Empty));
+        }
+
+        private int SumUpValidNumbersAndCheckForInvalidOnes(string commaSeparatedNumbers, string delimetersRegex)
+        {
+            return Regex.Split(commaSeparatedNumbers, delimetersRegex).Select(number => this.HandleIndividualValues(int.Parse(number))).Sum();
         }
 
         private void ValidateWhetherThereWereNegatives()

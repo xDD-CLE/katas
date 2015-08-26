@@ -117,5 +117,12 @@ namespace katas.AdderKata
             Assert.That(result, Is.EqualTo(999));
         }
 
+        [Test]
+        public void ItAllowsMultipleDelimitersToBeSpecified()
+        {
+            var result = adder.Add("//[p][q]\n1p1q1");
+
+            Assert.That(result, Is.EqualTo(3)); 
+        }
     }
 }
