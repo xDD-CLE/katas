@@ -124,5 +124,14 @@ namespace katas.AdderKata
 
             Assert.That(result, Is.EqualTo(3)); 
         }
+
+        [Test]
+        public void ItAllowsDelimitersAndEscapesSpecialRegexCharacters()
+        {
+            var result = adder.Add("//[_.][*#%]\n1_.1*#%1");
+
+            Assert.That(result, Is.EqualTo(3));  
+        }
+
     }
 }

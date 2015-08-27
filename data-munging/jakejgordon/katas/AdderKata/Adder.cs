@@ -36,9 +36,9 @@ namespace katas.AdderKata
             {
                 var indexOfFirstNewline = commaSeparatedNumbers.IndexOf('\n');
                 const int NUMBER_OF_NEWLINE_SLASHES = 2;
-                var numberOfCharactersOfTheDelimiter = indexOfFirstNewline - NUMBER_OF_NEWLINE_SLASHES;
-                var allDelimitersString = commaSeparatedNumbers.Substring(NUMBER_OF_NEWLINE_SLASHES, numberOfCharactersOfTheDelimiter);
-                var individualDelimiterRegex = new Regex(@"\[[^\]*]\]");
+                var numberOfCharactersOfTheDelimiterPortion = indexOfFirstNewline - NUMBER_OF_NEWLINE_SLASHES;
+                var allDelimitersString = commaSeparatedNumbers.Substring(NUMBER_OF_NEWLINE_SLASHES, numberOfCharactersOfTheDelimiterPortion);
+                var individualDelimiterRegex = new Regex(@"(\[[^\\]+?\])");
                 var listOfRegexes =
                     individualDelimiterRegex.Matches(allDelimitersString)
                                             .Cast<Match>()
