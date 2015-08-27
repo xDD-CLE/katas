@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+using katas.AdderKata;
 using NUnit.Framework;
 
-namespace katas.AdderKata
+namespace AdderKata
 {
     [TestFixture]
     public class AdderTests
@@ -15,13 +12,13 @@ namespace katas.AdderKata
         [SetUp]
         public void SetUp()
         {
-            adder = new Adder();
+            this.adder = new Adder();
         }
 
         [Test]
         public void ItReturnsZeroIfThereIsOnlyAnEmptyString()
         {
-            var result = adder.Add(string.Empty);
+            var result = this.adder.Add(string.Empty);
 
             Assert.That(result, Is.EqualTo(0));
         }
@@ -32,7 +29,7 @@ namespace katas.AdderKata
         [TestCase("99", Result = 99)]
         public int ItReturnsTheNumberThatWasPassedInIfThereIsOnlyOneNumber(string theNumberPassedIn)
         {
-            return adder.Add(theNumberPassedIn);
+            return this.adder.Add(theNumberPassedIn);
         }
 
         [TestCase("0,0", Result = 0)]
@@ -43,7 +40,7 @@ namespace katas.AdderKata
         [TestCase("100,200", Result = 300)]
         public int ItReturnsTheSumOfTwoNumbers(string commaSeparatedNumberList)
         {
-            return adder.Add(commaSeparatedNumberList);
+            return this.adder.Add(commaSeparatedNumberList);
         }
 
         //TODO discuss the fact that this test never failed. The amount of code to satisfy the previous test AND this one at the same time
@@ -53,13 +50,13 @@ namespace katas.AdderKata
         [TestCase("1,2,3,4,5,6,7", Result = 28)]
         public int ItReturnsTheSumOfAllNumbersPassedInRegardlessOfHowMany(string commaSeparatedNumberList)
         {
-            return adder.Add(commaSeparatedNumberList);
+            return this.adder.Add(commaSeparatedNumberList);
         }
 
         [Test]
         public void ItAcceptsNewlineDelimitedNumbers()
         {
-            var result = adder.Add("1\n1");
+            var result = this.adder.Add("1\n1");
 
             Assert.That(result, Is.EqualTo(2));
         }
@@ -69,7 +66,7 @@ namespace katas.AdderKata
         [Test]
         public void ItAcceptsBothNewlineAndCommaDelimitersAtTheSameTime()
         {
-            var result = adder.Add("1\n1,1");
+            var result = this.adder.Add("1\n1,1");
 
             Assert.That(result, Is.EqualTo(3)); 
         }
@@ -77,7 +74,7 @@ namespace katas.AdderKata
         [Test]
         public void ItSupportsSpecifyingADelimiter()
         {
-            var result = adder.Add("//p\n1p1p1");
+            var result = this.adder.Add("//p\n1p1p1");
 
             Assert.That(result, Is.EqualTo(3));
         }
@@ -85,7 +82,7 @@ namespace katas.AdderKata
         [Test]
         public void ItSupportsDelimitersThatAreMultipleCharacters()
         {
-            var result = adder.Add("//foobar\n1foobar2foobar3");
+            var result = this.adder.Add("//foobar\n1foobar2foobar3");
 
             Assert.That(result, Is.EqualTo(6));
         }
@@ -94,7 +91,7 @@ namespace katas.AdderKata
         public void ItThrowsANegativesNotAllowedExceptionIfOneOfTheNumbersAreNegative()
         {
             const string EXPECTED_MESSAGE = "Negatives are not allowed. You tried to pass: '-1'";
-            var actualException = Assert.Throws<NegativesNotAllowedException>(() => adder.Add("-1"));
+            var actualException = Assert.Throws<NegativesNotAllowedException>(() => this.adder.Add("-1"));
 
             Assert.That(actualException.Message, Is.EqualTo(EXPECTED_MESSAGE));
         }
@@ -104,7 +101,7 @@ namespace katas.AdderKata
         {
             var expectedException = new NegativesNotAllowedException(-1, -2, -3);
 
-            var actualException = Assert.Throws<NegativesNotAllowedException>(() => adder.Add("-1,-2,-3"));
+            var actualException = Assert.Throws<NegativesNotAllowedException>(() => this.adder.Add("-1,-2,-3"));
 
             Assert.That(actualException.Message, Is.EqualTo(expectedException.Message));
         }
@@ -112,7 +109,7 @@ namespace katas.AdderKata
         [Test]
         public void ItTreatsNumbersGreaterThan1000As0()
         {
-            var result = adder.Add("1000,2000,3000,999,0");
+            var result = this.adder.Add("1000,2000,3000,999,0");
 
             Assert.That(result, Is.EqualTo(999));
         }
@@ -120,7 +117,7 @@ namespace katas.AdderKata
         [Test]
         public void ItAllowsMultipleDelimitersToBeSpecified()
         {
-            var result = adder.Add("//[p][q]\n1p1q1");
+            var result = this.adder.Add("//[p][q]\n1p1q1");
 
             Assert.That(result, Is.EqualTo(3)); 
         }
@@ -128,7 +125,7 @@ namespace katas.AdderKata
         [Test]
         public void ItAllowsDelimitersAndEscapesSpecialRegexCharacters()
         {
-            var result = adder.Add("//[_.][*#%]\n1_.1*#%1");
+            var result = this.adder.Add("//[_.][*#%]\n1_.1*#%1");
 
             Assert.That(result, Is.EqualTo(3));  
         }
