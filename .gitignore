@@ -189,7 +189,7 @@ _Pvt_Extensions/
 ModelManifest.xml
 
 # Sam Jones
-*/samjones/.idea
+.idea
 */samjones/build
 */samjones/.gradle
-*/samjones/*.iml
+*.iml
