@@ -9,11 +9,6 @@ namespace AdderKata
     {
         public int Add(string input)
         {
-            if (string.IsNullOrEmpty(input))
-            {
-                return 0;
-            }
-
             var delimiters = GetDelimiters(input);
             var numbers = GetNumbers(input, delimiters);
             VerifyNoNegativeNumbers(numbers);
@@ -34,6 +29,11 @@ namespace AdderKata
 
         private static List<int> GetNumbers(string values, List<char> delimiters)
         {
+            if (string.IsNullOrEmpty(values))
+            {
+                return new List<int> {0};
+            }
+
             if (values.StartsWith("//"))
             {
                 values = values.Substring(4);
