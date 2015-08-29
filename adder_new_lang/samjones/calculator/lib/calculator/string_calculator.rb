@@ -8,12 +8,12 @@ class StringCalculator
   end
 
   def add(string)
-    @value += string.split(',').map{|s| s.to_i}.inject(:+)
+    @value += Tokenizer.new(string).ints.inject(:+)
     self
   end
 
   def subtract(string)
-    @value -= string.split(",").map{|s| s.to_i}.inject(:+)
+    @value -= Tokenizer.new(string).ints.inject(:+)
     self
   end
 end
