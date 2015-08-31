@@ -1,11 +1,21 @@
 
 class Tokenizer
   def initialize(string = '')
-    @string = string
+    case string
+      when /\/\/(.)\n(.*)/
+        @delims = $1
+        @string = $2
+      when /\/\/(\[.+\])+\n.*/
+        @delims = Regexp.new($1.split(/\[|\]/).reject(&:empty?).join('|'))
+        @string = string.sub(/\/\/(\[.+\])+\n/, '')
+      else
+        @delims = /,|\n/
+        @string = string
+    end
   end
 
   def tokens
-    @string.split(/[,|\n]/)
+    @string.split(@delims)
   end
 
   def ints
