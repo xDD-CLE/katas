@@ -10,7 +10,11 @@ class AdderTestCase(unittest.TestCase):
 
     def test_addOneNumber(self):
         result = adder.add("2")
-        self.assertEqual(2, result)
+        self.assertEqual(2, result, "Two and zero should be 2")
+
+    def test_addTwoNumbers(self):
+        result = adder.add("2, 2")
+        self.assertEqual(4, result, "Two and Two should be 4")
 
 if __name__ == '__main__':
     unittest.main()
