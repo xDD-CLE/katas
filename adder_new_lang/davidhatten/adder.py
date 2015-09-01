@@ -1,4 +1,8 @@
 __author__ = 'david'
 
-def add():
-    return 0
+
+def add(addInput):
+    if addInput:
+        return int(addInput)
+    else:
+        return 0
