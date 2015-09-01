@@ -24,4 +24,18 @@ class Adder:
 
     def delimiters(self):
         delims = [',', '\n']
+
+        if self.rawInput.startswith('//'):
+            self.rawInput = self.rawInput.strip('//')
+
+            while (not self.rawInput.startswith('\n')):
+                delims.append(self.rawInput[0])
+                self.consumeCharacter()
+            else:
+                self.consumeCharacter()
+
+
         return '|'.join(delims)
+
+    def consumeCharacter(self):
+        self.rawInput = self.rawInput[1:]

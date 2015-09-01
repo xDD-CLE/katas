@@ -30,5 +30,12 @@ class AdderTestCase(unittest.TestCase):
         result = self.add("3,3\n3")
         self.assertEqual(9, result, "Three plus three plus three with both delimiters")
 
+    def test_customDelimiter(self):
+        result = self.add('//;\n3;3')
+        self.assertEqual(6, result, "Three plus three with a custom delimiter should be 6")
+
+        result = self.add('//;\n3;3,2\n1')
+        self.assertEqual(9, result, "Three plus three plus two plus one with custom and default delimiters should be 9")
+
 if __name__ == '__main__':
     unittest.main()
