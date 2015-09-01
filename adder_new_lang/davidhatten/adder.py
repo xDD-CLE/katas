@@ -6,11 +6,15 @@ def add(addInput):
     if addInput:
         result = 0
         rawInput = addInput
-        splitInput = rawInput.split(',')
+        splitInput = [int(x) for x in rawInput.split(',')]
 
-        for input in splitInput:
-            result += int(input)
-
-        return result
+        return sumInputs(splitInput)
     else:
         return 0
+
+def sumInputs(inputs):
+    result = 0
+    for input in inputs:
+        result += input
+
+    return result
