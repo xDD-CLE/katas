@@ -1,23 +1,27 @@
 __author__ = 'david'
 import re
 
-def add(addInput):
-    if addInput:
-        global rawInput
-        rawInput = addInput
-        splitInput = [int(x) for x in re.split(delimiters(), rawInput)]
+class Adder:
 
-        return sumInputs(splitInput)
-    else:
-        return 0
+    def __init__(self):
+        self.rawInput = ''
 
-def sumInputs(inputs):
-    result = 0
-    for input in inputs:
-        result += input
+    def add(self, addInput):
+        if addInput:
+            self.rawInput = addInput
+            splitInput = [int(x) for x in re.split(self.delimiters(), self.rawInput)]
 
-    return result
+            return self.sumInputs(splitInput)
+        else:
+            return 0
 
-def delimiters():
-    delims = [',', '\n']
-    return '|'.join(delims)
+    def sumInputs(self, inputs):
+        result = 0
+        for input in inputs:
+            result += input
+
+        return result
+
+    def delimiters(self):
+        delims = [',', '\n']
+        return '|'.join(delims)

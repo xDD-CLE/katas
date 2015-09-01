@@ -4,27 +4,30 @@ import adder
 
 
 class AdderTestCase(unittest.TestCase):
+    def setUp(self):
+        self.add = adder.Adder().add
+
     def test_addNoNumbers(self):
-        result = adder.add("")
+        result = self.add("")
         self.assertEqual(0, result, "Adding no parameters should result in 0")
 
     def test_addOneNumber(self):
-        result = adder.add("2")
+        result = self.add("2")
         self.assertEqual(2, result, "Two and zero should be 2")
 
     def test_addTwoNumbers(self):
-        result = adder.add("2,2")
+        result = self.add("2,2")
         self.assertEqual(4, result, "Two and Two should be 4")
 
     def test_addManyNumbers(self):
-        result = adder.add("2,3,4")
+        result = self.add("2,3,4")
         self.assertEqual(9, result, "Two and Three and Four should be 9")
 
     def test_newlineDelimiter(self):
-        result = adder.add("2\n2")
+        result = self.add("2\n2")
         self.assertEqual(4, result, "Two plus Two with newline delimiter")
 
-        result = adder.add("3,3\n3")
+        result = self.add("3,3\n3")
         self.assertEqual(9, result, "Three plus three plus three with both delimiters")
 
 if __name__ == '__main__':
