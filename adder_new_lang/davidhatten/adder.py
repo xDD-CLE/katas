@@ -1,10 +1,9 @@
 __author__ = 'david'
 import re
 
-rawInput = ''
-
 def add(addInput):
     if addInput:
+        global rawInput
         rawInput = addInput
         splitInput = [int(x) for x in re.split(delimiters(), rawInput)]
 
