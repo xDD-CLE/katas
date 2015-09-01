@@ -4,7 +4,6 @@ rawInput = ''
 
 def add(addInput):
     if addInput:
-        result = 0
         rawInput = addInput
         splitInput = [int(x) for x in rawInput.split(',')]
 
