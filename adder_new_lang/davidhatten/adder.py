@@ -5,6 +5,7 @@ class Adder:
 
     def __init__(self):
         self.rawInput = ''
+        self.badInput = []
 
     def add(self, addInput):
         if addInput:
@@ -16,10 +17,9 @@ class Adder:
             return 0
 
     def sumInputs(self, inputs):
-        badInput = []
-
-        result = [x if x >= 0 else badInput.append(x) for x in inputs]
-        self.verifyNoNegativeInputs(badInput)
+        self.badInput.clear()
+        result = [x if x >= 0 else self.badInput.append(x) for x in inputs]
+        self.verifyNoNegativeInputs()
 
         return sum(result)
 
@@ -41,6 +41,6 @@ class Adder:
     def consumeCharacter(self):
         self.rawInput = self.rawInput[1:]
 
-    def verifyNoNegativeInputs(self, inputs):
-        if (inputs):
-            raise RuntimeError('Negative input not allowed: ' + ', '.join(str(x) for x in inputs))
+    def verifyNoNegativeInputs(self):
+        if (self.badInput):
+            raise RuntimeError('Negative input not allowed: ' + ', '.join(str(x) for x in self.badInput))
