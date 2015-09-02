@@ -1,46 +1,42 @@
 __author__ = 'david'
 import re
 
-class Adder:
+adder_globals = {'rawInput' : '', 'badInput' : []}
 
-    def __init__(self):
-        self.rawInput = ''
-        self.badInput = []
+def add(addInput):
+    if addInput:
+        adder_globals['rawInput'] = addInput
+        splitInput = [int(x) for x in re.split(delimiters(), adder_globals['rawInput'])]
 
-    def add(self, addInput):
-        if addInput:
-            self.rawInput = addInput
-            splitInput = [int(x) for x in re.split(self.delimiters(), self.rawInput)]
+        return sumInputs(splitInput)
+    else:
+        return 0
 
-            return self.sumInputs(splitInput)
+def sumInputs(inputs):
+    adder_globals['badInput'].clear()
+    result = [x if x >= 0 else adder_globals['badInput'].append(x) for x in inputs]
+    verifyNoNegativeInputs()
+
+    return sum(result)
+
+def delimiters():
+    delims = [',', '\n']
+
+    if adder_globals['rawInput'].startswith('//'):
+        adder_globals['rawInput'] = adder_globals['rawInput'].strip('//')
+
+        while (not adder_globals['rawInput'].startswith('\n')):
+            delims.append(adder_globals['rawInput'][0])
+            consumeCharacter()
         else:
-            return 0
-
-    def sumInputs(self, inputs):
-        self.badInput.clear()
-        result = [x if x >= 0 else self.badInput.append(x) for x in inputs]
-        self.verifyNoNegativeInputs()
-
-        return sum(result)
-
-    def delimiters(self):
-        delims = [',', '\n']
-
-        if self.rawInput.startswith('//'):
-            self.rawInput = self.rawInput.strip('//')
-
-            while (not self.rawInput.startswith('\n')):
-                delims.append(self.rawInput[0])
-                self.consumeCharacter()
-            else:
-                self.consumeCharacter()
+            consumeCharacter()
 
 
-        return '|'.join(delims)
+    return '|'.join(delims)
 
-    def consumeCharacter(self):
-        self.rawInput = self.rawInput[1:]
+def consumeCharacter():
+    adder_globals['rawInput'] = adder_globals['rawInput'][1:]
 
-    def verifyNoNegativeInputs(self):
-        if (self.badInput):
-            raise RuntimeError('Negative input not allowed: ' + ', '.join(str(x) for x in self.badInput))
+def verifyNoNegativeInputs():
+    if (adder_globals['badInput']):
+        raise RuntimeError('Negative input not allowed: ' + ', '.join(str(x) for x in adder_globals['badInput']))
