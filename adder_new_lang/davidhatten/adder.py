@@ -16,17 +16,12 @@ class Adder:
             return 0
 
     def sumInputs(self, inputs):
-        result = 0
         badInput = []
-        for input in inputs:
-            if input >= 0:
-                result += input
-            else:
-                badInput.append(input)
 
+        result = [x if x >= 0 else badInput.append(x) for x in inputs]
         self.verifyNoNegativeInputs(badInput)
 
-        return result
+        return sum(result)
 
     def delimiters(self):
         delims = [',', '\n']
