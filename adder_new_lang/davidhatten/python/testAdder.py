@@ -1,6 +1,7 @@
 __author__ = 'david'
 import unittest
-import adder
+
+from python import adder
 
 
 class AdderTestCase(unittest.TestCase):
