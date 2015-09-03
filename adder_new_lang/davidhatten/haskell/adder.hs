@@ -6,5 +6,8 @@ delimiters = ",\n"
 add :: String -> Int
 add [] = 0
 add (x:[]) = read [x]
-add ('/':'/':x:y:z) = sum $ map read $ splitOneOf ([x]++delimiters) z :: Int
-add (x) = sum $ map read $ splitOneOf delimiters x :: Int
+add ('/':'/':x:y:z) = sumValues $ splitOneOf ([x]++delimiters) z :: Int
+add (x) = sumValues $ splitOneOf delimiters x :: Int
+
+sumValues :: [String] -> Int
+sumValues (x) = sum $ map read x
