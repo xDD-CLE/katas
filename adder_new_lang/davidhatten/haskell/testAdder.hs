@@ -8,6 +8,7 @@ testAddMoreThanOneNumber = TestCase $ do
                             assertEqual "2 plus 2 is 4" 4 ( add "2,2" )
                             assertEqual "3 plus 3 plus 3 is 9" 9 ( add "3,3,3" )
 testAddNumbersWithNewlineDelimiter = TestCase $ assertEqual "3 plus 3 plus 3 is 6, split with a newline" 9 ( add "3,3\n3")
+testCustomDelimiter = TestCase $ assertEqual "2 plus 2 is 4 with custom delimiters" 4 ( add "//:\n2:2" )
 
 
-main = runTestTT $ TestList [ testAddEmptyString, testAddSingleNumber, testAddMoreThanOneNumber, testAddNumbersWithNewlineDelimiter ]
+main = runTestTT $ TestList [ testAddEmptyString, testAddSingleNumber, testAddMoreThanOneNumber, testAddNumbersWithNewlineDelimiter, testCustomDelimiter ]
