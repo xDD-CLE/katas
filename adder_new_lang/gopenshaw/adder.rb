@@ -3,14 +3,14 @@ require 'minitest/autorun'
 
 class Adder
 
-	def self.add(input)
+    def self.add(input)
         positives, negatives = get_numbers(input)
         if (negatives.empty?)
             return sum_numbers(positives)
         else
             return Exception.new(get_error_message(negatives))
         end
-	end
+    end
 
     def self.get_numbers(input)
         positives = Array.new
@@ -29,12 +29,12 @@ class Adder
     
     def self.sum_numbers(numbers)
         sum = 0
-		numbers.each do |number|
+        numbers.each do |number|
             value = Integer(number)
             if (value <= 1000)
                 sum += Integer(number)
             end
-		end
+        end
 
         return sum
     end
@@ -48,23 +48,23 @@ class Adder
         return message
     end
 
-	def self.parse(input)
-        delimiter = get_custom_delimiter(input)
+    def self.parse(input)
+        delimiter = get_delimiter(input)
         input = trim_input(input)
-		return input.split(delimiter)
-	end
+        return input.split(delimiter)
+    end
 
-    def self.get_custom_delimiter(input)
-		if (has_custom_delimiter(input))
+    def self.get_delimiter(input)
+        if (has_custom_delimiter(input))
             delimiter_length = input.index("\n") - 2
-			return input[2, delimiter_length]
-		end
+            return input[2, delimiter_length]
+        end
 
         return %r{,|\n}
     end
 
     def self.trim_input(input)
-		if (has_custom_delimiter(input))
+        if (has_custom_delimiter(input))
             return input[input.index("\n") + 1, input.length]
         end
 
@@ -72,7 +72,7 @@ class Adder
     end
 
     def self.has_custom_delimiter(input)
-		if (input[0,2] == "//")
+        if (input[0,2] == "//")
             return true;
         end
 
