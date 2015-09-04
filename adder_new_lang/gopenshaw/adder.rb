@@ -4,13 +4,46 @@ require 'minitest/autorun'
 class Adder
 
 	def self.add(input)
-		numbers = parse(input)
-		sum = 0
-		numbers.each do |number|
-			sum += Integer(number)
-		end
-		return sum
+        positives, negatives = get_numbers(input)
+        if (negatives.empty?)
+            return sum_numbers(positives)
+        else
+            return Exception.new(get_error_message(negatives))
+        end
 	end
+
+    def self.get_error_message(negatives)
+        message = "negatives not allowed";
+        negatives.each do |number|
+            message += " " + number.to_s
+        end
+        
+        return message
+    end
+    
+    def self.sum_numbers(numbers)
+        sum = 0
+		numbers.each do |number|
+            sum += Integer(number)
+		end
+
+        return sum
+    end
+
+    def self.get_numbers(input)
+        positives = Array.new
+        negatives = Array.new
+        parse(input).each do |number|
+            value = Integer(number)
+            if (value < 0)
+                negatives << value
+            else
+                positives << value
+            end
+        end
+
+        return positives, negatives
+    end
 
 	def self.parse(input)
 		if (input[0,2] == "//")
@@ -46,5 +79,15 @@ class AdderTests < MiniTest::Unit::TestCase
 
 	def test_supports_custom_delimiters
 		assert_equal 8, Adder.add("//;\n1;5;2")
+	end
+
+	def test_it_throws_an_exception_for_negative_numbers
+        result = Adder.add("5,-1")
+        assert result.is_a?(Exception)
+	end
+
+	def test_exception_has_descriptive_message
+        result = Adder.add("5,-1,-15")
+        assert_equal "negatives not allowed -1 -15", result.message
 	end
 end
