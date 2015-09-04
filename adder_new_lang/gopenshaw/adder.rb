@@ -12,27 +12,6 @@ class Adder
         end
 	end
 
-    def self.get_error_message(negatives)
-        message = "negatives not allowed";
-        negatives.each do |number|
-            message += " " + number.to_s
-        end
-        
-        return message
-    end
-    
-    def self.sum_numbers(numbers)
-        sum = 0
-		numbers.each do |number|
-            value = Integer(number)
-            if (value <= 1000)
-                sum += Integer(number)
-            end
-		end
-
-        return sum
-    end
-
     def self.get_numbers(input)
         positives = Array.new
         negatives = Array.new
@@ -47,17 +26,58 @@ class Adder
 
         return positives, negatives
     end
-
-	def self.parse(input)
-		if (input[0,2] == "//")
-            delimiter_length = input.index("\n") - 2
-			delimiter = input[2, delimiter_length]
-            values = input[2 + delimiter_length, input.length]
-			return values.split(delimiter)
+    
+    def self.sum_numbers(numbers)
+        sum = 0
+		numbers.each do |number|
+            value = Integer(number)
+            if (value <= 1000)
+                sum += Integer(number)
+            end
 		end
 
-		return input.split(%r',|\n')
+        return sum
+    end
+
+    def self.get_error_message(negatives)
+        message = "negatives not allowed";
+        negatives.each do |number|
+            message += " " + number.to_s
+        end
+        
+        return message
+    end
+
+	def self.parse(input)
+        delimiter = get_custom_delimiter(input)
+        input = trim_input(input)
+		return input.split(delimiter)
 	end
+
+    def self.get_custom_delimiter(input)
+		if (has_custom_delimiter(input))
+            delimiter_length = input.index("\n") - 2
+			return input[2, delimiter_length]
+		end
+
+        return %r{,|\n}
+    end
+
+    def self.trim_input(input)
+		if (has_custom_delimiter(input))
+            return input[input.index("\n") + 1, input.length]
+        end
+
+        return input
+    end
+
+    def self.has_custom_delimiter(input)
+		if (input[0,2] == "//")
+            return true;
+        end
+
+        return false
+    end
 end
 
 class AdderTests < MiniTest::Unit::TestCase
