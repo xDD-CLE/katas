@@ -24,7 +24,10 @@ class Adder
     def self.sum_numbers(numbers)
         sum = 0
 		numbers.each do |number|
-            sum += Integer(number)
+            value = Integer(number)
+            if (value <= 1000)
+                sum += Integer(number)
+            end
 		end
 
         return sum
@@ -47,8 +50,10 @@ class Adder
 
 	def self.parse(input)
 		if (input[0,2] == "//")
-			delimiter = input[2, 1]
-			return input[4,input.length].split(delimiter)
+            delimiter_length = input.index("\n") - 2
+			delimiter = input[2, delimiter_length]
+            values = input[2 + delimiter_length, input.length]
+			return values.split(delimiter)
 		end
 
 		return input.split(%r',|\n')
@@ -89,5 +94,14 @@ class AdderTests < MiniTest::Unit::TestCase
 	def test_exception_has_descriptive_message
         result = Adder.add("5,-1,-15")
         assert_equal "negatives not allowed -1 -15", result.message
+	end
+
+	def test_it_ignores_numbers_greater_than_1000
+        result = Adder.add("1000,1001,5")
+        assert_equal 1005, result
+	end
+
+	def test_supports_custom_delimiters_of_any_length
+		assert_equal 8, Adder.add("//***\n1***5***2")
 	end
 end
