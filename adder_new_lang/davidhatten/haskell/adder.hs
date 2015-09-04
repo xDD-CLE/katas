@@ -13,4 +13,4 @@ sumValues :: [String] -> Int
 sumValues (x) = sum $ parseValues x
 
 parseValues :: (Read a) => [String] -> [a]
-parseValues x = map read x
+parseValues input = map read input
