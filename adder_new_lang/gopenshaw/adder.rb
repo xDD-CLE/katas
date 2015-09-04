@@ -49,39 +49,32 @@ class Adder
     end
 
     def self.parse(input)
-        delimiter = get_delimiter(input)
-        input = trim_input(input)
-        return input.split(delimiter)
+        input, delimiters = split_delimiters(input)
+        return input.split(delimiters)
     end
 
-    def self.get_delimiter(input)
+    def self.split_delimiters(input)
+        if (!has_custom_delimiter(input))
+            return input, %r{,|\n}
+        end
+
+        delimiters = get_delimiters(input)
+        input = input[input.index("\n") + 1, input.length]
+        return input, delimiters
+    end
+
+    def self.get_delimiters(input)
+        delim_length = input.index("\n") - 2
         if (input[0,3] == "//[")
-            set_length = input.index("\n") - 2
-            delimiters = input[3, set_length - 2].split('][').join('|')
+            delimiters = input[3, delim_length - 2].split('][').join('|')
             return Regexp.new(delimiters)
         end
-        else if (has_custom_delimiter(input))
-            delimiter_length = input.index("\n") - 2
-            return input[2, delimiter_length]
-        end
 
-        return %r{,|\n}
-    end
-
-    def self.trim_input(input)
-        if (has_custom_delimiter(input))
-            return input[input.index("\n") + 1, input.length]
-        end
-
-        return input
+        return input[2, delim_length]
     end
 
     def self.has_custom_delimiter(input)
-        if (input[0,2] == "//")
-            return true;
-        end
-
-        return false
+        return input[0,2] == "//"
     end
 end
 
