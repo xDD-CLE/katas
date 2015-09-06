@@ -1,6 +1,7 @@
 class StringCalculator
-  def initialize(value = 0)
+  def initialize(value = 0, tokenizer = Tokenizer.new)
     @value = value
+    @tokenizer = tokenizer
   end
 
   def value
@@ -8,18 +9,19 @@ class StringCalculator
   end
 
   def add(string)
-    calculate(string, &lambda {|i| @value += i})
+    @value += sum_ints(string)
     self
   end
 
-  def calculate(string, &calculation)
-    ints = Tokenizer.new(string).ints
+  def sum_ints(string)
+    ints = @tokenizer.ints(string)
     @negs = ints.select { |i| i<0 }
-    calculation.call(ints.inject(:+))
+    ints.inject(:+)
   end
 
+
   def subtract(string)
-    calculate(string, &lambda {|i| @value -= i})
+    @value -= sum_ints(string)
     self
   end
 
