@@ -66,8 +66,8 @@ class Adder
     def self.get_delimiters(input)
         delim_length = input.index("\n") - 2
         if (input[0,3] == "//[")
-            delimiters = input[3, delim_length - 2].split('][').join('|')
-            return Regexp.new(delimiters)
+            delimiters = input[3, delim_length - 2].split('][').map {|x| Regexp.escape(x) }
+            return Regexp.new(delimiters.join('|'))
         end
 
         return input[2, delim_length]
@@ -125,5 +125,9 @@ class AdderTests < MiniTest::Unit::TestCase
 
 	def test_supports_multiple_delimiters
 		assert_equal 20, Adder.add("//[%][#]\n5#7%8")
+	end
+
+	def test_supports_multiple_delimiters_of_different_length
+		assert_equal 22, Adder.add("//[%*][###]\n5###7%*8%*2")
 	end
 end
