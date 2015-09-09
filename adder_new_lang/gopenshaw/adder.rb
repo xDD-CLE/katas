@@ -49,34 +49,36 @@ class Adder
     end
 
     def self.parse(input)
-        delimiter = get_delimiter(input)
-        input = trim_input(input)
-        return input.split(delimiter)
+        expression, delimiters = get_expression_and_delimiters(input)
+        return expression.split(delimiters)
     end
 
-    def self.get_delimiter(input)
-        if (has_custom_delimiter(input))
-            delimiter_length = input.index("\n") - 2
-            return input[2, delimiter_length]
+    def self.get_expression_and_delimiters(input)
+        if (!has_custom_delimiter(input))
+            return input, %r{,|\n}
         end
 
-        return %r{,|\n}
+        delimiters = get_custom_delimiters(input)
+        expression = input[input.index("\n") + 1, input.length]
+        return expression, delimiters
     end
 
-    def self.trim_input(input)
-        if (has_custom_delimiter(input))
-            return input[input.index("\n") + 1, input.length]
+    def self.get_custom_delimiters(input)
+        delim_length = input.index("\n") - 2
+        if (has_multiple_delimiters(input))
+            delimiters = input[3, delim_length - 2].split('][').map {|x| Regexp.escape(x) }
+            return Regexp.new(delimiters.join('|'))
         end
 
-        return input
+        return input[2, delim_length]
     end
 
     def self.has_custom_delimiter(input)
-        if (input[0,2] == "//")
-            return true;
-        end
+        return input[0,2] == "//"
+    end
 
-        return false
+    def self.has_multiple_delimiters(input)
+        return input[0,3] == "//["
     end
 end
 
@@ -123,5 +125,13 @@ class AdderTests < MiniTest::Unit::TestCase
 
 	def test_supports_custom_delimiters_of_any_length
 		assert_equal 8, Adder.add("//***\n1***5***2")
+	end
+
+	def test_supports_multiple_delimiters
+		assert_equal 20, Adder.add("//[%][#]\n5#7%8")
+	end
+
+	def test_supports_multiple_delimiters_of_different_length
+		assert_equal 22, Adder.add("//[%*][###]\n5###7%*8%*2")
 	end
 end
