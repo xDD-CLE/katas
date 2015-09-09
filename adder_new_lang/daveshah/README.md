@@ -1,9 +1,6 @@
-## This is my kata. There are many like it but this one is mine. 
+#Running#
 
-It's a Clojure library designed to help me grok Clojure :)
+```$: pip install -r requirements.txt```  
+```$: sniffer```
 
-## Usage
-
-```brew install leiningen```
-```lein test```
-
+\#AndThatIsAll
