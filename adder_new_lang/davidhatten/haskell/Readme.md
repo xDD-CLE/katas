@@ -20,4 +20,8 @@ A lot of this comes from List Comprehensions. The majority of lists you write in
 
 ##### Haskell cuts through Katas like butter
 
-I don't know what it is, but I can see every kata I've ever witnessed implemented in Haskell in fewer lines than I ever thought possible. I don't think I'm going to work on katas in Haskell until after I've solved it in another language. It's too powerful.
+I don't know what it is, but I can see every kata I've ever witnessed implemented in Haskell in fewer lines than I ever thought possible. I don't think I'm going to work on katas in Haskell until after I've solved it in another language. It's too powerful for these kind of narrowly defined problems
+
+##### Haskell lets you see the problem in stark terms
+
+Haskell lets you define your solution in concrete, immutable ways. There should be no ambiguity about what a correct answer could be. Bite-sized decompositions come to mind easily, even to someone with minimal functional programming language experience
