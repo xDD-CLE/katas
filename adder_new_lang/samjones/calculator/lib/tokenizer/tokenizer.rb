@@ -1,22 +1,33 @@
-
 class Tokenizer
+  def initialize
+    @regex_or = '|'
+
+    @standard_delimiter = /,|\n/
+
+    @has_single_delimiter = /\/\/(.)\n(.*)/
+
+    @has_multi_delimiter = /\/\/(\[.+\])+\n.*/
+    @multi_delimiter = /\[|\]/
+    @multi_delimiter_replace = /\/\/(\[.+\])+\n/
+  end
+
   def tokens(string)
     case string
-      when /\/\/(.)\n(.*)/
+      when @has_single_delimiter
         delims = $1
         string = $2
-      when /\/\/(\[.+\])+\n.*/
-        delims = Regexp.new($1.split(/\[|\]/).reject(&:empty?).join('|'))
-        string = string.sub(/\/\/(\[.+\])+\n/, '')
+      when @has_multi_delimiter
+        delims = Regexp.new($1.split(@multi_delimiter).reject(&:empty?).join(@regex_or))
+        string = string.sub(@multi_delimiter_replace, '')
       else
-        delims = /,|\n/
+        delims = @standard_delimiter
         string = string
     end
     string.split(delims)
   end
 
   def ints(string = '')
-    tokens(string).select{|s| is_i?(s)}.map{|s| s.to_i}
+    tokens(string).select { |s| is_i?(s) }.map { |s| s.to_i }
   end
 
   def is_i?(string)
