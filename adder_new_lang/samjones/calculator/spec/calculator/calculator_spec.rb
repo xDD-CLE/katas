@@ -1,4 +1,5 @@
 require 'calculator/string_calculator'
+require 'tokenizer/tokenizer'
 
 def tokenizer(test)
   tokenizer = instance_double('Tokenizer')
@@ -30,10 +31,10 @@ describe 'StringCalculator' do
            :result => 20
        },
        {
-           :initial_value => 0,
-           :string => '10',
-           :ints => [10],
-           :result => 20
+           :initial_value => 10,
+           :string => '0',
+           :ints => [0],
+           :result => 10
        }
       ].each { |test|
         expect(StringCalculator.new(test[:initial_value], tokenizer(test)).add(test[:string]).value).to eq(test[:result])
