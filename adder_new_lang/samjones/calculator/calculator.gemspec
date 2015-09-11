@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
   spec.license       = 'MIT'
 
   spec.add_dependency('rake')
+  spec.add_development_dependency('bundler')
   spec.add_development_dependency('rspec', ['>= 2.0.0'])
   spec.files = Dir['Rakefile', '{bin,lib,man,test,spec}/**/*', 'README*', 'LICENSE*'] & `git ls-files -z`.split("\0")
 end
