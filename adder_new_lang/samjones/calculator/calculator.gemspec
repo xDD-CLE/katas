@@ -3,7 +3,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = 'samjones-calculator'
-  spec.version       = '0.0.0'
+  spec.version       = '0.0.1'
   spec.authors       = ['Sam Jones']
   spec.email         = ['sam@samljones.com']
   spec.summary       = 'String Calculator'
