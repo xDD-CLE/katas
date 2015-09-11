@@ -1,12 +1,12 @@
 # Calculator
 
-TODO: Write a gem description
+Calculator written for the [String Calculator Kata](http://osherove.com/tdd-kata-1/.)
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'calculator'
+    gem 'samjones-calculator'
 
 And then execute:
 
@@ -18,12 +18,35 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Instantiation
+New Calculator with starting value of zero
+`StringCalculator.new`
+
+New Calculator setting starting value
+`StringCalculator.new(10)`
+
+### Adding and Subtracting
+
+Add value
+`StringCalculator.new(22).add('20').value` will produce a result of 42
+
+Subtract value
+`StringCalculator.new(62).subtract('20').value` will produce a result of 42
+
+Chaining calls
+`StringCalculator.new(22).add('40').subtract('20').value` will produce a result of 42
+
+### Working with Delimiters
+
+Add values with default delimiters `','`, `'\n'`
+`StringCalculator.new.add('12,23\n7').value` will produce a result of 42
+
+Add values by setting delimiter to `'~''`
+`StringCalculator.new.add('//~\n21~21').value` will produce a result of 42
+
+Add values by setting delimiters to `'~''`, `'!%'`
+`StringCalculator.new.add('//[~][!%]\n20~20!%2').value` will produce a result of 42
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/calculator/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+Contribution is closed.
