@@ -28,6 +28,12 @@ describe 'StringCalculator' do
            :string => '10',
            :ints => [10],
            :result => 20
+       },
+       {
+           :initial_value => 0,
+           :string => '10',
+           :ints => [10],
+           :result => 20
        }
       ].each { |test|
         expect(StringCalculator.new(test[:initial_value], tokenizer(test)).add(test[:string]).value).to eq(test[:result])
