@@ -63,7 +63,6 @@
     <None Include="packages.config" />
     <Compile Include="Adder.fs" />
     <Compile Include="AdderTests.fs" />
-    <Compile Include="FsUnitSample.fs" />
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
