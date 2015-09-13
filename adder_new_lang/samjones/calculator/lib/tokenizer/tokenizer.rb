@@ -1,4 +1,4 @@
-class Tokenizer
+module Tokenizer
   def initialize
     @regex_or = '|'
 

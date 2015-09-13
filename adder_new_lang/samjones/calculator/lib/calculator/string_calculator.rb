@@ -1,7 +1,9 @@
+require 'tokenizer/tokenizer'
+
 class StringCalculator
-  def initialize(value = 0, tokenizer = Tokenizer.new)
+  include Tokenizer
+  def initialize(value = 0)
     @value = value
-    @tokenizer = tokenizer
   end
 
   def value
@@ -9,14 +11,13 @@ class StringCalculator
   end
 
   def add(string)
+    check_negatives(string)
     @value += sum_ints(string)
     self
   end
 
   def sum_ints(string)
-    ints = @tokenizer.ints(string)
-    @negs = ints.select { |i| i<0 }
-    ints.inject(:+)
+    ints(string).inject(:+)
   end
 
 
@@ -25,8 +26,9 @@ class StringCalculator
     self
   end
 
-  def check_negatives
-    raise "Negatives not allowed! #{@negs.join(', ')}" if @negs.any?
+  def check_negatives(string)
+    negs = ints(string).select { |i| i<0 }
+    raise "Negatives not allowed! #{negs.join(', ')}" if negs.any?
     self
   end
 end
