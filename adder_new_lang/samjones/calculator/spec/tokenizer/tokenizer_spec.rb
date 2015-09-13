@@ -48,7 +48,7 @@ describe Tokenizer do
     expect(tokenizer.ints('1,2')).to eq([1, 2])
   end
 
-  
+
   it 'should filter non ints' do
     expect(tokenizer.ints('abc,123')).to eq([123])
   end
