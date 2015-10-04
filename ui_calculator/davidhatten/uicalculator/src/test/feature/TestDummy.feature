@@ -6,7 +6,7 @@ Feature: Dummy Index
   Scenario: Get to the index
     When I open the app
     Then I see Spring Boot And Thymeleaf!
-    Then I see Hello stranger!
+    Then I see Hello Stranger!
 
   Scenario: Use QueryParams
     When I open the app
