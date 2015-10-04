@@ -1,7 +1,10 @@
 package uicalculator.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by David on 10/4/2015.
@@ -10,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
     @RequestMapping("/")
-    String index(){
+    String index(@RequestParam(value="name", required=false, defaultValue="stranger") String name, Model model){
+        model.addAttribute("name", name);
         return "index";
     }
 }
