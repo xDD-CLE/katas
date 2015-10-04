@@ -1,0 +1,48 @@
+buildscript {
+    ext {
+        springBootVersion = '1.2.6.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
+        classpath('io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE')
+        classpath('com.github.samueltbrown:gradle-cucumber-plugin:0.9')
+    }
+
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot' 
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.github.samueltbrown.cucumber'
+
+jar {
+    baseName = 'uicalculator'
+    version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    runtime('mysql:mysql-connector-java')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('info.cukes:cucumber-java:1.2.4')
+    testCompile('info.cukes:cucumber-junit:1.2.4')
+    testCompile('com.codeborne:selenide:2.23')
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.7'
+}
