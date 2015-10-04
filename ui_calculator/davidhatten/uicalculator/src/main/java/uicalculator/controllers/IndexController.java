@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class IndexController {
 
     @RequestMapping("/")
-    String index(@RequestParam(value="name", required=false, defaultValue="stranger") String name, Model model){
+    String index(@RequestParam(value="name", required=false, defaultValue="Stranger") String name, Model model){
         model.addAttribute("name", name);
         return "index";
     }
