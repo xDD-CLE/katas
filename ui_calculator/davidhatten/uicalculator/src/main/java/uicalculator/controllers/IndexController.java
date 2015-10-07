@@ -14,7 +14,7 @@ public class IndexController {
 
     @RequestMapping("/")
     String index(@RequestParam(value="name", required=false, defaultValue="Stranger") String name, Model model){
-        model.addAttribute("name", name);
+        model.addAttribute("nameText", String.format("Hello %s!", name));
         return "index";
     }
 }

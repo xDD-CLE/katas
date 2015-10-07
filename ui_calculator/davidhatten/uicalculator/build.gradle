@@ -40,7 +40,7 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('info.cukes:cucumber-java:1.2.4')
     testCompile('info.cukes:cucumber-junit:1.2.4')
-    testCompile('com.codeborne:selenide:2.23')
+    //testCompile('com.codeborne:selenide:2.23')
 }
 
 task wrapper(type: Wrapper) {
