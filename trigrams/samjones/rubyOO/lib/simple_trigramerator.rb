@@ -11,7 +11,7 @@ class SimpleTrigramerator
 	end
 	def seed
 		check_state
-		@trigrameration.keys.sample
+		String.new(@trigrameration.keys.sample)
 	end
 	def retrieve(key)
 		check_state

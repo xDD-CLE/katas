@@ -49,4 +49,7 @@ describe "StringTokenizer" do
 			end
 		end
 	end
+	it "should return the last two words of text" do
+		expect(StringTokenizer.last_two_words("hello world foo!")).to eq('world foo')
+	end
 end

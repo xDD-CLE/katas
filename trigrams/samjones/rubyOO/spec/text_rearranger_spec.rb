@@ -3,19 +3,16 @@ require 'text_rearranger'
 describe "TextRearranger" do
 	context "when I trigramerate some text" do
 		it "should be rearranged" do
-			trigramerator = double('Trigramerator', trigramerate: {
-				"I wish" => ["I", "I"],
-				"wish I" => ["may", "might"],
-				"may I"  => ["wish"],
-				"I may"  => ["I"]
-			})
+			trigramerator = double('Trigramerator', seed: 'hello world')
+			expect(trigramerator).to receive(:retrieve).with('hello world').and_return('foo')
+			expect(trigramerator).to receive(:retrieve).with('world foo').and_return('bar')
+			expect(trigramerator).to receive(:has_record?).with('world foo').and_return(true)
+			expect(trigramerator).to receive(:has_record?).with('foo bar').and_return(false)
 
 			rearranger = TextRearranger.new(trigramerator)
 
-			# I don't know how to test this so I'll just print it.
 			text =  rearranger.rearrange
-			puts text
-			expect(text).to_not be_empty
+			expect(text).to eq('hello world foo bar')
 		end
 	end
 end
