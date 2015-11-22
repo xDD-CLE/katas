@@ -1,1 +1,0 @@
-trigram_test.rb
