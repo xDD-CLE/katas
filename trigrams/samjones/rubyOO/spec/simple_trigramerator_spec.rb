@@ -1,8 +1,11 @@
 require 'simple_trigramerator'
 
 describe "SimpleTrigramerator" do
+
 	context "when I trigramerate a tokenizer" do
+
 		let(:tokenizer) { double('Tokenizer', words: ['I', 'wish', 'I', 'may', 'I', 'wish', 'I', 'might']) }
+
 		let(:results) {{
 			"I wish" => ["I"], 
 			"wish I" => ["may", "might"], 

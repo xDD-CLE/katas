@@ -2,6 +2,7 @@ class SimpleTrigramerator
 	def initialize(tokenizer)
 		@tokenizer = tokenizer
 	end
+	
 	def trigramerate!
 		@trigrameration = {}.tap do |hash| 
 			@tokenizer.words.each_cons(3) do |trigram|
@@ -10,10 +11,12 @@ class SimpleTrigramerator
 		end
 		self
 	end
+
 	def seed
 		check_state
 		String.new(@trigrameration.keys.sample)
 	end
+
 	def value_for(key)
 		check_state
 		value = @trigrameration[key]

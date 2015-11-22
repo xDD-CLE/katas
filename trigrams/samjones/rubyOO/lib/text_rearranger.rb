@@ -4,6 +4,7 @@ class TextRearranger
 	def initialize(trigramerator)
 		@trigramerator = trigramerator
 	end
+
 	def rearrange
 		@trigramerator.seed.tap do |text|
 			loop do

@@ -2,6 +2,7 @@ require 'string_tokenizer'
 
 describe "StringTokenizer" do
 	context "when I tokenize a string" do
+
 		it "should return a list of words" do
 			tokenizer = StringTokenizer.new "I wish I may I wish I might"
 			expect(tokenizer.words).to eq(['I', 'wish', 'I', 'may', 'I', 'wish', 'I', 'might'])
@@ -30,11 +31,7 @@ describe "StringTokenizer" do
 				string: "one, two",
 				delim: ', ',
 				result: ['one', 'two']
-			}, {
-				string: "one_two",
-				delim: '_',
-				result: ['one', 'two']
-			}, {
+			},{
 				string: "one\ntwo",
 				delim: '\n',
 				result: ['one', 'two']
@@ -44,8 +41,8 @@ describe "StringTokenizer" do
 				result: ['one', 'two']
 			}
 		].each do |test| 
-			it "should respect non word char '#{test[:delim]}'" do
-
+			it "should seperate on non word char '#{test[:delim]}'" do
+				expect(StringTokenizer.new(test[:string]).words).to eq(test[:result])
 			end
 		end
 	end

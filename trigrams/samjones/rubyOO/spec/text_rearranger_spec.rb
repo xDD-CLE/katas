@@ -5,7 +5,9 @@ require 'string_tokenizer'
 describe "TextRearranger" do
 	context "when I trigramerate some text" do
 		it "should be rearranged" do
-			trigramerator = double('Trigramerator', seed: 'hello world')
+			trigramerator = double('Trigramerator')
+
+			expect(trigramerator).to receive(:seed).and_return('hello world')
 			expect(trigramerator).to receive(:value_for).with('hello world').and_return('foo')
 			expect(trigramerator).to receive(:value_for).with('world foo').and_return('bar')
 			expect(trigramerator).to receive(:value_for).with('foo bar').and_return(nil)
@@ -22,6 +24,7 @@ describe "TextRearranger" do
 
 			text = rearranger.rearrange
 
+			# what else to test here?
 			puts text
 			expect(text).to_not be_empty
 		end
