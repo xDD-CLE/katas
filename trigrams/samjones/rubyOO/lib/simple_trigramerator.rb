@@ -25,6 +25,6 @@ class SimpleTrigramerator
 	
 	private
 	def check_state
-		raise 'You must first call trigramerate! to populate your trigramerations' if !defined?(@trigrameration)
+		raise 'You must first call trigramerate! to populate your trigramerations' unless defined?(@trigrameration)
 	end
 end
