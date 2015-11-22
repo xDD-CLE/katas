@@ -19,6 +19,7 @@ class PersistedTrigramerator
 			end
 		end
 		@trigramerated = true
+		self
 	end
 
 	def seed

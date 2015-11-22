@@ -1,6 +1,8 @@
 require 'text_rearranger'
 require 'simple_trigramerator'
+require 'persisted_trigramerator'
 require 'string_tokenizer'
+require 'file_tokenizer'
 
 describe "TextRearranger" do
 	context "when I trigramerate some text" do
@@ -19,13 +21,43 @@ describe "TextRearranger" do
 	end
 
 	context "when I want to verify integration between pieces" do
-		it "should trigramerate some text" do
+		it "should trigramerate with SimpleTrigramerator and StringTokenizer" do
 			rearranger = TextRearranger.new(SimpleTrigramerator.new(StringTokenizer.new('I wish I may I wish I might')).trigramerate!)
 
 			text = rearranger.rearrange
 
 			# what else to test here?
-			puts text
+			puts "\t\t#{text}"
+			expect(text).to_not be_empty
+		end
+
+		it "should trigramerate with PersistedTrigramerator and StringTokenizer" do
+			rearranger = TextRearranger.new(PersistedTrigramerator.new(StringTokenizer.new('I wish I may I wish I might')).trigramerate!)
+
+			text = rearranger.rearrange
+
+			# what else to test here?
+			puts "\t\t#{text}"
+			expect(text).to_not be_empty
+		end
+
+		it "should trigramerate with SimpleTrigramerator and FileTokenizer" do
+			rearranger = TextRearranger.new(SimpleTrigramerator.new(FileTokenizer.new(newTempFile('I wish I may I wish I might').path)).trigramerate!)
+
+			text = rearranger.rearrange
+
+			# what else to test here?
+			puts "\t\t#{text}"
+			expect(text).to_not be_empty
+		end
+	
+		it "should trigramerate with PersistedTrigramerator and FileTokenizer" do
+			rearranger = TextRearranger.new(PersistedTrigramerator.new(FileTokenizer.new(newTempFile('I wish I may I wish I might'))).trigramerate!)
+
+			text = rearranger.rearrange
+
+			# what else to test here?
+			puts "\t\t#{text}"
 			expect(text).to_not be_empty
 		end
 	end

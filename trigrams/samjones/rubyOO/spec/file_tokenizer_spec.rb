@@ -14,9 +14,3 @@ describe "FileTokenizer" do
 	end
 end
 
-def newTempFile(contents)
-	file = Tempfile.new('tokenizer')
-	file.write(contents)
-	file.rewind
-	file
-end

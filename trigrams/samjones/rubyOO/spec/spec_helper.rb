@@ -94,3 +94,10 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+def newTempFile(contents)
+	file = Tempfile.new('tokenizer')
+	file.write(contents)
+	file.rewind
+	file
+end
