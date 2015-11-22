@@ -8,14 +8,16 @@ class SimpleTrigramerator
 				(hash[trigram.first(2).join(' ')] ||= []) << trigram[2]
 			end
 		end
+		self
 	end
 	def seed
 		check_state
 		String.new(@trigrameration.keys.sample)
 	end
-	def retrieve(key)
+	def value_for(key)
 		check_state
-		@trigrameration[key]
+		value = @trigrameration[key]
+		value.nil? ? nil : value.sample
 	end
 	
 	private
