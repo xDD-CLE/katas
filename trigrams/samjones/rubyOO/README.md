@@ -22,8 +22,8 @@ rspec
   - Text Rearranger: Adds each translation to an instance variable. Returns value when completed.
 2. Complex Trigramerations: File to File trigramerations. Tested with moby dick (runs in <5 seconds).
   - File Tokenizer: Lazily reads file lines, then splits on non word characters, then flattens results to return words.
-  - Persisted Trigramerator: Trigramerates tokens into a database using DBM.  Seeds text generation by providing the last key that was trigramerated. Returns random trigramerated value for each key.
-  - File Rearranger: Writes each translation to file as it happens. Does not return rearranged text to allow large file rearrangement.
+	- Persisted Trigramerator: Trigramerates tokens into a database using DBM.  Seeds text generation by random key from the database. Returns random trigramerated value for each key.
+	- File Rearranger: Writes each translation to file as it happens. Does not return rearranged text to allow large file rearrangement.
 
 ##Assumptions
 - File cleanup insn't important.

@@ -19,8 +19,7 @@ class SimpleTrigramerator
 
 	def value_for(key)
 		check_state
-		value = @trigrameration[key]
-		value.nil? ? nil : value.sample
+		@trigrameration.has_key?(key) ? @trigrameration[key].sample : nil
 	end
 	
 	private

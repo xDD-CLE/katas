@@ -2,9 +2,9 @@ require 'dbm'
 require 'tempfile'
 
 class PersistedTrigramerator
-	def initialize(tokenizer, file_name = Time.now.nsec)
+	def initialize(tokenizer)
 		@tokenizer = tokenizer
-		@file_name = '.db-'+file_name.to_s
+		@file_name = '.db-'+Time.now.nsec.to_s
 	end
 
 	def trigramerate!
@@ -13,19 +13,14 @@ class PersistedTrigramerator
 		@store = DBM.open(@file_name)
 		@tokenizer.words.each_cons(3) do |trigram|
 			key = trigram.first(2).join(' ')
-			values = @store[key] || ""
-			values << ',' unless values.empty?
-			values << trigram.last
-			@store[key] = values
-			@seed = key
+			@store[key] = @store.has_key?(key) ? @store[key] << ',' + trigram.last : trigram.last
 		end
-		@trigramerated = true
 		self
 	end
 
 	def seed
 		check_state
-		@seed
+		@store.keys.sample
 	end
 
 	def value_for(key)
