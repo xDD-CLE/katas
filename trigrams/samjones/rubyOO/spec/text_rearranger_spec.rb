@@ -42,7 +42,7 @@ describe "TextRearranger" do
 		end
 
 		it "should trigramerate with SimpleTrigramerator and FileTokenizer" do
-			rearranger = TextRearranger.new(SimpleTrigramerator.new(FileTokenizer.new(newTempFile('I wish I may I wish I might').path)).trigramerate!)
+			rearranger = TextRearranger.new(SimpleTrigramerator.new(FileTokenizer.new(new_temp_file('I wish I may I wish I might').path)).trigramerate!)
 
 			text = rearranger.rearrange
 
@@ -52,7 +52,7 @@ describe "TextRearranger" do
 		end
 	
 		it "should trigramerate with PersistedTrigramerator and FileTokenizer" do
-			rearranger = TextRearranger.new(PersistedTrigramerator.new(FileTokenizer.new(newTempFile('I wish I may I wish I might'))).trigramerate!)
+			rearranger = TextRearranger.new(PersistedTrigramerator.new(FileTokenizer.new(new_temp_file('I wish I may I wish I might'))).trigramerate!)
 
 			text = rearranger.rearrange
 

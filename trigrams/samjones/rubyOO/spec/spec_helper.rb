@@ -95,7 +95,7 @@ RSpec.configure do |config|
 =end
 end
 
-def newTempFile(contents)
+def new_temp_file(contents)
 	file = Tempfile.new('tokenizer')
 	file.write(contents)
 	file.rewind

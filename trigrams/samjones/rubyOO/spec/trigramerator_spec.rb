@@ -23,11 +23,11 @@ require 'persisted_trigramerator'
 				trigramerator.trigramerate!
 
 				results.each do |key, value|
-					expect(trigramerator.value_for(key)).to satisfy{ |s| value.include?(s) }, "Expected key: #{key} to retrieve value included in #{value}, but got #{trigramerator.value_for(key)}"
+					expect(trigramerator.value_for(key)).to satisfy{ |s| value.include?(s) }
 				end
 			end
 
-			it "should retrieve nil when phrase hasn't been trigramerated" do
+			it "should retrieve nil when desired phrase hasn't been trigramerated" do
 				trigramerator = clazz.new(tokenizer)
 				trigramerator.trigramerate!
 
