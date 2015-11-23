@@ -10,13 +10,18 @@ describe Trigram do
 
   describe "parsing" do
   	
-  	it "correctly parses input string into correct hash" do
-  		simpleString = "I wish I"
-  		results = @trigram.parse(simpleString)
-  		expect(results.size).to eq(8)
-  	end
+  	# it "correctly parses input string into correct hash" do
+  	# 	simpleString = "I wish I"
+  	# 	results = @trigram.parse(simpleString)
+  	# 	expect(results.size).to eq(3)
+   #    #this test is wrong
+  	# end
 
-
+    it "correctly parses simple input string into correct key/value pair" do
+      simpleString = "I wish I"
+      results = @trigram.parse(simpleString)
+      expect(results["I wish"]).to eq(["I"])
+    end
 
   end
 
