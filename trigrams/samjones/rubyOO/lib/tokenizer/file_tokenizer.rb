@@ -1,4 +1,4 @@
-require 'string_tokenizer'
+require 'tokenizer/string_tokenizer'
 
 class FileTokenizer
 	def initialize(file_path)

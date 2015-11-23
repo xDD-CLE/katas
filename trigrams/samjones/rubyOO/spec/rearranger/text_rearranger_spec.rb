@@ -1,8 +1,8 @@
-require 'text_rearranger'
-require 'simple_trigramerator'
-require 'persisted_trigramerator'
-require 'string_tokenizer'
-require 'file_tokenizer'
+require 'rearranger/text_rearranger'
+require 'trigramerator/simple_trigramerator'
+require 'trigramerator/persisted_trigramerator'
+require 'tokenizer/string_tokenizer'
+require 'tokenizer/file_tokenizer'
 
 describe "TextRearranger" do
 	context "when I trigramerate some text" do

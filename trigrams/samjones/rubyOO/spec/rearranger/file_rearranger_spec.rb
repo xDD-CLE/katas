@@ -1,8 +1,8 @@
-require 'file_rearranger'
-require 'simple_trigramerator'
-require 'persisted_trigramerator'
-require 'string_tokenizer'
-require 'file_tokenizer'
+require 'rearranger/file_rearranger'
+require 'trigramerator/simple_trigramerator'
+require 'trigramerator/persisted_trigramerator'
+require 'tokenizer/string_tokenizer'
+require 'tokenizer/file_tokenizer'
 
 describe "FileRearranger" do
 	context "when I trigramerate a file" do

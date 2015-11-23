@@ -1,4 +1,4 @@
-require 'string_tokenizer'
+require 'tokenizer/string_tokenizer'
 
 describe "StringTokenizer" do
 	context "when I tokenize a string" do

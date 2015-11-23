@@ -1,5 +1,5 @@
-require 'string_tokenizer'
-require 'rearranger'
+require 'tokenizer/string_tokenizer'
+require 'rearranger/rearranger'
 
 class TextRearranger < Rearranger
 	def rearrange

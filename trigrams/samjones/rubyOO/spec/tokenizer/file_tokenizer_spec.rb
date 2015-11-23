@@ -1,5 +1,5 @@
 require 'tempfile'
-require 'file_tokenizer'
+require 'tokenizer/file_tokenizer'
 
 describe "FileTokenizer" do
 	context "When I tokenize a file" do

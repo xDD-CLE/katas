@@ -1,5 +1,5 @@
-require 'simple_trigramerator'
-require 'persisted_trigramerator'
+require 'trigramerator/simple_trigramerator'
+require 'trigramerator/persisted_trigramerator'
 
 [
 	SimpleTrigramerator,
