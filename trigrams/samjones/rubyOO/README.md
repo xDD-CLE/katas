@@ -28,4 +28,4 @@ rspec
 ##Assumptions
 - File cleanup insn't important.
 - Caller doesn't mind choosing and instantiating each layer.
-- Trigramerating Moby Dick each time i run my test suite is A-OK.
+- Trigramerating Moby Dick each time I run my test suite is A-OK.
