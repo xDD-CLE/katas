@@ -2,7 +2,7 @@ require 'dbm'
 
 class DBMWrapper
 	def initialize
-		@file_name = '.db-'+Time.now.nsec.to_s
+		@file_name = 'tmp/db-'+Time.now.nsec.to_s
 		@store = DBM.open(@file_name)
 	end
 

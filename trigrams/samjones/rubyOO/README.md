@@ -26,6 +26,5 @@ rspec
 	- File Rearranger: Writes each translation to file as it happens. Does not return rearranged text to allow large file rearrangement.
 
 ##Assumptions
-- File cleanup insn't important. (lots of test db's are made but not cleaned up)
 - Caller doesn't mind choosing and instantiating each layer.
 - Trigramerating Moby Dick each time I run my test suite is A-OK.
