@@ -24,7 +24,7 @@ describe "FileRearranger" do
 
 	context "when I want to verify integration between pieces" do
 		it "should trigramerate with SimpleTrigramerator and StringTokenizer" do
-			rearranger = FileRearranger.new(SimpleTrigramerator.new(StringTokenizer.new('I wish I may I wish I might')).trigramerate!)
+			rearranger = FileRearranger.new(SimpleTrigramerator.new(StringTokenizer.new('I wish I may I wish I might')))
 
 			file = new_temp_file('')
 			rearranger.rearrange(file.path)
@@ -36,7 +36,7 @@ describe "FileRearranger" do
 		end
 
 		it "should trigramerate with PersistedTrigramerator and StringTokenizer" do
-			rearranger = FileRearranger.new(PersistedTrigramerator.new(StringTokenizer.new('I wish I may I wish I might')).trigramerate!)
+			rearranger = FileRearranger.new(PersistedTrigramerator.new(StringTokenizer.new('I wish I may I wish I might')))
 
 			file = new_temp_file('')
 			rearranger.rearrange(file.path)
@@ -48,7 +48,7 @@ describe "FileRearranger" do
 		end
 
 		it "should trigramerate with SimpleTrigramerator and FileTokenizer" do
-			rearranger = FileRearranger.new(SimpleTrigramerator.new(FileTokenizer.new(new_temp_file('I wish I may I wish I might').path)).trigramerate!)
+			rearranger = FileRearranger.new(SimpleTrigramerator.new(FileTokenizer.new(new_temp_file('I wish I may I wish I might').path)))
 
 			file = new_temp_file('')
 			rearranger.rearrange(file.path)
@@ -60,7 +60,7 @@ describe "FileRearranger" do
 		end
 
 		it "should trigramerate with PersistedTrigramerator and FileTokenizer" do
-			rearranger = FileRearranger.new(PersistedTrigramerator.new(FileTokenizer.new(new_temp_file('I wish I may I wish I might'))).trigramerate!)
+			rearranger = FileRearranger.new(PersistedTrigramerator.new(FileTokenizer.new(new_temp_file('I wish I may I wish I might'))))
 
 			file = new_temp_file('')
 			rearranger.rearrange(file.path)
@@ -74,7 +74,7 @@ describe "FileRearranger" do
 
 	context "when I use a very large file" do
 		it "should not barf while rarranging" do
-			rearranger = FileRearranger.new(PersistedTrigramerator.new(FileTokenizer.new('moby_dick.txt')).trigramerate!)
+			rearranger = FileRearranger.new(PersistedTrigramerator.new(FileTokenizer.new('moby_dick.txt')))
 
 			File.delete('moby_output.txt') if File.exists?('moby_output.txt')
 			file = File.open('moby_output.txt', 'w')

@@ -20,36 +20,24 @@ require 'trigramerator/persisted_trigramerator'
 
 			it "should populate trigramerations" do
 				trigramerator = clazz.new(tokenizer)
-				trigramerator.trigramerate!
 
 				results.each do |key, value|
-					expect(trigramerator.value_for(key)).to satisfy{ |s| value.include?(s) }
+					real = trigramerator.value_for(key)
+					str = "Expected result \"#{real}\" for key \"#{key}\" to be included in #{value}"
+					expect(real).to satisfy{ |s| value.include?(s) }, str
 				end
 			end
 
 			it "should retrieve nil when desired phrase hasn't been trigramerated" do
 				trigramerator = clazz.new(tokenizer)
-				trigramerator.trigramerate!
 
 				expect(trigramerator.value_for('foo bar')).to be_nil
 			end
 
 			it "should seed with one of the keys" do
 				trigramerator = clazz.new(tokenizer)
-				trigramerator.trigramerate!
 
 				expect(trigramerator.seed).to  satisfy{ |s| results.keys.include?(s) }
-			end
-		end
-
-		context "when I don't trigramerate a tokenizer" do
-			it "should raise an error" do
-				trigramerator = clazz.new(double('Tokenizer'))
-
-				expected_error = 'You must first call trigramerate! to populate your trigramerations'
-
-				expect{trigramerator.seed}.to raise_error(expected_error)
-				expect{trigramerator.value_for('foo')}.to raise_error(expected_error)
 			end
 		end
 	end

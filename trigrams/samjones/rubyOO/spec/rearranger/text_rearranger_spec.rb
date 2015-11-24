@@ -22,7 +22,7 @@ describe "TextRearranger" do
 
 	context "when I want to verify integration between pieces" do
 		it "should trigramerate with SimpleTrigramerator and StringTokenizer" do
-			rearranger = TextRearranger.new(SimpleTrigramerator.new(StringTokenizer.new('I wish I may I wish I might')).trigramerate!)
+			rearranger = TextRearranger.new(SimpleTrigramerator.new(StringTokenizer.new('I wish I may I wish I might')))
 
 			text = rearranger.rearrange
 
@@ -32,7 +32,7 @@ describe "TextRearranger" do
 		end
 
 		it "should trigramerate with PersistedTrigramerator and StringTokenizer" do
-			rearranger = TextRearranger.new(PersistedTrigramerator.new(StringTokenizer.new('I wish I may I wish I might')).trigramerate!)
+			rearranger = TextRearranger.new(PersistedTrigramerator.new(StringTokenizer.new('I wish I may I wish I might')))
 
 			text = rearranger.rearrange
 
@@ -42,7 +42,7 @@ describe "TextRearranger" do
 		end
 
 		it "should trigramerate with SimpleTrigramerator and FileTokenizer" do
-			rearranger = TextRearranger.new(SimpleTrigramerator.new(FileTokenizer.new(new_temp_file('I wish I may I wish I might').path)).trigramerate!)
+			rearranger = TextRearranger.new(SimpleTrigramerator.new(FileTokenizer.new(new_temp_file('I wish I may I wish I might').path)))
 
 			text = rearranger.rearrange
 
@@ -52,7 +52,7 @@ describe "TextRearranger" do
 		end
 	
 		it "should trigramerate with PersistedTrigramerator and FileTokenizer" do
-			rearranger = TextRearranger.new(PersistedTrigramerator.new(FileTokenizer.new(new_temp_file('I wish I may I wish I might'))).trigramerate!)
+			rearranger = TextRearranger.new(PersistedTrigramerator.new(FileTokenizer.new(new_temp_file('I wish I may I wish I might'))))
 
 			text = rearranger.rearrange
 
