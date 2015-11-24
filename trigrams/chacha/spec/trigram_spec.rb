@@ -17,12 +17,19 @@ describe Trigram do
    #    #this test is wrong
   	# end
 
-    it "correctly parses simple input string into correct key/value pair" do
+    # it "correctly parses simple input string into correct key/value pair" do
+    #   simpleString = "I wish I"
+    #   results = @trigram.parse(simpleString)
+    #   expect(results["I wish"]).to eq(["I"])
+    # end
+
+    it "correctly returns me the third word in a string" do
       simpleString = "I wish I"
       results = @trigram.parse(simpleString)
       expect(results["I wish"]).to eq(["I"])
     end
 
+    
   end
 
 end
