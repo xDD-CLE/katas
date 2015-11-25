@@ -2,17 +2,15 @@ require 'pry'
 
 class Trigram
 	def parse(string)
-		@trigram = []
-		string_array = string.split(' ')
 
+		trigrams_hash = Hash.new(0)
 
-		@trigram = array.last
+		key_string = string.split[0..1].join(' ')
+		value_word = string.split[2]
 
-		binding.pry
+		trigrams_hash[key_string] = value_word
 
+		trigrams_hash
+			
 	end
 end
-
-#split string into hash where
-#key is the first two elements
-#value is the last element 
