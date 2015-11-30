@@ -8,7 +8,8 @@
   ([trigrams [a b c & more]]
    (if c
      (build-trigrams
-       (merge-with concat trigrams {(str a " " b) [c]}) (concat [b c] more))
+       (merge-with concat trigrams {(str a " " b) [c]})
+       (concat [b c] more))
      trigrams)))
 
 (defn- trigram-sequence
@@ -26,9 +27,17 @@
 (defn trigrams-for [document]
   (build-trigrams (string/split document #"\s+")))
 
-(defn blather [document]
-  (let [trigrams (trigrams-for document)
-        seed (rand-nth (keys trigrams))]
-    (if seed
-      (trigram-sequence trigrams 5 seed)
-      "")))
+(defn blather
+  ([document]
+   (blather document 10))
+
+  ([document iterations]
+   (let [trigrams (trigrams-for document)
+         seed (rand-nth (keys trigrams))]
+     (if seed
+       (trigram-sequence trigrams iterations seed)
+       ""))))
+
+(let [filename (second *command-line-args*)]
+  (if filename
+    (println (blather (slurp filename) 100))))
