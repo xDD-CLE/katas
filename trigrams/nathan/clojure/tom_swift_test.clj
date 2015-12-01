@@ -24,7 +24,7 @@
   (is (= "" (tom-swift/blather "I wish"))))
 
 (deftest simple-blathering
-  (is (= "I wish I" (tom-swift/blather "I wish I"))))
+  (is (= "I wish I." (tom-swift/blather "I wish I"))))
 
 (deftest aphasic-blathering
   (is (every?
@@ -33,9 +33,14 @@
         (partition
           3 1
           (clojure.string/split
-            (tom-swift/blather "I wish I may I wish I might") #"\s+" )))))
+            (clojure.string/replace
+              (tom-swift/blather "I wish I may I wish I might") #"\.$" "")
+            #"\s+")))))
 
 (deftest blathering-starts-with-capital-letter
   (is (re-find #"^[A-Z]" (tom-swift/blather "I wish i may i wish i might"))))
+
+(deftest blathering-ends-with-other-punctuation
+  (is (re-find #"\?$" (tom-swift/blather "I wish I?"))))
 
 (run-tests)

@@ -23,6 +23,11 @@
        (concat [b c] more))
      trigrams)))
 
+(defn- punctuate [string]
+  (if (re-find #"\w$" string)
+    (str string ".")
+    string))
+
 (defn trigrams-for [document]
   (build-trigrams (split-str document)))
 
@@ -41,7 +46,8 @@
    (let [trigrams (trigrams-for document)
          seed (rand-item (filter (partial re-find #"^[A-Z]") (keys trigrams)))]
      (if seed
-       (join-strs (blather-with-trigrams trigrams (- length 2) (split-str seed)))
+       (punctuate
+         (join-strs (blather-with-trigrams trigrams (- length 2) (split-str seed))))
        ""))))
 
 (let [filename (second *command-line-args*)]
