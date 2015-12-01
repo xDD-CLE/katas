@@ -26,11 +26,6 @@
 (deftest simple-blathering
   (is (= "I wish I" (tom-swift/blather "I wish I"))))
 
-(defn note [desc data]
-  (do
-    (println "[NOTE] " desc ": " data)
-    data))
-
 (deftest aphasic-blathering
   (is (every?
         (fn [[a b c]]
@@ -39,5 +34,8 @@
           3 1
           (clojure.string/split
             (tom-swift/blather "I wish I may I wish I might") #"\s+" )))))
+
+(deftest blathering-starts-with-capital-letter
+  (is (re-find #"^[A-Z]" (tom-swift/blather "I wish i may i wish i might"))))
 
 (run-tests)

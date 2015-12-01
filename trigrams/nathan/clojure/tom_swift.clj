@@ -7,6 +7,11 @@
 (defn- split-str [string]
   (string/split string #"\s+"))
 
+(defn- rand-item [coll]
+  (if (empty? coll)
+    nil
+    (clojure.core/rand-nth coll)))
+
 (defn- build-trigrams
   ([strings]
    (build-trigrams {} strings))
@@ -21,24 +26,24 @@
 (defn trigrams-for [document]
   (build-trigrams (split-str document)))
 
-(defn- blather-with-trigrams [trigrams iterations words]
+(defn- blather-with-trigrams [trigrams remaining words]
   (let [last-digram (join-strs (take-last 2 words))
-        next-word (rand-nth (get trigrams last-digram))]
-    (if (and next-word (pos? iterations))
-      (recur trigrams (- iterations 1) (conj words next-word))
+        next-word (rand-item (get trigrams last-digram))]
+    (if (and next-word (pos? remaining))
+      (recur trigrams (- remaining 1) (conj words next-word))
       words)))
 
 (defn blather
   ([document]
    (blather document 10))
 
-  ([document iterations]
+  ([document length]
    (let [trigrams (trigrams-for document)
-         seed (rand-nth (keys trigrams))]
+         seed (rand-item (filter (partial re-find #"^[A-Z]") (keys trigrams)))]
      (if seed
-       (join-strs (blather-with-trigrams trigrams iterations (split-str seed)))
+       (join-strs (blather-with-trigrams trigrams (- length 2) (split-str seed)))
        ""))))
 
 (let [filename (second *command-line-args*)]
   (if filename
-    (println (blather (slurp filename) 100))))
+    (println (blather (slurp filename) 200))))
