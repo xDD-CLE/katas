@@ -1,31 +1,32 @@
 (ns tom-swift
   (:require [clojure.string :as string]))
 
+(defn- join-strs [& strings]
+  (string/join " " (flatten strings)))
+
+(defn- split-str [string]
+  (string/split string #"\s+"))
+
 (defn- build-trigrams
   ([strings]
    (build-trigrams {} strings))
 
   ([trigrams [a b c & more]]
    (if c
-     (build-trigrams
-       (merge-with concat trigrams {(str a " " b) [c]})
+     (recur
+       (merge-with concat trigrams {(join-strs a b) [c]})
        (concat [b c] more))
      trigrams)))
 
-(defn- trigram-sequence
-  ([trigrams iterations seed]
-   (trigram-sequence trigrams iterations seed seed))
-
-  ([trigrams iterations seed blathering]
-   (let [new-word (rand-nth (get trigrams seed))
-         new-seed (str (last (string/split seed #"\s+")) " " new-word)]
-     (if (and new-word (pos? iterations))
-       (trigram-sequence
-         trigrams (- iterations 1) new-seed (str blathering " " new-word))
-       blathering))))
-
 (defn trigrams-for [document]
-  (build-trigrams (string/split document #"\s+")))
+  (build-trigrams (split-str document)))
+
+(defn- blather-with-trigrams [trigrams iterations words]
+  (let [last-digram (join-strs (take-last 2 words))
+        next-word (rand-nth (get trigrams last-digram))]
+    (if (and next-word (pos? iterations))
+      (recur trigrams (- iterations 1) (conj words next-word))
+      words)))
 
 (defn blather
   ([document]
@@ -35,7 +36,7 @@
    (let [trigrams (trigrams-for document)
          seed (rand-nth (keys trigrams))]
      (if seed
-       (trigram-sequence trigrams iterations seed)
+       (join-strs (blather-with-trigrams trigrams iterations (split-str seed)))
        ""))))
 
 (let [filename (second *command-line-args*)]
