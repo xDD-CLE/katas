@@ -1,35 +1,29 @@
 (ns tom-swift
   (:require [clojure.string :as string]))
 
+(defn- rand-item [coll]
+  (if (not (empty? coll))
+    (clojure.core/rand-nth coll)))
+
 (defn- join-strs [& strings]
   (string/join " " (flatten strings)))
 
 (defn- split-str [string]
   (string/split string #"\s+"))
 
-(defn- rand-item [coll]
-  (if (empty? coll)
-    nil
-    (clojure.core/rand-nth coll)))
-
-(defn- build-trigrams
-  ([strings]
-   (build-trigrams {} strings))
-
-  ([trigrams [a b c & more]]
-   (if c
-     (recur
-       (merge-with concat trigrams {(join-strs a b) [c]})
-       (concat [b c] more))
-     trigrams)))
-
 (defn- punctuate [string]
   (if (re-find #"\w$" string)
     (str string ".")
     string))
 
-(defn trigrams-for [document]
-  (build-trigrams (split-str document)))
+(defn- build-trigrams [strings]
+  (loop [trigrams {}
+         [a b c & more] strings]
+   (if c
+     (recur
+       (merge-with concat trigrams {(join-strs a b) [c]})
+       (concat [b c] more))
+     trigrams)))
 
 (defn- blather-with-trigrams [trigrams remaining words]
   (let [last-digram (join-strs (take-last 2 words))
@@ -37,6 +31,9 @@
     (if (and next-word (pos? remaining))
       (recur trigrams (- remaining 1) (conj words next-word))
       words)))
+
+(defn trigrams-for [document]
+  (build-trigrams (split-str document)))
 
 (defn blather
   ([document]
