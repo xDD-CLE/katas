@@ -5,28 +5,23 @@ defmodule Trigrams do
               |> Enum.chunk(3,1)
     keys = Enum.map(threes, &Enum.at(&1, 0))
     vals = Enum.map(threes, &Enum.drop(&1, 1))
-    
-    %{}
-  end
+    key_val_tupples = Enum.zip(keys,vals)
 
-end
-
-defmodule TrigramHelpers do
-
-  def break_into_threes(text) do
-    String.split(text, " ") |> Enum.chunk(3,1)
-  end
-
-  def create_keys_from(threes) do
-    Enum.map(threes, &Enum.at(&1,0)) |> Enum.uniq
-  end
-
-  def map_from(array_of_keys) do
-    Enum.reduce(array_of_keys, %{}, 
+    map_with_keys = Enum.reduce(keys, %{}, 
                   fn (key, map) -> Dict.put(map,key,[]) 
+                  end
+                )
+    Enum.reduce(key_val_tupples, map_with_keys,
+                  fn(tupple, map) ->
+                    Dict.update!(map, elem(tupple,0), 
+                      fn(arr) ->
+                        arr ++ elem(tupple,1) |> Enum.uniq
+                      end
+                      )
                   end
                 )
   end
 
-
 end
+
+
