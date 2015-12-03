@@ -51,11 +51,14 @@ defmodule TrigramHelpersTest do
     keys = TrigramHelpers.create_keys_from(broken_sentence)
 
     assert keys == ["I", "wish", "may"]
-
   end
 
+  test "that it creates keys in a map from an array" do
+    map = TrigramHelpers.map_from(["I", "wish", "may"])
 
 
+    assert map == %{"I" => [], "wish" => [], "may" => []}
+  end
 
 
 

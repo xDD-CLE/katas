@@ -21,5 +21,12 @@ defmodule TrigramHelpers do
     Enum.map(threes, &Enum.at(&1,0)) |> Enum.uniq
   end
 
+  def map_from(array_of_keys) do
+    Enum.reduce(array_of_keys, %{}, 
+                  fn (key, map) -> Dict.put(map,key,[]) 
+                  end
+                )
+  end
+
 
 end
