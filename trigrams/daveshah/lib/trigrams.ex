@@ -7,17 +7,13 @@ defmodule Trigrams do
 
     Enum.reduce(
       Enum.zip(keys,vals), 
-      Enum.reduce(keys, %{}, 
-            fn(key,map) -> Dict.put(map,key,[]) end),
+      Enum.reduce(keys, %{}, fn(key,map) -> Dict.put(map,key,[]) end),
         fn(tupple, map) ->
-          Dict.update!(map, elem(tupple,0), 
-            fn(arr) ->
-              arr ++ elem(tupple,1) |> Enum.uniq
-            end
-            )
+          Dict.update!(map, elem(tupple,0), fn(arr) -> arr ++ elem(tupple,1) |> Enum.uniq end)
         end
       )
   end
+
 end
 
 
