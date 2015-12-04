@@ -124,5 +124,5 @@ class Test_Trigram(unittest.TestCase):
         trigram = Trigram('sorry sorry sorry')
         trigram.parse()
         text = trigram.generate_text(start_text = 'sorry sorry',
-                                     max_words = 5)
+                                     max_words = 4)
         self.assertEqual('sorry sorry sorry sorry', text)
