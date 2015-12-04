@@ -2,7 +2,6 @@ import unittest
 from collections import Counter
 from Trigram import Trigram
 
-
 class Test_Trigram(unittest.TestCase):
 
     # Class-wide Tests
@@ -83,3 +82,22 @@ class Test_Trigram(unittest.TestCase):
         trigram.parse()
         next_word = trigram.predict_next_word(bigram = 'enough to')
         self.assertEqual('properly', next_word)
+
+    # get_next_word_array tests
+    def test_get_next_word_list_returns_list(self):
+        trigram = Trigram('three whole words')
+        trigram.parse()
+        next_word_list = trigram.get_next_word_list(bigram = 'three whole')
+        self.assertIsInstance(next_word_list, list)
+
+    def test_get_next_word_array_returns_single_element_list(self):
+        trigram = Trigram('three whole words')
+        trigram.parse()
+        next_word_list = trigram.get_next_word_list(bigram = 'three whole')
+        self.assertEqual(['words'], next_word_list)
+
+    def test_get_next_word_array_returns_two_next_word_options(self):
+        trigram = Trigram('two words first two words second')
+        trigram.parse()
+        next_word_list = trigram.get_next_word_list(bigram = 'two words')
+        self.assertEqual(['first', 'second'], next_word_list)

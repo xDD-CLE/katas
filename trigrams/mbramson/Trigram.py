@@ -21,3 +21,8 @@ class Trigram:
         if not self.map:
             raise ValueError('Empty Map. You must parse valid input text first')
         return self.map[bigram].keys()[0]
+
+    def get_next_word_list(self, bigram):
+        next_word_list = list(self.map[bigram].elements())
+        next_word_list.sort()
+        return next_word_list
