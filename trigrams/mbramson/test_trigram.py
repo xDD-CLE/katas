@@ -54,3 +54,8 @@ class Test_Trigram(unittest.TestCase):
         trigram.parse()
         self.assertEqual(2, trigram.map['three whole']['words'])
 
+    def test_running_parse_twice_with_append_map_true_double_counts(self):
+        trigram = Trigram('three whole words')
+        trigram.parse()
+        trigram.parse(append_map=True)
+        self.assertEqual(2, trigram.map['three whole']['words'])
