@@ -20,9 +20,4 @@ class Trigram:
     def predict_next_word(self, bigram):
         if not self.map:
             raise ValueError('Empty Map. You must parse valid input text first')
-        return self.get_next_word_list(bigram)[0]
-
-    def get_next_word_list(self, bigram):
-        next_word_list = list(self.map[bigram].elements())
-        next_word_list.sort()
-        return next_word_list
+        return self.map[bigram].most_common(1)[0][0]

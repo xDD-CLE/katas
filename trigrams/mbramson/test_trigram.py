@@ -83,22 +83,10 @@ class Test_Trigram(unittest.TestCase):
         next_word = trigram.predict_next_word(bigram = 'enough to')
         self.assertEqual('properly', next_word)
 
-    # get_next_word_list tests
-    def test_get_next_word_list_returns_list(self):
-        trigram = Trigram('three whole words')
+    def test_predict_next_word_returns_most_likely_word(self):
+        trigram = Trigram('two words this '
+                          'two words that '
+                          'two words this')
         trigram.parse()
-        next_word_list = trigram.get_next_word_list(bigram = 'three whole')
-        self.assertIsInstance(next_word_list, list)
-
-    def test_get_next_word_array_returns_single_element_list(self):
-        trigram = Trigram('three whole words')
-        trigram.parse()
-        next_word_list = trigram.get_next_word_list(bigram = 'three whole')
-        self.assertEqual(['words'], next_word_list)
-
-    def test_get_next_word_array_returns_two_next_word_options(self):
-        trigram = Trigram('two words first two words second')
-        trigram.parse()
-        next_word_list = trigram.get_next_word_list(bigram = 'two words')
-        self.assertEqual(['first', 'second'], next_word_list)
-
+        next_word = trigram.predict_next_word(bigram = 'two words')
+        self.assertEqual('this', next_word)
