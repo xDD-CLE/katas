@@ -117,5 +117,12 @@ class Test_Trigram(unittest.TestCase):
     def test_generate_text_returns_only_start_text_if_no_match(self):
         trigram = Trigram('three whole words')
         trigram.parse()
-        text=  trigram.generate_text(start_text = 'what the')
+        text = trigram.generate_text(start_text = 'what the')
         self.assertEqual('what the', text)
+
+    def test_generate_text_limited_by_max_words_property(self):
+        trigram = Trigram('sorry sorry sorry')
+        trigram.parse()
+        text = trigram.generate_text(start_text = 'sorry sorry',
+                                     max_words = 5)
+        self.assertEqual('sorry sorry sorry sorry', text)
