@@ -1,4 +1,5 @@
 from collections import Counter
+import os.path
 
 class Trigram:
     def __init__(self, input_text=''):
@@ -35,3 +36,9 @@ class Trigram:
             except KeyError: # don't know the next word. bigram not in self.map
                 break
         return ' '.join(bigram_array)
+
+    def load_from_file(self, filename):
+        if not os.path.exists(filename):
+            raise IOError('filename not found')
+        with open(filename) as f:
+            self.input_text = f.read()

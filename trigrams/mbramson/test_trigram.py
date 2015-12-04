@@ -1,6 +1,13 @@
 import unittest
+from mock import patch, mock_open
 from collections import Counter
 from Trigram import Trigram
+
+from sys import version_info
+if version_info.major == 2:
+    import __builtin__ as builtins
+else:
+    import builtins
 
 class Test_Trigram(unittest.TestCase):
 
@@ -126,3 +133,30 @@ class Test_Trigram(unittest.TestCase):
         text = trigram.generate_text(start_text = 'sorry sorry',
                                      max_words = 4)
         self.assertEqual('sorry sorry sorry sorry', text)
+
+    # load_from_file tests
+    @patch('Trigram.os.path')
+    def test_mapbox_load_from_file_checks_for_file_existance(self,
+                                                             mock_os_path):
+        mock_os_path.exists.return_value = True
+        trigram = Trigram()
+        with patch.object(builtins, 'open',
+                          mock_open(read_data='three whole words')):
+            trigram.load_from_file(filename = 'filename.txt')
+        mock_os_path.exists.assert_called_once_with('filename.txt')
+
+    @patch('Trigram.os.path')
+    def test_mapbox_load_from_file_errors_if_no_file(self, mock_os_path):
+        mock_os_path.exists.return_value = False
+        trigram = Trigram()
+        self.assertRaises(IOError, trigram.load_from_file, 'filename.txt')
+
+    @patch('Trigram.os.path')
+    def test_mapbox_load_from_file_populates_input_text(self, mock_os_path):
+        mock_os_path.exists.return_value = True
+        trigram = Trigram()
+        with patch.object(builtins, 'open',
+                          mock_open(read_data='three whole words')):
+            trigram.load_from_file(filename = 'filename.txt')
+        self.assertEqual('three whole words', trigram.input_text)
+
