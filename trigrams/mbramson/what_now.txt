@@ -1,0 +1,8 @@
+# Where would I go from here?
+
+* Built-in mechanism to parse files
+* Account for punctuation and irregular text
+* Randomized valid start_text for generate_text
+* Continuation after failure to find valid next predicted word
+* Randomize next word prediction based on map
+* Map analysis capability
