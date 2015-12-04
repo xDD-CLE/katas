@@ -44,7 +44,12 @@ class Trigram
 			end	
 		end
 
-		def remove_punctuation(word)
+		def remove_punctuation(words)
+			word_array = words.split(' ')
+			word_array.map {|word| remove_punctuation_from_one_word(word)}.join(' ')
+		end
+
+		def remove_punctuation_from_one_word(word)
 			word.gsub(/^[\?\'\:\,\"\.\!\(\)\-\_]|[\?\'\:\,\"\.\!\(\)\-\_]$/,'')
 		end
 end
