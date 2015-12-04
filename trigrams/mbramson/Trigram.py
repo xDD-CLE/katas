@@ -16,3 +16,8 @@ class Trigram:
             if not self.map.has_key(current_bigram):
                 self.map[current_bigram] = Counter()
             self.map[current_bigram][words[i+2]] += 1
+
+    def predict_next_word(self, bigram):
+        if not self.map:
+            raise ValueError('Empty Map. You must parse valid input text first')
+        return self.map[bigram].keys()[0]

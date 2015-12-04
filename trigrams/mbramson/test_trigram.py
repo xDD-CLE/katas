@@ -19,7 +19,7 @@ class Test_Trigram(unittest.TestCase):
         trigram = Trigram()
         self.assertEqual(trigram.map, {})
 
-    # test parse functionality
+    # parse() tests
     def test_parse_makes_trigram_map_a_dictionary(self):
         trigram = Trigram('the quick brown fox jumped over the fence')
         trigram.parse()
@@ -59,3 +59,27 @@ class Test_Trigram(unittest.TestCase):
         trigram.parse()
         trigram.parse(append_map=True)
         self.assertEqual(2, trigram.map['three whole']['words'])
+
+    # predict_next_word tests
+    def test_predict_next_word_returns_string(self):
+        trigram = Trigram('three whole words')
+        trigram.parse()
+        next_word = trigram.predict_next_word(bigram = 'three whole')
+        self.assertIsInstance(next_word, str)
+
+    def test_predict_next_word_errors_if_no_map(self):
+        trigram = Trigram()
+        self.assertRaises(ValueError, trigram.predict_next_word, 'anything')
+
+    def test_predict_next_word_returns_third_word_for_trigram_input(self):
+        trigram = Trigram('three whole words')
+        trigram.parse()
+        next_word = trigram.predict_next_word(bigram = 'three whole')
+        self.assertEqual('words', next_word)
+
+    def test_predict_next_word_returns_only_possible_answer_for_longer_corpus(self):
+        trigram = Trigram('three whole words are not enough to properly test '
+                          'this method so how about fifteen')
+        trigram.parse()
+        next_word = trigram.predict_next_word(bigram = 'enough to')
+        self.assertEqual('properly', next_word)
