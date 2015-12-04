@@ -95,3 +95,27 @@ class Test_Trigram(unittest.TestCase):
         trigram = Trigram('three whole words')
         trigram.parse()
         self.assertRaises(KeyError, trigram.predict_next_word, 'a word')
+
+    # generate_text tests
+    def test_generate_text_returns_string(self):
+        trigram = Trigram('three whole words')
+        trigram.parse()
+        text = trigram.generate_text(start_text = 'three whole')
+        self.assertIsInstance(text, str)
+
+    def test_generate_text_errors_if_start_text_is_less_than_two_words(self):
+        trigram = Trigram('three whole words')
+        trigram.parse()
+        self.assertRaises(ValueError, trigram.generate_text, 'three')
+
+    def test_generate_text_returns_third_whole_trigram(self):
+        trigram = Trigram('three whole words')
+        trigram.parse()
+        text = trigram.generate_text(start_text = 'three whole')
+        self.assertEqual('three whole words', text)
+
+    def test_generate_text_returns_only_start_text_if_no_match(self):
+        trigram = Trigram('three whole words')
+        trigram.parse()
+        text=  trigram.generate_text(start_text = 'what the')
+        self.assertEqual('what the', text)
