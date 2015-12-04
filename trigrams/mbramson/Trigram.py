@@ -20,7 +20,7 @@ class Trigram:
     def predict_next_word(self, bigram):
         if not self.map:
             raise ValueError('Empty Map. You must parse valid input text first')
-        return self.map[bigram].keys()[0]
+        return self.get_next_word_list(bigram)[0]
 
     def get_next_word_list(self, bigram):
         next_word_list = list(self.map[bigram].elements())

@@ -83,7 +83,7 @@ class Test_Trigram(unittest.TestCase):
         next_word = trigram.predict_next_word(bigram = 'enough to')
         self.assertEqual('properly', next_word)
 
-    # get_next_word_array tests
+    # get_next_word_list tests
     def test_get_next_word_list_returns_list(self):
         trigram = Trigram('three whole words')
         trigram.parse()
@@ -101,3 +101,4 @@ class Test_Trigram(unittest.TestCase):
         trigram.parse()
         next_word_list = trigram.get_next_word_list(bigram = 'two words')
         self.assertEqual(['first', 'second'], next_word_list)
+
