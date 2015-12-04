@@ -90,3 +90,8 @@ class Test_Trigram(unittest.TestCase):
         trigram.parse()
         next_word = trigram.predict_next_word(bigram = 'two words')
         self.assertEqual('this', next_word)
+
+    def test_predict_next_word_throws_key_error_if_map_missing_bigram(self):
+        trigram = Trigram('three whole words')
+        trigram.parse()
+        self.assertRaises(KeyError, trigram.predict_next_word, 'a word')
