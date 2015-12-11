@@ -13,9 +13,10 @@ defmodule TrigramsTest do
      simple_sentance = "I wish I may I wish I might"
      trigrams = Trigrams.from(simple_sentance)
 
-     assert Dict.get(trigrams,"I") == ["wish", "I", "may"]
-     assert Dict.get(trigrams,"wish") == ["I", "may", "might"]
-     assert Dict.get(trigrams,"may") == ["I", "wish"]
+     assert Dict.get(trigrams,"I wish") == ["I", "I"]
+     assert Dict.get(trigrams,"wish I") == ["may", "might"]
+     assert Dict.get(trigrams,"may I") == ["wish"]
+     assert Dict.get(trigrams,"I may") == ["I"]
    end
 end
 
