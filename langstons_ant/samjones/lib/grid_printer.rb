@@ -13,6 +13,10 @@ class GridPrinter
 	end
 
 	def refresh
+		sleep(1)
 		pp @grid
+
+		puts
+		puts
 	end
 end

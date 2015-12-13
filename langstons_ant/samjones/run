@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+$:<< 'lib'
+require 'highline/import'
+require 'langston'
+
+width = ask("Width [9]: ") { |q| q.default = 9 }
+height = ask("Height [9]: ") { |q| q.default = 9 }
+gens = ask("Generations [9]: ") { |q| q.default = 12  }
+
+
+puts "Running Langston's ant with width: #{width} height: #{height} gens: #{gens}"
+puts
+puts
+Langston.with_size(width, height).run(gens)
