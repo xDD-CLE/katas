@@ -1,12 +1,24 @@
 require 'grid_printer'
 
 describe GridPrinter do
+	let(:black) { " ".colorize(background: :black) }
+	let(:white) { " ".colorize(background: :white) }
+	let(:north) { "\u2191".colorize(color: :red) }
+	let(:south) { "\u2193".colorize(color: :red) }
+	let(:east) { "\u2192".colorize(color: :red) }
+	let(:west) { "\u2190".colorize(color: :red) }
+
 	it "Should let me print a grid" do
-		printer = GridPrinter.open_with_size(2, 2)
-		printer.print(0, 0, 'F')
-		printer.print(1, 0, 'O')
-		printer.print(0, 1, 'B')
-		printer.print(1, 1, 'R')
-		expect {printer.refresh}.to output("[[\"F\", \"O\"], [\"B\", \"R\"]]\n").to_stdout
+		printer = GridPrinter.open_with_size(3, 2)
+		printer.print(0, 0, :black)
+		printer.print(1, 0, :white)
+		printer.print(2, 0, :north)
+		printer.print(0, 1, :south)
+		printer.print(1, 1, :east)
+		printer.print(2, 1, :west)
+		expect {printer.refresh}.to output(
+			black + white + north + "\n" +
+			south + east + west + "\n\n\n"
+		).to_stdout
 	end
 end

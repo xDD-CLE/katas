@@ -4,9 +4,9 @@ $:<< 'lib'
 require 'highline/import'
 require 'langston'
 
-width = ask("Width [9]: ") { |q| q.default = 9 }
-height = ask("Height [9]: ") { |q| q.default = 9 }
-gens = ask("Generations [9]: ") { |q| q.default = 12  }
+width = ask("Width [9]: ") { |q| q.default = 9 }.to_i
+height = ask("Height [9]: ") { |q| q.default = 9 }.to_i
+gens = ask("Generations [9]: ") { |q| q.default = 12  }.to_i
 
 
 puts "Running Langston's ant with width: #{width} height: #{height} gens: #{gens}"
