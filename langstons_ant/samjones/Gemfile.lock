@@ -3,6 +3,7 @@ GEM
   specs:
     coderay (1.1.0)
     colorize (0.7.7)
+    curses (1.0.1)
     diff-lcs (1.2.5)
     ffi (1.9.10)
     formatador (0.2.5)
@@ -59,6 +60,7 @@ PLATFORMS
 
 DEPENDENCIES
   colorize
+  curses
   guard-rspec
   highline
   rspec

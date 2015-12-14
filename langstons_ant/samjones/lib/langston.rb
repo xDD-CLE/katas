@@ -1,6 +1,7 @@
 require 'ant'
 require 'cell'
 require 'grid_printer'
+require 'curses_printer'
 require 'color_behavior'
 
 class Langston
@@ -44,6 +45,7 @@ class Langston
 		end
 
 		def create_printer(x_size, y_size)
+			#@printer = CursesPrinter.open_with_size(x_size, y_size)
 			@printer = GridPrinter.open_with_size(x_size, y_size)
 		end
 

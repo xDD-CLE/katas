@@ -6,6 +6,15 @@ module ColorBehavior
 		},
 		white: {
 			next_color: :black,
+			#next_color: :green,
+			turn: :left
+		},
+		green: {
+			next_color: :blue,
+			turn: :right
+		},
+		blue: {
+			next_color: :black,
 			turn: :left
 		}
 	}
