@@ -43,7 +43,7 @@ it "Should hold x position" do
 	].each do |test|
 		it "Should move #{test[:direction]}" do
 			grid.at(3,3)
-			grid.move!(test[:direction])
+			grid.move_direction!(test[:direction])
 			expect(grid.x).to eq(test[:resulting_x])
 			expect(grid.y).to eq(test[:resulting_y])
 		end

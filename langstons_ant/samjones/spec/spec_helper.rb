@@ -16,6 +16,8 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'grid_printer'
+
 RSpec.configure do |config|
 	config.before(:each) do
 		allow_any_instance_of(GridPrinter).to receive(:sleep)

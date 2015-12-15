@@ -7,7 +7,7 @@ module GridNavigable
 		self
 	end
 
-	def move!(direction)
+	def move_direction!(direction)
 		public_send(direction)
 	end
 	def north

@@ -11,6 +11,7 @@ class Langston
 		create_printer(x_size, y_size, printer)
 		create_cells(x_size, y_size)
 		create_ant(x_size, y_size)
+		@ant = Ant.new((x_size/2.0).round-1, (y_size/2.0).round-1, facing: :north, printer: @printer).print
 		@printer.refresh
 	end
 
@@ -20,7 +21,7 @@ class Langston
 			turn = turn_for_color(cell_under_ant.color)
 
 			update_cell_color(cell_under_ant)
-			update_ant(turn)
+			@ant.turn!(turn).move!.print
 			@printer.refresh
 		end
 	end
@@ -46,8 +47,6 @@ class Langston
 		end
 
 		def create_ant(x_size, y_size)
-			@ant = Ant.at_and_facing((x_size/2.0).round-1, (y_size/2.0).round-1, :north)
-			@printer.print(@ant.x, @ant.y, @ant.facing)
 		end
 
 		def find_cell_under_ant
@@ -60,10 +59,4 @@ class Langston
 			cell_under_ant.color = next_color(cell_under_ant.color)
 			@printer.print(cell_under_ant.x, cell_under_ant.y, cell_under_ant.color)
 		end
-
-		def update_ant(turn)
-			@ant.turn_and_move(turn)
-			@printer.print(@ant.x, @ant.y, @ant.facing)
-		end
-		
 end

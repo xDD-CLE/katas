@@ -14,24 +14,26 @@ class Ant
 		right: +1
 	}
 
-	attr_accessor :facing
-
-	def self.at_and_facing(x, y, facing)
-		ant = Ant.new
-		ant.at(x, y)
-		ant.facing = facing
-		ant
+	def initialize(x, y, opts = {})
+		at(x, y)
+		@facing = opts[:facing] || :north
+		@printer = opts[:printer] || :printer
 	end
 
-	def turn_and_move(turn)
-		turn(turn)
-		move!(facing)
+	def turn!(turn)
+			increment = @@turn_direction[turn]
+			current_pos = @@directions.find_index(@facing)
+			@facing = @@directions[(current_pos + increment) % @@directions.size]
+		self
 	end
 
-	private
-	def turn(turn)
-		increment = @@turn_direction[turn]
-		current_pos = @@directions.find_index(facing)
-		self.facing = @@directions[(current_pos + increment) % @@directions.size]
+	def move!
+		move_direction!(@facing)
+		self
+	end
+
+	def print
+		@printer.print(x, y, @facing) if @printer
+		self
 	end
 end
