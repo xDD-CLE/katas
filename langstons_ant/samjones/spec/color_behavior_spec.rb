@@ -5,12 +5,20 @@ describe ColorBehavior do
 
 	[
 		{
-			color: :black,
-			next_color: :white
+			color: :white,
+			next_color: :green
 		},
 		{
-			color: :white,
+			color: :green,
+			next_color: :blue
+		},
+		{
+			color: :blue,
 			next_color: :black
+		},
+		{
+			color: :black,
+			next_color: :white
 		}
 	].each do |test|
 		it "Should tell me #{test[:color]} comes after #{test[:next_color]}" do
@@ -26,6 +34,14 @@ describe ColorBehavior do
 		{
 			color: :white,
 			turn: :left
+		},
+		{
+			color: :green,
+			turn: :left
+		},
+		{
+			color: :blue,
+			turn: :right
 		}
 	].each do |test|
 		it "Should tell me #{test[:color]} turns #{test[:turn]}" do

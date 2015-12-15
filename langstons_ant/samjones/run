@@ -3,6 +3,7 @@
 $:<< 'lib'
 require 'highline/import'
 require 'langston'
+require 'curses_printer'
 
 width = ask("Width [33]: ") { |q| q.default = 33 }.to_i
 height = ask("Height [33]: ") { |q| q.default = 33 }.to_i
@@ -12,4 +13,4 @@ gens = ask("Generations [100]: ") { |q| q.default = 100  }.to_i
 puts "Running Langston's ant with width: #{width} height: #{height} gens: #{gens}"
 puts
 puts
-Langston.with_size(width, height).run(gens)
+Langston.new(width, height, CursesPrinter).run(gens)

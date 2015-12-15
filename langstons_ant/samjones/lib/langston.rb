@@ -7,15 +7,11 @@ require 'color_behavior'
 class Langston
 	include ColorBehavior
 
-	def initialize(x_size, y_size)
-		create_printer(x_size, y_size)
+	def initialize(x_size, y_size, printer = GridPrinter)
+		create_printer(x_size, y_size, printer)
 		create_cells(x_size, y_size)
 		create_ant(x_size, y_size)
 		@printer.refresh
-	end
-
-	def self.with_size(x_size, y_size)
-		Langston.new(x_size, y_size)
 	end
 
 	def run(generations)
@@ -44,9 +40,9 @@ class Langston
 			end
 		end
 
-		def create_printer(x_size, y_size)
-			#@printer = CursesPrinter.open_with_size(x_size, y_size)
-			@printer = GridPrinter.open_with_size(x_size, y_size)
+		def create_printer(x_size, y_size, printer)
+			@printer = printer.open_with_size(x_size, y_size)
+			#@printer = GridPrinter.open_with_size(x_size, y_size)
 		end
 
 		def create_ant(x_size, y_size)

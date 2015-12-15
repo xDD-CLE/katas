@@ -10,7 +10,7 @@ describe Langston do
 	let(:west) { "\u2190".colorize(color: :red) }
 
 	it "should print initial grid when initializing" do
-		expect{Langston.with_size(3, 3)}.to output(
+		expect{Langston.new(3, 3)}.to output(
 			black + black + black + "\n" +
 			black + north + black + "\n" +
 			black + black + black + "\n\n\n"
@@ -18,7 +18,7 @@ describe Langston do
 	end
 
 	it "should print the grid for each generation" do
-		lang = Langston.with_size(3, 3)
+		lang = Langston.new(3, 3)
 		expect{lang.run(2)}.to output(
 		black + black + black + "\n" +
 			black + white + east + "\n" +
