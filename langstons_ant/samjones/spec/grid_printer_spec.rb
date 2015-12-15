@@ -8,6 +8,14 @@ describe GridPrinter do
 	let(:east) { "\u2192".colorize(color: :red) }
 	let(:west) { "\u2190".colorize(color: :red) }
 
+	it "Should have a size" do
+		x, y = 3, 2
+		printer = GridPrinter.open_with_size(x, y)
+
+		expect(printer.width).to eq(x)
+		expect(printer.height).to eq(y)
+	end
+
 	it "Should let me print a grid" do
 		printer = GridPrinter.open_with_size(3, 2)
 		printer.print(0, 0, :black)

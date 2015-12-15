@@ -1,13 +1,13 @@
 require 'colorize'
 
 class GridPrinter
-	def initialize(x_size, y_size)
-		@x_size = x_size
-		@y_size = y_size
-		@grid = Array.new(y_size) {Array.new(x_size)}
+	def initialize(width, height)
+		@width = width
+		@height = height
+		@grid = Array.new(height) {Array.new(width)}
 	end
-	def self.open_with_size(x_size, y_size)
-		GridPrinter.new(x_size, y_size)
+	def self.open_with_size(width, height)
+		GridPrinter.new(width, height)
 	end
 
 	def print(x, y, value)
@@ -17,9 +17,9 @@ class GridPrinter
 	def refresh
 		sleep(0.1)
 
-		@y_size.times do |y|
+		@height.times do |y|
 			line = ""
-			@x_size.times do |x|
+			@width.times do |x|
 				line << get_character_at(x, y)
 			end
 			puts line + "\n"
@@ -27,6 +27,14 @@ class GridPrinter
 
 		puts
 		puts
+	end
+
+	def width
+		@width
+	end
+
+	def height
+		@height
 	end
 
 	private

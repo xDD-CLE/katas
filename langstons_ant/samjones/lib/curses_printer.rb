@@ -2,9 +2,9 @@ require 'curses'
 
 class CursesPrinter
 
-	def initialize(x_size, y_size)
-		@x_size = x_size
-		@y_size = y_size
+	def initialize(width, height)
+		@width = width
+		@height = height
 		Curses.noecho
 		Curses.init_screen
 		Curses.start_color
@@ -14,10 +14,10 @@ class CursesPrinter
 		Curses.init_pair(color_key(:green), Curses::COLOR_BLACK, Curses::COLOR_GREEN)
 		Curses.init_pair(color_key(:blue), Curses::COLOR_BLACK, Curses::COLOR_BLUE)
 		Curses.init_pair(color_key(nil), Curses::COLOR_RED, Curses::COLOR_BLACK)
-		@win = Curses::Window.new(x_size, y_size, 0, 0)
+		@win = Curses::Window.new(width, height, 0, 0)
 	end
-	def self.open_with_size(x_size, y_size)
-		CursesPrinter.new(x_size, y_size)
+	def self.open_with_size(width, height)
+		CursesPrinter.new(width, height)
 	end
 
 	def print(x, y, value)
@@ -29,6 +29,14 @@ class CursesPrinter
 	def refresh
 		sleep(0.15)
 		@win.refresh
+	end
+
+	def height
+		@height
+	end
+
+	def width
+		@width
 	end
 
 	private

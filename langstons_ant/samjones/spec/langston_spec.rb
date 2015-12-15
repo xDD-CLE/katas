@@ -1,7 +1,7 @@
 require 'langston'
+require 'grid_printer'
 
 describe Langston do
-
 	let(:black) { " ".colorize(background: :black) }
 	let(:white) { " ".colorize(background: :white) }
 	let(:north) { "\u2191".colorize(color: :red) }
@@ -9,17 +9,29 @@ describe Langston do
 	let(:east) { "\u2192".colorize(color: :red) }
 	let(:west) { "\u2190".colorize(color: :red) }
 
+	before(:each) do
+		@printer = GridPrinter.open_with_size(3, 3)
+		@output = ""
+		@printer.stub(:puts) do |val|
+		 	@output << (val || "\n")
+		end
+
+	end
+
 	it "should print initial grid when initializing" do
-		expect{Langston.new(3, 3)}.to output(
+		Langston.new(@printer)
+		expect(@output).to eq(
 			black + black + black + "\n" +
 			black + north + black + "\n" +
 			black + black + black + "\n\n\n"
-		).to_stdout
+		)
 	end
 
 	it "should print the grid for each generation" do
-		lang = Langston.new(3, 3)
-		expect{lang.run(2)}.to output(
+		lang = Langston.new(@printer)
+		@output = ""
+		lang.run(2)
+		expect(@output).to eq(
 		black + black + black + "\n" +
 			black + white + east + "\n" +
 			black + black + black + "\n\n\n" +
@@ -27,6 +39,6 @@ describe Langston do
 			black + black + black + "\n" +
 			black + white + white + "\n" +
 			black + black + south + "\n\n\n"
-		).to_stdout
+		)
 	end
 end

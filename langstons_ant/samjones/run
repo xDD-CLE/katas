@@ -13,4 +13,4 @@ gens = ask("Generations [100]: ") { |q| q.default = 100  }.to_i
 puts "Running Langston's ant with width: #{width} height: #{height} gens: #{gens}"
 puts
 puts
-Langston.new(width, height, CursesPrinter).run(gens)
+Langston.new(CursesPrinter.open_with_size(width, height)).run(gens)

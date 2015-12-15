@@ -26,26 +26,7 @@ describe ColorBehavior do
 		end
 	end
 
-	[
-		{
-			color: :black,
-			turn: :right
-		},
-		{
-			color: :white,
-			turn: :left
-		},
-		{
-			color: :green,
-			turn: :left
-		},
-		{
-			color: :blue,
-			turn: :right
-		}
-	].each do |test|
-		it "Should tell me #{test[:color]} turns #{test[:turn]}" do
-			expect(behavior.turn_for_color(test[:color])).to eq(test[:turn])
-		end
+	it "Should return color info" do
+		expect(behavior.color_info(:black)).to eq({next_color: :white, turn: :right})
 	end
 end

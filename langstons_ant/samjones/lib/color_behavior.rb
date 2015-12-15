@@ -22,7 +22,7 @@ module ColorBehavior
 		@@colors[color][:next_color]
 	end
 
-	def turn_for_color(color)
-		@@colors[color][:turn]
-	end
+	def color_info(color)
+		@@colors[color]
+	end	
 end
