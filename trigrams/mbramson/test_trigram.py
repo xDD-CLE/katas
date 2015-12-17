@@ -159,4 +159,3 @@ class Test_Trigram(unittest.TestCase):
                           mock_open(read_data='three whole words')):
             trigram.load_from_file(filename = 'filename.txt')
         self.assertEqual('three whole words', trigram.input_text)
-
