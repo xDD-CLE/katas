@@ -1,11 +1,17 @@
 from langton.Square import Square
 
+
 class AntGrid:
     def __init__(self):
         self.x = 0
         self.y = 0
         self.dir = "up"
         self.grid_list = [Square(x=0, y=0)]
+
+    def current_activation(self):
+        for square in self.grid_list:
+            if square == Square(x=self.x, y=self.y):
+                return square.activated
 
     def turn(self, activated):
         right_map = {"up": "right",
@@ -20,3 +26,4 @@ class AntGrid:
             self.dir = left_map[self.dir]
         else:
             self.dir = right_map[self.dir]
+

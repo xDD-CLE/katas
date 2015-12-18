@@ -74,3 +74,31 @@ class TestAnt(unittest.TestCase):
         ant.dir = "left"
         ant.turn(activated=True)
         self.assertEqual("down", ant.dir)
+
+    def test_ant_get_current_activation_returns_false_at_origin(self):
+        ant = AntGrid()
+        ant.x, ant.y = 0, 0
+        ant.grid_list = [Square(x=0, y=0)]
+        self.assertEqual(False, ant.current_activation())
+
+    def test_ant_get_current_activation_returns_true_if_square_activated(self):
+        ant = AntGrid()
+        ant.x, ant.y = 1, 3
+        square_1_3 = Square(x=1, y=3)
+        square_1_3.activated = True
+        ant.grid_list = [square_1_3]
+        self.assertEqual(True, ant.current_activation())
+
+    def test_ant_get_current_activation_returns_state_of_correct_square(self):
+        ant = AntGrid()
+        ant.x, ant.y = 3, 4
+        square_0_0 = Square(x=0, y=0)
+        square_0_1 = Square(x=0, y=1)
+        square_3_4 = Square(x=3, y=4)
+        square_3_4.activated = True
+        ant.grid_list = [square_0_0, square_0_1, square_3_4]
+        self.assertEqual(True, ant.current_activation())
+
+    #def test_first_step_from_unactivated_origin_with_dir_up_is_right(self):
+        #ant = AntGrid()
+        #ant.x, ant.y = 0, 0
