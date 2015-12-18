@@ -25,3 +25,28 @@ class TestAnt(unittest.TestCase):
     def test_ant_grid_contains_0_0_square(self):
         ant = AntGrid()
         self.assertIn(Square(x=0, y=0), ant.grid_list)
+
+    # turning tests
+    def test_ant_grid_turn_right_dir_up_to_right(self):
+        ant = AntGrid()
+        ant.dir = "up"
+        ant.turn_right()
+        self.assertEqual("right", ant.dir)
+
+    def test_ant_grid_turn_right_dir_right_to_down(self):
+        ant = AntGrid()
+        ant.dir = "right"
+        ant.turn_right()
+        self.assertEqual("down", ant.dir)
+
+    def test_ant_grid_turn_right_dir_down_to_left(self):
+        ant = AntGrid()
+        ant.dir = "down"
+        ant.turn_right()
+        self.assertEqual("left", ant.dir)
+
+    def test_ant_grid_turn_right_dir_right_to_left(self):
+        ant = AntGrid()
+        ant.dir = "left"
+        ant.turn_right()
+        self.assertEqual("up", ant.dir)
