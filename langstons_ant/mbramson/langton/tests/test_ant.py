@@ -27,26 +27,50 @@ class TestAnt(unittest.TestCase):
         self.assertIn(Square(x=0, y=0), ant.grid_list)
 
     # turning tests
-    def test_ant_grid_turn_right_dir_up_to_right(self):
+    def test_ant_grid_turn_dir_up_to_right_when_unactivated(self):
         ant = AntGrid()
         ant.dir = "up"
-        ant.turn_right()
+        ant.turn(activated=False)
         self.assertEqual("right", ant.dir)
 
-    def test_ant_grid_turn_right_dir_right_to_down(self):
+    def test_ant_grid_turn_dir_right_to_down_when_unactivated(self):
         ant = AntGrid()
         ant.dir = "right"
-        ant.turn_right()
+        ant.turn(activated=False)
         self.assertEqual("down", ant.dir)
 
-    def test_ant_grid_turn_right_dir_down_to_left(self):
+    def test_ant_grid_turn_dir_down_to_left_when_unactivated(self):
         ant = AntGrid()
         ant.dir = "down"
-        ant.turn_right()
+        ant.turn(activated=False)
         self.assertEqual("left", ant.dir)
 
-    def test_ant_grid_turn_right_dir_right_to_left(self):
+    def test_ant_grid_turn_dir_right_to_left_when_unactivated(self):
         ant = AntGrid()
         ant.dir = "left"
-        ant.turn_right()
+        ant.turn(activated=False)
         self.assertEqual("up", ant.dir)
+
+    def test_ant_grid_turn_dir_up_to_right_when_activated(self):
+        ant = AntGrid()
+        ant.dir = "up"
+        ant.turn(activated=True)
+        self.assertEqual("left", ant.dir)
+
+    def test_ant_grid_turn_dir_right_to_down_when_activated(self):
+        ant = AntGrid()
+        ant.dir = "right"
+        ant.turn(activated=True)
+        self.assertEqual("down", ant.dir)
+
+    def test_ant_grid_turn_dir_down_to_left_when_activated(self):
+        ant = AntGrid()
+        ant.dir = "down"
+        ant.turn(activated=True)
+        self.assertEqual("left", ant.dir)
+
+    def test_ant_grid_turn_dir_right_to_left_when_activated(self):
+        ant = AntGrid()
+        ant.dir = "left"
+        ant.turn(activated=True)
+        self.assertEqual("down", ant.dir)

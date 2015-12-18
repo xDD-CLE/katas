@@ -7,9 +7,16 @@ class AntGrid:
         self.dir = "up"
         self.grid_list = [Square(x=0, y=0)]
 
-    def turn_right(self):
+    def turn(self, activated):
         right_map = {"up": "right",
                      "right": "down",
                      "down": "left",
                      "left": "up"}
-        self.dir = right_map[self.dir]
+        left_map = {"up": "left",
+                    "right": "down",
+                    "down": "left",
+                    "left": "down"}
+        if activated:
+            self.dir = left_map[self.dir]
+        else:
+            self.dir = right_map[self.dir]
