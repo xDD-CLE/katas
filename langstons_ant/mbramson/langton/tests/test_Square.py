@@ -6,7 +6,7 @@ class TestSquare(unittest.TestCase):
 
     def test_square_starts_unactivated(self):
         square = Square(x=0, y=4)
-        self.assertEqual(0, square.activated)
+        self.assertEqual(False, square.activated)
 
     def test_square_starts_with_correct_x_value(self):
         square = Square(x=5, y=23)
@@ -19,13 +19,13 @@ class TestSquare(unittest.TestCase):
     def test_square_flip_function_flips_activated_property(self):
         square = Square(x=0, y=0)
         square.flip()
-        self.assertEqual(1, square.activated)
+        self.assertEqual(True, square.activated)
 
     def test_square_flipping_twice_leaves_same_activated_property(self):
         square = Square(x=0, y=0)
         square.flip()
         square.flip()
-        self.assertEqual(0, square.activated)
+        self.assertEqual(False, square.activated)
 
     def test_square_hash_reflect_x_and_y_variation1(self):
         square = Square(x=3, y=20)
