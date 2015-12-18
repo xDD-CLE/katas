@@ -26,4 +26,11 @@ class TestSquare(unittest.TestCase):
         square.flip()
         square.flip()
         self.assertEqual(0, square.activated)
-        
+
+    def test_square_hash_reflect_x_and_y_variation1(self):
+        square = Square(x=3, y=20)
+        self.assertEqual(hash((3, 20)), hash(square))
+
+    def test_square_hash_reflect_x_and_y_variation2(self):
+        square = Square(x=-10, y= 2)
+        self.assertEqual(hash((-10, 2)), hash(square))

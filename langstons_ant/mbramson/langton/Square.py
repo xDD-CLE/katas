@@ -11,3 +11,6 @@ class Square:
             self.activated = 1
         else:
             self.activated = 0
+
+    def __hash__(self):
+        return hash((self.x, self.y))
