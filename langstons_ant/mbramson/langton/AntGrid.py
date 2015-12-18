@@ -27,3 +27,16 @@ class AntGrid:
         else:
             self.dir = right_map[self.dir]
 
+    def translate(self, dir):
+        if dir == "up":
+            self.y += 1
+        elif dir == "down":
+            self.y -= 1
+        elif dir == "right":
+            self.x += 1
+        elif dir == "left":
+            self.x -= 1
+
+    def step(self):
+        self.turn(self.current_activation())
+        self.translate(self.dir)

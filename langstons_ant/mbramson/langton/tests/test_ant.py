@@ -99,6 +99,38 @@ class TestAnt(unittest.TestCase):
         ant.grid_list = [square_0_0, square_0_1, square_3_4]
         self.assertEqual(True, ant.current_activation())
 
-    #def test_first_step_from_unactivated_origin_with_dir_up_is_right(self):
-        #ant = AntGrid()
-        #ant.x, ant.y = 0, 0
+    def test_translate_increases_y_for_dir_of_up(self):
+        ant = AntGrid()
+        ant.x, ant.y = 0, 0
+        ant.translate("up")
+        self.assertEqual(0, ant.x)
+        self.assertEqual(1, ant.y)
+
+    def test_translate_decreases_y_for_dir_of_down(self):
+        ant = AntGrid()
+        ant.x, ant.y = 0, 0
+        ant.translate("down")
+        self.assertEqual(0, ant.x)
+        self.assertEqual(-1, ant.y)
+
+    def test_translate_increases_x_for_dir_of_right(self):
+        ant = AntGrid()
+        ant.x, ant.y = 0, 0
+        ant.translate("right")
+        self.assertEqual(1, ant.x)
+        self.assertEqual(0, ant.y)
+
+    def test_translate_decreases_x_for_dir_of_left(self):
+        ant = AntGrid()
+        ant.x, ant.y = 0, 0
+        ant.translate("left")
+        self.assertEqual(-1, ant.x)
+        self.assertEqual(0, ant.y)
+
+    def test_first_step_from_unactivated_origin_with_dir_up_is_right(self):
+        ant = AntGrid()
+        ant.x, ant.y = 0, 0
+        ant.dir = "up"
+        ant.step()
+        self.assertEqual(1, ant.x)
+        self.assertEqual(0, ant.y)
