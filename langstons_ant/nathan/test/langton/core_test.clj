@@ -11,8 +11,20 @@
        (:faces ant) => :north)
 
     (facts "about turning"
-      (fact "it turns left when given :black"
-        (:faces ((:turn ant) :black)) => :west
-        (:faces ((:turn ((:turn ant) :black)) :black)) => :south)
-        (:faces ((:turn ((:turn ((:turn ant) :black)) :black)) :black)) => :east
-        (:faces ((:turn ((:turn ((:turn ((:turn ant) :black)) :black)) :black)) :black)) => :north)))
+      (letfn [(turn-ant [ant times color]
+                (loop [loop-ant ant loop-times times]
+                  (if (> loop-times 0)
+                    (recur ((:turn loop-ant) color) (dec loop-times))
+                    loop-ant)))]
+
+        (fact "it turns left when given :black"
+          (:faces (turn-ant ant 1 :black)) => :west
+          (:faces (turn-ant ant 2 :black)) => :south
+          (:faces (turn-ant ant 3 :black)) => :east
+          (:faces (turn-ant ant 4 :black)) => :north)
+
+        (fact "it turns right when given :white"
+          (:faces (turn-ant ant 1 :white)) => :east
+          (:faces (turn-ant ant 2 :white)) => :south
+          (:faces (turn-ant ant 3 :white)) => :west
+          (:faces (turn-ant ant 4 :white)) => :north)))))

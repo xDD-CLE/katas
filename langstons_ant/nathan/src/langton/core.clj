@@ -4,7 +4,8 @@
 
 (defn- next-direction [current-direction color]
   (let [current-index (.indexOf directions current-direction)
-        next-index (mod (inc current-index) (count directions))]
+        inc-or-dec (if (= :black color) inc dec)
+        next-index (mod (inc-or-dec current-index) (count directions))]
     (assert (>= current-index 0) (str "Invalid direction " current-direction))
     (directions next-index)))
 
