@@ -7,7 +7,7 @@ describe ChainsWords do
 
 	let(:retrieves_words) { double('retrieves_words') }
 
-	subject { ChainsWords.new(retrieves_words) }
+	subject { ChainsWords.new(retrieves_words: retrieves_words) }
 	
 	it "Should chain words" do
 		expect(retrieves_words).to receive(:next_word).with(start_word).and_return(next_word)
