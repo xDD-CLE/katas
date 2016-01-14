@@ -1,0 +1,2 @@
+class WordChain:
+    pass
