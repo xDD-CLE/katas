@@ -9,7 +9,7 @@ class ChainsWords
 	def chain_words(start_word, end_word)
 		[start_word].tap do |acc|
 			until acc.last == end_word
-				acc << @retrieves_words.next_word(acc.last)
+				acc << @retrieves_words.next_word(acc.last, blacklist: acc)
 			end
 		end
 	end

@@ -10,8 +10,8 @@ describe ChainsWords do
 	subject { ChainsWords.new(retrieves_words: retrieves_words) }
 	
 	it "Should chain words" do
-		expect(retrieves_words).to receive(:next_word).with(start_word).and_return(next_word)
-		expect(retrieves_words).to receive(:next_word).with(next_word).and_return(end_word)
+		expect(retrieves_words).to receive(:next_word).with(start_word, blacklist: [start_word]).and_return(next_word)
+		expect(retrieves_words).to receive(:next_word).with(next_word, blacklist: [start_word, next_word]).and_return(end_word)
 
 		expect(subject.chain_words(start_word, end_word)).to eq([start_word, next_word, end_word])
 	end
