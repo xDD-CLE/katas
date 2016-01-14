@@ -1,3 +1,5 @@
+require 'retrieves_words'
+
 class ChainsWords
 
 	def initialize(opts = {})
