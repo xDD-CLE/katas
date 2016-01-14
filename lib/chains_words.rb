@@ -1,0 +1,2 @@
+class ChainsWords
+end
