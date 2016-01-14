@@ -1,3 +1,5 @@
+require 'reads_dictionary'
+
 class RetrievesWords
 
 	def initialize(opts = {})
