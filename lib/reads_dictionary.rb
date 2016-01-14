@@ -5,6 +5,7 @@ class ReadsDictionary
 	end
 
 	def contains_word(word)
+		@file.rewind
 		return @file.each_line.any? do |line|
 			line.chomp == word
 		end

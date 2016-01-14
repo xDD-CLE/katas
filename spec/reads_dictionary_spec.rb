@@ -11,6 +11,7 @@ describe ReadsDictionary do
 
 	context "#contains_word" do
 		before(:each) do
+			expect(dictionary_file).to receive(:rewind)
 			expect(dictionary_file).to receive(:each_line).and_return(words)
 		end
 
