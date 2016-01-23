@@ -15,14 +15,12 @@
     :south [     x  (dec y)]
     :east  [(inc x)      y ]))
 
-(defn create
-  ([] (create {:pos [0 0] :faces :north}))
-  ([{:keys [pos faces]}]
-     {:pos pos
-      :faces faces
-      :turn (fn [color]
-              (create {:pos pos
-                       :faces (next-direction faces color)}))
-      :step (fn []
-              (create {:pos (next-pos pos faces)
-                       :faces faces}))}))
+(defn create [& {:keys [pos faces]
+                 :or {pos [0 0] faces :north}}]
+  {:pos pos :faces faces})
+
+(defn turn [{:keys [faces] :as ant} color]
+  (assoc ant :faces (next-direction faces color)))
+
+(defn step [{:keys [pos faces] :as ant}]
+  (assoc ant :pos (next-pos pos faces)))
