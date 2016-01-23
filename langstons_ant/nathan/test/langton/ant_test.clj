@@ -2,12 +2,12 @@
   (:use midje.sweet)
   (:use [langton.ant]))
 
-(facts "about `new-ant`"
-  (let [ant (new-ant)]
-    (fact "it starts at the origin"
+(facts "about creating ants"
+  (let [ant (create)]
+    (fact "a new ant starts at the origin"
       (:pos ant) => [0 0])
 
-    (fact "it starts facing north"
+    (fact "a new ant starts facing north"
        (:faces ant) => :north)
 
     (facts "about turning"
@@ -21,7 +21,7 @@
 
     (facts "about stepping"
       (fact "it advances forward by one"
-        (:pos ((:step (new-ant {:pos [0 0] :faces :north})))) => [ 0  1]
-        (:pos ((:step (new-ant {:pos [0 0] :faces :west })))) => [-1  0]
-        (:pos ((:step (new-ant {:pos [0 0] :faces :south})))) => [ 0 -1]
-        (:pos ((:step (new-ant {:pos [0 0] :faces :east })))) => [ 1  0]))))
+        (:pos ((:step (create {:pos [0 0] :faces :north})))) => [ 0  1]
+        (:pos ((:step (create {:pos [0 0] :faces :west })))) => [-1  0]
+        (:pos ((:step (create {:pos [0 0] :faces :south})))) => [ 0 -1]
+        (:pos ((:step (create {:pos [0 0] :faces :east })))) => [ 1  0]))))
