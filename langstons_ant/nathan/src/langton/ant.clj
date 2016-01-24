@@ -16,7 +16,7 @@
     :east  [(inc x)      y ]))
 
 (defn create [& {:keys [pos faces]
-                 :or {pos [0 0] faces :north}}]
+                 :or {pos [0 0] faces :west}}]
   {:pos pos :faces faces})
 
 (defn turn [{:keys [faces] :as ant} color]

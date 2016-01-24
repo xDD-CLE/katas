@@ -8,17 +8,17 @@
   (fact "a new ant starts at the origin"
     (:pos ant) => [0 0])
 
-  (fact "a new ant starts facing north"
-     (:faces ant) => :north))
+  (fact "a new ant starts facing west"
+     (:faces ant) => :west))
 
 (facts "about turning"
   (fact "it turns left when given :black"
     (map :faces (take 5 (iterate #(turn % :black) ant)))
-      => [:north :west :south :east :north])
+      => [:west :south :east :north :west])
 
   (fact "it turns right when given :white"
     (map :faces (take 5 (iterate #(turn % :white) ant)))
-      => [:north :east :south :west :north]))
+      => [:west :north :east :south :west]))
 
 (facts "about stepping"
   (fact "it advances forward by one"
