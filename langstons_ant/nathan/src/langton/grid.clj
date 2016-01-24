@@ -1,5 +1,6 @@
-(ns langton.grid
-  (:use [langton.core :refer [colors]]))
+(ns langton.grid)
+
+(def colors #{:white :black})
 
 (defn- all-y-coords [grid]
   (map keys (vals grid)))

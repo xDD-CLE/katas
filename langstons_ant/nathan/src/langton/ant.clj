@@ -1,5 +1,6 @@
-(ns langton.ant
-  (:use [langton.core :refer [directions]]))
+(ns langton.ant)
+
+(def directions [:north :west :south :east])
 
 (defn- next-direction [current-direction color]
   (let [current-index (.indexOf directions current-direction)
