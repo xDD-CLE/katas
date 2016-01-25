@@ -16,6 +16,7 @@
         interval (get-in opts [:options :interval])
         iterations (Integer/parseInt (first (:arguments opts)))
         error (:error opts)]
+    (print (str (char 27) "[2J")) ; clear screen
     (if error
       (throw (str "Illegal usage:" error))
       (doall

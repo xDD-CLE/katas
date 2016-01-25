@@ -3,8 +3,7 @@
   (:require [clojure.term.colors :refer :all])
   (:require [langton.grid :as grid]))
 
-(defn- clear-screen []
-  (print (str (char 27) "[2J"))  ; clear screen
+(defn- back-to-top []
   (print (str (char 27) "[;H"))) ; move cursor to the top left corner
 
 (defn- cell-symbol [{:keys [ant grid]} coord]
@@ -39,6 +38,6 @@
     (join "\n" row-strings)))
 
 (defn render [world]
-  (clear-screen)
+  (back-to-top)
   (println (world->string world))
   world)
