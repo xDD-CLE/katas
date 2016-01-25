@@ -1,0 +1,4 @@
+cat
+cot
+cog
+dog
