@@ -11,6 +11,18 @@ defmodule WordDistanceTest do
 	end
 
 	test "Words that are different lengths are not neighbors" do
-		assert !WordDistance.neighbors?("cat", "catch")
+		assert !WordDistance.neighbors?("cat", "cats")
+	end
+
+	test "Word distance is the number of different characters at the same index positions" do
+		assert 1 == WordDistance.distance("cat", "cot")
+	end
+
+	test "A word should have a distance of zero with itself" do
+		assert 0 == WordDistance.distance("cat", "cat")
+	end
+
+	test "Words of different lengths have distances that include the longer word" do
+		assert 1 == WordDistance.distance("cat", "cats")
 	end
 end

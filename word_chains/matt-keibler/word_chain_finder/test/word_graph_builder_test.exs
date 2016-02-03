@@ -11,7 +11,7 @@ defmodule WordGraphBuilderTest do
 	end
 
 	test "It should return a graph when the file contains a word list" do
-		expected = {:ok, %{"cat" => ["cot"], "cot" => ["cat", "cog"], "cog" => ["cot", "dog"], "dog" => ["cog"]}}
+		expected = {:ok, %{3 => %{"cat" => ["cot"], "cot" => ["cat", "cog"], "cog" => ["cot", "dog"], "dog" => ["cog"]}}}
 
 		assert expected == WordGraphBuilder.build_graph("test/test_files/simple_list.txt")
 	end

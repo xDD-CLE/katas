@@ -26,10 +26,21 @@ defmodule WordGraphBuilder do
 		parse_graph_helper(word_list, %{})
 	end
 
-	defp parse_graph_helper([], graph) do graph end
+	defp parse_graph_helper([], graph) do {:ok, graph} end
 
 	defp parse_graph_helper([word | word_list], graph) do
-		# TODO
+		# get word list length map
+		word_length = String.length(word)
+		n_char_map = Map.get(graph, word_length, %{})
+		associations_for_word = Map.get(n_char_map, word, [])
+		filtered_list = word_list |> Enum.filter(&(WordDistance.neighbors?(word, &1)))
+
+		associations_for_word = associations_for_word ++ filtered_list
+		n_char_map = Map.put(n_char_map, word, associations_for_word)
+
+		n_char_map = filtered_list |> Enum.reduce(n_char_map, fn(x, acc) -> Map.put(acc, x, [word] ++ Map.get(acc, x, [])) end)
+		
+		graph = Map.put(graph, word_length, n_char_map)
 		parse_graph_helper(word_list, graph)
 	end
 end
