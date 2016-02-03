@@ -3,7 +3,11 @@ defmodule WordGraphBuilder do
 	def build_graph(filename) do
 		if File.exists? filename do
 			{:ok, file_content} = File.read(filename)
-			parse_content_to_list(file_content)
+			content_list = parse_content_to_list(file_content)
+			case content_list do
+				{:ok, word_list} -> parse_word_list_to_graph(word_list)
+				_ -> content_list
+			end
 		else
 			{:error, "File does not exist"}
 		end
@@ -16,5 +20,16 @@ defmodule WordGraphBuilder do
 		else
 			{:error, "File did not contain a word list."}
 		end
+	end
+
+	defp parse_word_list_to_graph(word_list) do
+		parse_graph_helper(word_list, %{})
+	end
+
+	defp parse_graph_helper([], graph) do graph end
+
+	defp parse_graph_helper([word | word_list], graph) do
+		# TODO
+		parse_graph_helper(word_list, graph)
 	end
 end
