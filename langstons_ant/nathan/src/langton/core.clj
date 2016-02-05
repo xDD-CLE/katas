@@ -3,6 +3,7 @@
   (:require [langton.runner :as runner])
   (:require [langton.ant :as ant])
   (:require [langton.grid :as grid])
+  (:require [langton.prerenderer :refer [world->cells]])
   (:require [langton.renderer :refer [render]]))
 
 (def cli-options
@@ -23,5 +24,7 @@
         (take iterations
               (iterate #(do
                           (Thread/sleep interval)
-                          (-> % runner/run render))
-                       (render {:ant (ant/create) :grid (grid/create)})))))))
+                          (let [next-world (runner/run %)]
+                            (-> next-world world->cells render)
+                            next-world))
+                       (doto {:ant (ant/create) :grid (grid/create)} #(-> % world->cells render))))))))

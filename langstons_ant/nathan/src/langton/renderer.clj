@@ -1,23 +1,9 @@
 (ns langton.renderer
   (:require [clojure.string :refer [join]])
-  (:require [clojure.term.colors :refer :all])
-  (:require [langton.grid :as grid]))
+  (:require [clojure.term.colors :refer :all]))
 
 (defn- back-to-top []
   (print (str (char 27) "[;H"))) ; move cursor to the top left corner
-
-(defn- cell-symbol [{:keys [ant grid]} coord]
-  (let [color (get-in grid coord)]
-    (if (= coord (:pos ant))
-      {:color color :ant (:faces ant)}
-      {:color color})))
-
-(defn world->cells [{:keys [grid] :as world}]
-  (let [x-coords (grid/x-coords grid)
-        y-coords (grid/y-coords grid)]
-    (map (fn [y]
-           (map #(cell-symbol world [% y]) x-coords))
-         y-coords)))
 
 (defn- cell-character [faces]
   (condp = faces
@@ -31,13 +17,11 @@
   (let [bg-color-fn (condp = color :white on-white :black on-grey)]
     (bg-color-fn (cell-character ant))))
 
-(defn world->string [world]
-  (let [cells (world->cells world)
-        cells-for-printing (map #(map print-cell %) cells)
+(defn cells->string [cells]
+  (let [cells-for-printing (map #(map print-cell %) cells)
         row-strings (map join cells-for-printing)]
     (join "\n" row-strings)))
 
-(defn render [world]
+(defn render [cells]
   (back-to-top)
-  (println (world->string world))
-  world)
+  (println (cells->string cells)))
