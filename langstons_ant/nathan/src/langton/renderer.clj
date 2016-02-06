@@ -1,6 +1,7 @@
 (ns langton.renderer
-  (:require [clojure.string :refer [join]])
-  (:require [clojure.term.colors :refer :all]))
+  (:require [clojure.string :refer [join]]
+            [clojure.term.colors :refer :all]
+            [langton.rules :as rules]))
 
 (defn- back-to-top []
   (print (str (char 27) "[;H"))) ; move cursor to the top left corner
@@ -13,9 +14,19 @@
     :west  (red (bold "<"))
            " "))
 
+(def ^{:private true} on-black identity)
+
+(defn- bg-color-fn [color]
+  {:pre [(color @rules/current-rule-set)]
+   :post [%]}
+  (->> color
+       name
+       (str "on-")
+       symbol
+       (ns-resolve 'langton.renderer)))
+
 (defn- print-cell [{:keys [color ant] :or {ant nil}}]
-  (let [bg-color-fn (condp = color :white on-white :black on-grey)]
-    (bg-color-fn (cell-character ant))))
+  ((bg-color-fn color) (cell-character ant)))
 
 (defn cells->string [cells]
   (let [cells-for-printing (map #(map print-cell %) cells)

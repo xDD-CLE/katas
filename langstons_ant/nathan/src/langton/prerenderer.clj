@@ -11,5 +11,5 @@
   (let [x-coords (grid/x-coords grid)
         y-coords (grid/y-coords grid)]
     (map (fn [y]
-           (map #(cell-symbol world [% y]) x-coords))
-         y-coords)))
+            (map #(cell-symbol world [% y]) x-coords))
+          y-coords)))

@@ -1,6 +1,9 @@
 (ns langton.ant-test
-  (:use midje.sweet)
-  (:use [langton.ant]))
+  (:use midje.sweet
+        [langton.ant]
+        [langton.rules :refer [set-rules!]]))
+
+(set-rules! "RL")
 
 (def ant (create))
 
@@ -12,8 +15,8 @@
      (:faces ant) => :west))
 
 (facts "about turning"
-  (fact "it turns left when given :black"
-    (map :faces (take 5 (iterate #(turn % :black) ant)))
+  (fact "it turns left when given :grey"
+    (map :faces (take 5 (iterate #(turn % :grey) ant)))
       => [:west :south :east :north :west])
 
   (fact "it turns right when given :white"

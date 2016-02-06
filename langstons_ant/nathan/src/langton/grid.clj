@@ -24,7 +24,7 @@
   {0 {0 :white}})
 
 (defn color [grid color & coords]
-  {:pre [(color rules/colors)]
+  {:pre [(color @rules/current-rule-set)]
    :post [(= (x-coords grid) (x-coords %))
           (= (all-y-coords grid) (all-y-coords %))]}
   (reduce #(assoc-in %1 %2 color) grid coords))
