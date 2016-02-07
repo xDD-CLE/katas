@@ -11,5 +11,8 @@
 
 (facts "about turning the cells to a string"
   (fact "it returns a string representation of the cells"
-    (cells->string cells) => (str (on-white (red (bold "^"))) (on-grey " ") "\n"
-                                  (on-grey " ") (on-white " "))))
+    (cells->string cells) => (str (on-white (red (bold "^")) (red (bold "^")))
+                                  (on-grey  " " " ")
+                                  "\n"
+                                  (on-grey  " " " ")
+                                  (on-white " " " "))))
