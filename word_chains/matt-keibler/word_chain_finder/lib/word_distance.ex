@@ -10,13 +10,14 @@ defmodule WordDistance do
 		length_diff(left_word, right_word) + letter_diff(left_word, right_word)
 	end
 
+	
 	defp length_diff(left_word, right_word) do
 		abs(String.length(left_word) - String.length(right_word))
 	end
 
 	defp letter_diff(left_word, right_word) do
-		Enum.zip(String.to_char_list(left_word), String.to_char_list(right_word))
-		|> Enum.map(&char_diff/1)
+		Stream.zip(String.to_char_list(left_word), String.to_char_list(right_word))
+		|> Stream.map(&char_diff/1)
   	|> Enum.reduce(0, &different?/2)
 	end
 
