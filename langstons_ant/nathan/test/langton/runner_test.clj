@@ -1,12 +1,15 @@
 (ns langton.runner-test
-  (:use midje.sweet)
-  (:use [langton.runner])
-  (:require [langton.ant :as ant])
-  (:require [langton.grid :as grid]))
+  (:use midje.sweet
+        [langton.runner])
+  (:require [langton.ant :as ant]
+            [langton.grid :as grid]
+            [langton.rules :refer [set-rules!]]))
+
+(set-rules! "RL")
 
 (def north-ant (ant/create :faces :north))
 (def white-1x1 (grid/create))
-(def black-1x1 (-> (grid/create) (grid/color :black [0 0])))
+(def grey-1x1  (-> (grid/create) (grid/color :grey [0 0])))
 (def white-2x2 (-> (grid/create)
                    (grid/expand :north)
                    (grid/expand :east)))
@@ -16,7 +19,7 @@
     (get-in (run {:ant (ant/create :faces :north)
                   :grid white-1x1}) [:ant :faces]) => :east
     (get-in (run {:ant (ant/create :faces :north)
-                  :grid black-1x1}) [:ant :faces]) => :west)
+                  :grid grey-1x1}) [:ant :faces]) => :west)
 
   (fact "it moves the ant forward one step after turning"
     (get-in (run {:ant (ant/create :faces :north)
@@ -29,8 +32,8 @@
                   :grid white-1x1}) [:ant :pos]) => [0 1])
 
   (fact "it changes the color of the square the ant started on"
-    (get-in (run {:ant north-ant :grid white-1x1}) [:grid 0 0]) => :black
-    (get-in (run {:ant north-ant :grid black-1x1}) [:grid 0 0]) => :white)
+    (get-in (run {:ant north-ant :grid white-1x1}) [:grid 0 0]) => :grey
+    (get-in (run {:ant north-ant :grid grey-1x1}) [:grid 0 0]) => :white)
 
   (fact "it expands the grid as the ant pushes it out"
     ((juxt grid/x-coords grid/y-coords)
