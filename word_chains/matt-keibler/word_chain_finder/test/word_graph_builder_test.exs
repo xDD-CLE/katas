@@ -11,8 +11,24 @@ defmodule WordGraphBuilderTest do
 	end
 
 	test "It should return a graph when the file contains a word list" do
-		expected = {:ok, %{3 => %{"cat" => ["cot"], "cot" => ["cat", "cog"], "cog" => ["cot", "dog"], "dog" => ["cog"]}}}
+		expected = {:ok, %WordGraph{graph: %{"cat" => HashSet.put(HashSet.new, "cot"),
+															"cot" => Enum.into(["cat", "cog"], HashSet.new),
+															"cog" => Enum.into(["cot", "dog"], HashSet.new),
+															"dog" => HashSet.put(HashSet.new, "cog")}}}
 
 		assert expected == WordGraphBuilder.build_graph("test/test_files/simple_list.txt")
+	end
+
+	test "It should remove words with non [a-zA-z] characters" do
+		assert {:error, "File did not contain a word list."} == WordGraphBuilder.build_graph("test/test_files/nonalpha_list.txt")
+	end
+
+	test "It should flatten words to lower case" do
+		expected = {:ok, %WordGraph{graph: %{"cat" => HashSet.put(HashSet.new, "cot"),
+															"cot" => Enum.into(["cat", "cog"], HashSet.new),
+															"cog" => Enum.into(["cot", "dog"], HashSet.new),
+															"dog" => HashSet.put(HashSet.new, "cog")}}}
+
+		assert expected == WordGraphBuilder.build_graph("test/test_files/capitalization_list.txt")
 	end
 end

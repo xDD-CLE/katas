@@ -7,15 +7,13 @@ defmodule WordGraph do
 
 	def add_word(%WordGraph{graph: word_graph}, word) do
 		word_as_set = Set.put(HashSet.new, word)
-		# get neighbors from keys
 		neighbors = Map.keys(word_graph)
-		|> Enum.filter(&WordDistance.neighbors?(&1, word))
+		|> Stream.filter(&WordDistance.neighbors?(&1, word))
 		|> Enum.into(HashSet.new)
-		# add word -> neighbor using Map.update
+		# add word -> neighbor
 		word_graph = associate_word(word_graph, word, neighbors)
-		# add neighbor -> word using Map.update
+		# add neighbor -> word
 		word_graph = Enum.reduce(neighbors, word_graph, fn(neighbor, acc) -> associate_word(acc, neighbor, word_as_set) end)
-		# Map.update(word_graph.graph
 		%WordGraph{graph: word_graph}
 	end
 
