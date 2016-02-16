@@ -1,10 +1,7 @@
 (ns langton.renderer-test
   (:use midje.sweet
-        [langton.renderer]
-        [langton.rules :refer [set-rules!]])
+        [langton.renderer])
   (:require [clojure.term.colors :refer :all]))
-
-(set-rules! "RL")
 
 (def cells [[{:color :white :ant :north} {:color :grey}]
             [{:color :grey} {:color :white}]])

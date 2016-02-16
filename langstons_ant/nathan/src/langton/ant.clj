@@ -1,5 +1,4 @@
-(ns langton.ant
-  (:require [langton.rules :as rules]))
+(ns langton.ant)
 
 (def directions [:north :west :south :east])
 

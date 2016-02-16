@@ -1,9 +1,6 @@
 (ns langton.grid-test
   (:use midje.sweet
-        [langton.grid]
-        [langton.rules :refer [set-rules!]]))
-
-(set-rules! "RL")
+        [langton.grid]))
 
 (def white-1x1 {0 {0 :white}})
 (def grey-1x1  {0 {0 :grey}})
@@ -20,8 +17,6 @@
     (color grey-1x1 :white [0 0]) => white-1x1
     (color white-2x2 :grey [1 1] [1 0]) => {0 {0 :white 1 :white}
                                             1 {0 :grey 1 :grey}})
-  (fact "it throws an error if the given color is neither :white nor :grey"
-    (color white-1x1 :blue [0 0]) => (throws AssertionError))
 
   (fact "it throws an error if the given coordinates are off the grid"
     (color white-1x1 :grey [0 1]) => (throws AssertionError)

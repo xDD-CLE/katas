@@ -1,7 +1,6 @@
 (ns langton.renderer
   (:require [clojure.string :refer [join]]
-            [clojure.term.colors :refer :all]
-            [langton.rules :as rules]))
+            [clojure.term.colors :refer :all]))
 
 (defn- back-to-top []
   (print (str (char 27) "[;H"))) ; move cursor to the top left corner
@@ -20,8 +19,7 @@
 (defn- on-black [& args] (apply str args))
 
 (defn- bg-color-fn [color]
-  {:pre [(color @rules/current-rule-set)]
-   :post [%]}
+  {:post [%]}
   (->> color
        name
        (str "on-")

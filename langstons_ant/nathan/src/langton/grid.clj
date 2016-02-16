@@ -1,5 +1,4 @@
-(ns langton.grid
-  (:require [langton.rules :as rules]))
+(ns langton.grid)
 
 (defn- all-y-coords [grid]
   (map keys (vals grid)))
@@ -24,8 +23,7 @@
   {0 {0 :white}})
 
 (defn color [grid color & coords]
-  {:pre [(color @rules/current-rule-set)]
-   :post [(= (x-coords grid) (x-coords %))
+  {:post [(= (x-coords grid) (x-coords %))
           (= (all-y-coords grid) (all-y-coords %))]}
   (reduce #(assoc-in %1 %2 color) grid coords))
 

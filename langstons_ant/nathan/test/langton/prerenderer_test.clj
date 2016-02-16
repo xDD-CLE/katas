@@ -1,9 +1,6 @@
 (ns langton.prerenderer-test
   (:use midje.sweet
-        [langton.prerenderer]
-        [langton.rules :refer [set-rules!]]))
-
-(set-rules! "RL")
+        [langton.prerenderer]))
 
 (def world {:ant {:pos [0 0] :faces :north}
             :grid {0 {0 :white
