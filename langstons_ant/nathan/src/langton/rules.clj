@@ -14,10 +14,10 @@
 
 (defn- chars->rule-set [chars]
   (let [color-sequence (make-color-sequence (count chars))
-        turn-fns {"R" inc "L" dec}]
+        turn-keys {"R" :right "L" :left}]
     (reduce (fn [m [[color next-color] r-or-l]]
-              (assert (get turn-fns r-or-l) (str "Invalid direction " r-or-l))
-              (assoc m color {:next-color next-color :turn (get turn-fns r-or-l)}))
+              (assert (get turn-keys r-or-l) (str "Invalid direction " r-or-l))
+              (assoc m color {:next-color next-color :turn (get turn-keys r-or-l)}))
             {}
             (map vector color-sequence chars))))
 
@@ -30,12 +30,5 @@
 (defn next-color [color]
   (get-in @current-rule-set [color :next-color]))
 
-(defn note [value] (doto value prn))
-
-(defn next-direction [current-direction color]
-  {:pre [(color @current-rule-set)]}
-  (let [current-index (.indexOf directions current-direction)
-        inc-or-dec (get-in @current-rule-set [color :turn])
-        next-index (mod (inc-or-dec current-index) (count directions))]
-    (assert (>= current-index 0) (str "Invalid direction " current-direction))
-    (directions next-index)))
+(defn turn-direction [color]
+  (get-in @current-rule-set [color :turn]))

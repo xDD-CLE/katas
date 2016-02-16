@@ -16,7 +16,8 @@
 (defn run [{:keys [ant grid] :as world}]
   (let [current-color (get-in grid (:pos ant))
         next-color (rules/next-color current-color)
-        new-ant (-> ant (ant/turn current-color) ant/step)]
+        turn-dir (rules/turn-direction current-color)
+        new-ant (-> ant (ant/turn turn-dir) ant/step)]
     {:ant new-ant
      :grid (-> grid
                (grid/color next-color (:pos ant))
