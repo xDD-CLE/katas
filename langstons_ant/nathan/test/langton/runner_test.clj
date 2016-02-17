@@ -3,10 +3,9 @@
         [langton.runner])
   (:require [langton.ant :as ant]
             [langton.grid :as grid]
-            [langton.rules :refer [set-rules!]]))
+            [langton.rules :as rules]))
 
-(set-rules! "RL")
-
+(def rules (rules/create "RL"))
 (def north-ant (ant/create :faces :north))
 (def white-1x1 (grid/create))
 (def grey-1x1  (-> (grid/create) (grid/color :grey [0 0])))
@@ -17,39 +16,50 @@
 (facts "about running"
   (fact "it turns the ant"
     (get-in (run {:ant (ant/create :faces :north)
-                  :grid white-1x1}) [:ant :faces]) => :east
+                  :grid white-1x1
+                  :rules rules}) [:ant :faces]) => :east
     (get-in (run {:ant (ant/create :faces :north)
-                  :grid grey-1x1}) [:ant :faces]) => :west)
+                  :grid grey-1x1
+                  :rules rules}) [:ant :faces]) => :west)
 
   (fact "it moves the ant forward one step after turning"
     (get-in (run {:ant (ant/create :faces :north)
-                  :grid white-1x1}) [:ant :pos]) => [1 0]
+                  :grid white-1x1
+                  :rules rules}) [:ant :pos]) => [1 0]
     (get-in (run {:ant (ant/create :faces :east)
-                  :grid white-1x1}) [:ant :pos]) => [0 -1]
+                  :grid white-1x1
+                  :rules rules}) [:ant :pos]) => [0 -1]
     (get-in (run {:ant (ant/create :faces :south)
-                  :grid white-1x1}) [:ant :pos]) => [-1 0]
+                  :grid white-1x1
+                  :rules rules}) [:ant :pos]) => [-1 0]
     (get-in (run {:ant (ant/create :faces :west)
-                  :grid white-1x1}) [:ant :pos]) => [0 1])
+                  :grid white-1x1
+                  :rules rules}) [:ant :pos]) => [0 1])
 
   (fact "it changes the color of the square the ant started on"
-    (get-in (run {:ant north-ant :grid white-1x1}) [:grid 0 0]) => :grey
-    (get-in (run {:ant north-ant :grid grey-1x1}) [:grid 0 0]) => :white)
+    (get-in (run {:ant north-ant :grid white-1x1 :rules rules}) [:grid 0 0])
+        => :grey
+    (get-in (run {:ant north-ant :grid grey-1x1  :rules rules}) [:grid 0 0])
+        => :white)
 
   (fact "it expands the grid as the ant pushes it out"
     ((juxt grid/x-coords grid/y-coords)
-      (:grid (run {:ant (ant/create :faces :north) :grid white-1x1})))
+      (:grid (run {:ant (ant/create :faces :north) :grid white-1x1 :rules rules})))
         => [[0 1] [0]]
     ((juxt grid/x-coords grid/y-coords)
-      (:grid (run {:ant (ant/create :faces :east) :grid white-1x1})))
+      (:grid (run {:ant (ant/create :faces :east) :grid white-1x1 :rules rules})))
         => [[0] [-1 0]]
     ((juxt grid/x-coords grid/y-coords)
-     (:grid (run {:ant (ant/create :faces :south) :grid white-1x1})))
+     (:grid (run {:ant (ant/create :faces :south) :grid white-1x1 :rules rules})))
         => [[-1 0] [0]]
     ((juxt grid/x-coords grid/y-coords)
-      (:grid (run {:ant (ant/create :faces :west) :grid white-1x1})))
+      (:grid (run {:ant (ant/create :faces :west) :grid white-1x1 :rules rules})))
         => [[0] [0 1]])
 
   (fact "it doesn't expand the grid if the ant doesn't push it out"
     ((juxt grid/x-coords grid/y-coords)
-     (:grid (run {:ant (ant/create :faces :west) :grid white-2x2})))
-        => [[0 1] [0 1]]))
+     (:grid (run {:ant (ant/create :faces :west) :grid white-2x2 :rules rules})))
+        => [[0 1] [0 1]])
+
+  (fact "it doesn't alter the rules"
+    (:rules (run {:ant north-ant :grid white-1x1 :rules rules})) => rules))

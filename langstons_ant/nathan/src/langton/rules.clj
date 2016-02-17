@@ -1,7 +1,6 @@
 (ns langton.rules
   (:require [clojure.string :as string]))
 
-(def current-rule-set (atom {}))
 (def all-colors [:white :grey :green :blue :red :yellow :magenta :cyan :black])
 (def directions [:north :east :south :west])
 
@@ -21,14 +20,7 @@
             {}
             (map vector color-sequence chars))))
 
-(defn set-rules! [rule-string]
-  (reset! current-rule-set
-          (-> rule-string
-              (string/split #"")
-              chars->rule-set)))
-
-(defn next-color [color]
-  (get-in @current-rule-set [color :next-color]))
-
-(defn turn-direction [color]
-  (get-in @current-rule-set [color :turn]))
+(defn create [rule-string]
+  (-> rule-string
+      (string/split #"")
+      chars->rule-set))

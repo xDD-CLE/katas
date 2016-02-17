@@ -1,6 +1,6 @@
 (ns langton.core
   (:require [clojure.tools.cli :refer [parse-opts]]
-            [langton.rules :refer [set-rules!]]
+            [langton.rules :as rules]
             [langton.runner :as runner]
             [langton.ant :as ant]
             [langton.grid :as grid]
@@ -18,7 +18,6 @@
     :validate [pos? "Must be greater than zero"]]])
 
 (defn run-simulation [render-fn rule-set iterations interval]
-  (set-rules! rule-set)
   (letfn [(render-world [world]
             (-> world world->cells render-fn)
             world)]
@@ -26,7 +25,9 @@
       (take iterations
             (iterate #(do (Thread/sleep interval)
                           (render-world (runner/run %)))
-                     (render-world {:ant (ant/create) :grid (grid/create)}))))))
+                     (render-world {:ant (ant/create)
+                                    :grid (grid/create)
+                                    :rules (rules/create rule-set)}))))))
 
 (defn -main [& args]
   (let [opts       (parse-opts args cli-options)

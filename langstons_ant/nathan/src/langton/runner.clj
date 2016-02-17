@@ -1,7 +1,6 @@
 (ns langton.runner
   (:require [langton.ant :as ant]
-            [langton.grid :as grid]
-            [langton.rules :as rules]))
+            [langton.grid :as grid]))
 
 (defn- expand-if-necessary [grid [new-x new-y]]
   (let [[min-x max-x] ((juxt first last) (grid/x-coords grid))
@@ -13,12 +12,13 @@
       (> new-y max-y) (grid/expand grid :north)
       :else grid)))
 
-(defn run [{:keys [ant grid] :as world}]
+(defn run [{:keys [ant grid rules] :as world}]
+  {:pre [(and ant grid rules)]}
   (let [current-color (get-in grid (:pos ant))
-        next-color (rules/next-color current-color)
-        turn-dir (rules/turn-direction current-color)
+        next-color (get-in rules [current-color :next-color])
+        turn-dir (get-in rules [current-color :turn])
         new-ant (-> ant (ant/turn turn-dir) ant/step)]
-    {:ant new-ant
-     :grid (-> grid
-               (grid/color next-color (:pos ant))
-               (expand-if-necessary (:pos new-ant)))}))
+    (assoc world :ant new-ant
+                 :grid (-> grid
+                           (grid/color next-color (:pos ant))
+                           (expand-if-necessary (:pos new-ant))))))
