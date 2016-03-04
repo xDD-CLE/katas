@@ -1,0 +1,1 @@
+# File that contains the kata tests
