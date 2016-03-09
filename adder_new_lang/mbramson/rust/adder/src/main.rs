@@ -3,8 +3,8 @@ fn main() {
 }
 
 fn add(numbers: &str) -> i32 {
-    match numbers {
-        "5" => return 5,
+    match numbers.parse::<i32>() {
+        Ok(n) => return n,
         _ => return 0
     }
 }
@@ -22,4 +22,9 @@ fn add_returns_0_if_empty_string() {
 #[test]
 fn add_returns_5_when_passed_5() {
     assert_eq!(5, add("5"));
+}
+
+#[test]
+fn add_returns_9_when_passed_9() {
+    assert_eq!(9, add("9"));
 }
