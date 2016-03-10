@@ -41,3 +41,13 @@ fn add_returns_9_when_passed_9() {
 fn add_returns_sum_of_1_and_2() {
     assert_eq!(3, add("1,2"));
 }
+
+#[test]
+fn add_returns_sum_of_4_and_nothing() {
+    assert_eq!(4, add("4,"));
+}
+
+#[test]
+fn add_returns_sum_of_nothing_and_3() {
+    assert_eq!(3, add(",3"))
+}
