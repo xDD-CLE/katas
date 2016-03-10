@@ -4,7 +4,7 @@ fn main() {
 
 fn add(numbers: &str) -> i32 {
 
-    let numbers: Vec<&str> = numbers.split(',').collect();
+    let numbers: Vec<&str> = numbers.split(|c| c == ',' || c == '\n').collect();
 
     let mut sum: i32 = 0;
 
@@ -70,4 +70,9 @@ fn add_returns_sum_of_3_numbers() {
 #[test]
 fn add_returns_sum_of_5_numbers() {
     assert_eq!(16, add("-3,5,-1,10,5"));
+}
+
+#[test]
+fn add_returns_sum_with_newline_delimiter() {
+    assert_eq!(6, add("1\n2,3"));
 }
