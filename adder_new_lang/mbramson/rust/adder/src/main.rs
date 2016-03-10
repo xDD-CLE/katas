@@ -58,6 +58,16 @@ fn add_returns_negative_single_number() {
 }
 
 #[test]
-fn add_returns_correctly_for_sum_of_positive_and_negative() {
+fn add_returns_sum_of_positive_and_negative_numbers() {
     assert_eq!(-1, add("-3,2"));
+}
+
+#[test]
+fn add_returns_sum_of_3_numbers() {
+    assert_eq!(12, add("5,4,3"));
+}
+
+#[test]
+fn add_returns_sum_of_5_numbers() {
+    assert_eq!(16, add("-3,5,-1,10,5"));
 }
