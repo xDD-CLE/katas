@@ -49,5 +49,15 @@ fn add_returns_sum_of_4_and_nothing() {
 
 #[test]
 fn add_returns_sum_of_nothing_and_3() {
-    assert_eq!(3, add(",3"))
+    assert_eq!(3, add(",3"));
+}
+
+#[test]
+fn add_returns_negative_single_number() {
+    assert_eq!(-2, add("-2"));
+}
+
+#[test]
+fn add_returns_correctly_for_sum_of_positive_and_negative() {
+    assert_eq!(-1, add("-3,2"));
 }
