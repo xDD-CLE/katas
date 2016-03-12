@@ -4,33 +4,30 @@ fn main() {
 
 fn add(numbers: &str) -> i32 {
     if numbers.starts_with("//") {
+
         let delimiter = ';';
 
         let numbers: Vec<&str> = numbers.split(|c| c == delimiter || c == '\n').collect();
 
-        let mut sum: i32 = 0;
+        sum_string_vector(&numbers)
 
-        for number in numbers {
-            match number.parse::<i32>() {
-                Ok(n) => sum += n,
-                _ => continue
-            }
-        }
-
-        return sum;
     } else {
+
         let numbers: Vec<&str> = numbers.split(|c| c == ',' || c == '\n').collect();
 
-        let mut sum: i32 = 0;
-
-        for number in numbers {
-            match number.parse::<i32>() {
-                Ok(n) => sum += n,
-                _ => continue
-            }
-        }
-        return sum;
+        sum_string_vector(&numbers)
     }
+}
+
+fn sum_string_vector(numbers: &Vec<&str>) -> i32 {
+    let mut sum: i32 = 0;
+    for number in numbers {
+        match number.parse::<i32>() {
+            Ok(n) => sum += n,
+            _ => continue
+        }
+    }
+    sum
 }
 
 #[test]
@@ -97,3 +94,12 @@ fn add_returns_sum_with_newline_delimiter() {
 fn add_returns_sum_with_custom_delimiter() {
     assert_eq!(3, add("//;\n1;2"));
 }
+
+// sum_string_vector tests
+
+#[test]
+fn sum_string_vector_returns_correctly() {
+    let numbers: Vec<&str> = "3,5,6".split(',').collect();
+    assert_eq!(14, sum_string_vector(&numbers));
+}
+
