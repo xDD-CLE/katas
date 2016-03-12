@@ -3,18 +3,34 @@ fn main() {
 }
 
 fn add(numbers: &str) -> i32 {
+    if numbers.starts_with("//") {
+        let delimiter = ';';
 
-    let numbers: Vec<&str> = numbers.split(|c| c == ',' || c == '\n').collect();
+        let numbers: Vec<&str> = numbers.split(|c| c == delimiter || c == '\n').collect();
 
-    let mut sum: i32 = 0;
+        let mut sum: i32 = 0;
 
-    for number in numbers {
-        match number.parse::<i32>() {
-            Ok(n) => sum += n,
-            _ => continue
+        for number in numbers {
+            match number.parse::<i32>() {
+                Ok(n) => sum += n,
+                _ => continue
+            }
         }
+
+        return sum;
+    } else {
+        let numbers: Vec<&str> = numbers.split(|c| c == ',' || c == '\n').collect();
+
+        let mut sum: i32 = 0;
+
+        for number in numbers {
+            match number.parse::<i32>() {
+                Ok(n) => sum += n,
+                _ => continue
+            }
+        }
+        return sum;
     }
-    return sum;
 }
 
 #[test]
@@ -75,4 +91,9 @@ fn add_returns_sum_of_5_numbers() {
 #[test]
 fn add_returns_sum_with_newline_delimiter() {
     assert_eq!(6, add("1\n2,3"));
+}
+
+#[test]
+fn add_returns_sum_with_custom_delimiter() {
+    assert_eq!(3, add("//;\n1;2"));
 }
