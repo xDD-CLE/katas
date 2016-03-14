@@ -1,0 +1,31 @@
+Features": {
+"modules": true
+},
+  "env": {
+    "node": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 7
+  },
+  "rules": {
+		"eqeqeq": [2, "smart"],
+    "quotes": [1, "single", "avoid-escape"],
+    "strict": [2, "never"],
+		"no-extra-semi": 2,
+		"semi": [2, "never"],
+		"comma-dangle": [2, "never"],
+		"no-func-assign": 1,
+		"no-unreachable": 2,
+		"complexity": [2, 7],
+		"curly": [2, "multi-line"],
+		"no-alert": 2,
+		"no-console": 1,
+		"no-implicit-globals": 2,
+		"no-return-assign": 2,
+		"no-delete-var": 2,
+		"max-depth": [2, 6],
+		"no-unneeded-ternary": 2,
+		"no-useless-constructor": 2,
+  }
+}

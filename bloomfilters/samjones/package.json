@@ -1,0 +1,17 @@
+{
+  "name": "samjones",
+  "version": "1.0.0",
+  "description": "Bloom Filter Kata",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/jasmine-es6/bin/jasmine.js JASMINE_CONFIG_PATH=code/support/jasmine.json"
+  },
+  "author": "Sam Jones",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine-es6": "^0.1.6"
+  },
+  "dependencies": {
+    "ramda": "^0.19.1"
+  }
+}
