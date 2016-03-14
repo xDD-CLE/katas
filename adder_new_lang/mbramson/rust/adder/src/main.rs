@@ -3,20 +3,21 @@ fn main() {
 }
 
 fn add(numbers: &str) -> i32 {
+    let numbers_list: Vec<&str>;
+    
     if numbers.starts_with("//") {
 
         let delimiter = ';';
 
-        let numbers: Vec<&str> = numbers.split(|c| c == delimiter || c == '\n').collect();
-
-        sum_string_vector(&numbers)
+        numbers_list = numbers.split(|c| c == delimiter || c == '\n').collect();
 
     } else {
 
-        let numbers: Vec<&str> = numbers.split(|c| c == ',' || c == '\n').collect();
+        numbers_list = numbers.split(|c| c == ',' || c == '\n').collect();
 
-        sum_string_vector(&numbers)
     }
+
+    sum_string_vector(&numbers_list)
 }
 
 fn sum_string_vector(numbers: &Vec<&str>) -> i32 {
