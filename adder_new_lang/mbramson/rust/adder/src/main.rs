@@ -7,7 +7,7 @@ fn add(numbers: &str) -> i32 {
     
     if numbers.starts_with("//") {
 
-        let delimiter = ';';
+        let delimiter = numbers.chars().skip(2).next().unwrap();
 
         numbers_list = numbers.split(|c| c == delimiter || c == '\n').collect();
 
@@ -94,6 +94,11 @@ fn add_returns_sum_with_newline_delimiter() {
 #[test]
 fn add_returns_sum_with_custom_delimiter() {
     assert_eq!(3, add("//;\n1;2"));
+}
+
+#[test]
+fn add_returns_sum_with_underscore_delimiter() {
+    assert_eq!(6, add("//_\n3_2_1"));
 }
 
 // sum_string_vector tests
