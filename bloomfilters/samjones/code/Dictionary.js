@@ -1,12 +1,12 @@
-import fs from 'fs'
 import R from 'ramda'
 
-export const isWord = (dictionaryPath) => (word) => {
-  return contains(dictionaryWords(dictionaryPath))(word)
+import * as FileReader from './FileReader'
+
+export const isWordFromFile = (readWords, dictionaryPath = '/usr/share/dict/words') => (word) => {
+  let words = readWords(dictionaryPath)
+  return contains(words)(word)
 }
+
+export const  isWord = isWordFromFile(FileReader.readWords)
 
 const contains = R.flip(R.contains)
-
-const dictionaryWords = (dictionaryPath) => {
-  return fs.readFileSync(dictionaryPath).toString().split('\n')
-}
