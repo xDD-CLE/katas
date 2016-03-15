@@ -1,7 +1,7 @@
 import fs from 'fs'
 import R from 'ramda'
 
-export const loadDictionary = (dictionaryPath) => (word) => {
+export const isWord = (dictionaryPath) => (word) => {
   return contains(dictionaryWords(dictionaryPath))(word)
 }
 

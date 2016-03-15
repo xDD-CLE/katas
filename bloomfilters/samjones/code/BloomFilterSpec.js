@@ -1,15 +1,12 @@
-import {loadDictionary} from './Dictionary'
-import {spellCheck} from './SpellCheck'
+import * as Dictionary from './Dictionary'
+import * as SpellChecker from './SpellCheck'
 
 describe('bloom filter', () => {
   const dictPath = '/usr/share/dict/words'
-  const dictionary = loadDictionary(dictPath)
-  const spellChecker = spellCheck(dictionary)
+  const isWord = Dictionary.isWord(dictPath)
+  const findMisspellings = SpellChecker.findMisspellings(isWord)
 
   it('should spell check', () => {
-
-    let misspellings = spellChecker('hello world foobar')
-
-    expect(misspellings).toEqual(['foobar'])
+    expect(findMisspellings('hello world foobar')).toEqual(['foobar'])
   })
 })

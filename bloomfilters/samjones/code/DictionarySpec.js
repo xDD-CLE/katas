@@ -1,13 +1,13 @@
-import {loadDictionary} from './Dictionary.js'
+import * as Dictionary from './Dictionary.js'
 
 describe('Reading the System Dictionary', () => {
-  const contains = loadDictionary('/usr/share/dict/words')
+  const isWord = Dictionary.isWord('/usr/share/dict/words')
 
   it('Should contain a real word', () => {
-    expect(contains('hello')).toEqual(true)
+    expect(isWord('hello')).toEqual(true)
   })
 
   it('Should not contain a fake word', () => {
-    expect(contains('foobar')).toEqual(false)
+    expect(isWord('foobar')).toEqual(false)
   })
 })

@@ -1,14 +1,14 @@
-import {spellCheck} from './SpellCheck'
+import * as SpellChecker from './SpellCheck'
 
 describe('Spell Checking', () => {
   const misspelling = 'foobar'
-  const dictionary = (text) => {
+  const isWord = (text) => {
     return text !== misspelling
   }
 
-  const spellChecker = spellCheck(dictionary)
+  const findMisspellings = SpellChecker.findMisspellings(isWord)
 
   it('should find misspellings', () => {
-    expect(spellChecker('hello world foobar')).toEqual([misspelling])
+    expect(findMisspellings('hello world foobar')).toEqual([misspelling])
   })
 })
