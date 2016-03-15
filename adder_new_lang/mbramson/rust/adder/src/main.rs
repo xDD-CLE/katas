@@ -24,7 +24,12 @@ fn sum_string_vector(numbers: &Vec<&str>) -> i32 {
     let mut sum: i32 = 0;
     for number in numbers {
         match number.parse::<i32>() {
-            Ok(n) => sum += n,
+            Ok(n) => {
+                if n < 0 {
+                    panic!("Negative Number");
+                }
+                sum += n;
+            },
             _ => continue
         }
     }
@@ -67,23 +72,19 @@ fn add_returns_sum_of_nothing_and_3() {
 }
 
 #[test]
-fn add_returns_negative_single_number() {
-    assert_eq!(-2, add("-2"));
-}
-
-#[test]
-fn add_returns_sum_of_positive_and_negative_numbers() {
-    assert_eq!(-1, add("-3,2"));
-}
-
-#[test]
 fn add_returns_sum_of_3_numbers() {
     assert_eq!(12, add("5,4,3"));
 }
 
 #[test]
 fn add_returns_sum_of_5_numbers() {
-    assert_eq!(16, add("-3,5,-1,10,5"));
+    let i = add("3,2,1,10,7");
+    assert_eq!(23, i);
+}
+
+#[test]
+fn add_returns_sum_of_4_numbers() {
+    assert_eq!(8, add("2,2,2,2"));
 }
 
 #[test]
@@ -99,6 +100,12 @@ fn add_returns_sum_with_custom_delimiter() {
 #[test]
 fn add_returns_sum_with_underscore_delimiter() {
     assert_eq!(6, add("//_\n3_2_1"));
+}
+
+#[test]
+#[should_panic]
+fn add_panics_when_negative_is_used() {
+    assert_eq!(-1, add("-1"));
 }
 
 // sum_string_vector tests
