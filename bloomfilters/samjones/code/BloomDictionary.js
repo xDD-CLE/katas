@@ -1,31 +1,22 @@
 import R from 'ramda'
-import murmurhash from 'node-murmurhash'
+import * as Hasher from './Hasher'
 
 import * as FileReader from './FileReader'
 
-export const isWordFromFile = (readWords, dictionaryPath = '/usr/share/dict/words') => (word) => {
-  let dictionary = hashDictionary(readWords, dictionaryPath)
-  return R.any(hash => dictionary[hash] === 1)(wordHashes(word))
-}
+const inHashes = dictionaryHashes =>  R.all(h => dictionaryHashes[h] === 1)
 
-export const  isWord = isWordFromFile(FileReader.readWords)
-
-
-const hashDictionary = (readWords, dictionaryPath) => {
-  let hashes = R.chain(wordHashes)(readWords(dictionaryPath))
-
-  return hashes.reduce((acc, h) => {
-    acc[h] =1
+const dictionaryPath = '/usr/share/dict/words'
+export const isWordWithReaderAndHasher = (readWords, hashWord) => {
+  let words = readWords(dictionaryPath)
+  let dictionaryHashes = R.chain(hashWord, words).reduce((acc, h) => {
+    acc[h] = 1
     return acc
   }, [])
+  return (word) => inHashes(dictionaryHashes)(hashWord(word))
 }
 
-const wordHashes = (word) => {
-  return R.times(hash(word), 5)
-}
+export const isWord = 
+  isWordWithReaderAndHasher(FileReader.readWords, Hasher.hashWord)
 
-const max = 10000000
-const hashNum = 4
-const hash = (word) => (seed) => {
-  return murmurhash(word, seed)
-}
+
+
