@@ -1,5 +1,14 @@
-fn main() {
+use std::io;
 
+fn main() {
+    println!("Enter a string to process:");
+
+    let mut number_string = String::new();
+    io::stdin().read_line(&mut number_string).unwrap();
+    let number_string: &str = number_string.trim();
+
+    let answer = add(number_string);
+    println!("sum: {}", answer);
 }
 
 fn add(numbers: &str) -> i32 {
@@ -22,16 +31,21 @@ fn add(numbers: &str) -> i32 {
 
 fn sum_string_vector(numbers: &Vec<&str>) -> i32 {
     let mut sum: i32 = 0;
+    let mut errors: Vec<i32> = Vec::new();
+
     for number in numbers {
         match number.parse::<i32>() {
             Ok(n) => {
                 if n < 0 {
-                    panic!("Negative Number");
+                    errors.push(n);
                 }
                 sum += n;
             },
             _ => continue
         }
+    }
+    if !errors.is_empty() {
+        panic!("negatives: {:?}", errors);
     }
     sum
 }
@@ -106,6 +120,12 @@ fn add_returns_sum_with_underscore_delimiter() {
 #[should_panic]
 fn add_panics_when_negative_is_used() {
     assert_eq!(-1, add("-1"));
+}
+
+#[test]
+#[should_panic(expected = "negatives: [-1, -2]")]
+fn add_panics_with_correct_panic_message() {
+    assert_eq!(-3, add("-1,-2"));
 }
 
 // sum_string_vector tests
