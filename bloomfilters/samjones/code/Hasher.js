@@ -1,16 +1,21 @@
 import murmurhash from 'node-murmurhash'
 import R from 'ramda'
 
-const hashWithMod = (mod) => (word) => (seed) => {
-  return parseInt(murmurhash(word, seed)) % mod
+function* hashMaker(mod, word) {
+  let seed = 0
+  while(true) {
+    seed = parseInt(murmurhash(word, seed)) % mod
+    yield seed
+  }
 }
 
-export const maxHash = 100000000
-export const hash = hashWithMod(maxHash)
+export const maxHash = 1000000
+export const hash = R.curry(hashMaker)(maxHash)
 
 
 const hashWordKTimes = (k) => (word) => {
-  return R.times(hash(word), k)
+  const hasher = hash(word)
+  return R.times(_ => hasher.next().value, k)
 }
-export const defaultK = 3
+export const defaultK = 5
 export const hashWord = hashWordKTimes(defaultK)
