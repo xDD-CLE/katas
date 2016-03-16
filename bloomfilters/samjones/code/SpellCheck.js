@@ -1,5 +1,5 @@
 import R from 'ramda'
 
-export const findMisspellings = (dictionary) => (text) => {
-  return R.compose(R.reject(dictionary), R.split(' '))(text)
+export const findMisspellings = (isWord) => (text) => {
+  return R.compose(R.reject(isWord), R.split(' '))(text)
 }

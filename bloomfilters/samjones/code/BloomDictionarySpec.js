@@ -1,6 +1,6 @@
-import * as Dictionary from './Dictionary.js'
+import * as Dictionary from './BloomDictionary.js'
 
-describe('Dictionary', () => {
+describe('BloomDictionary', () => {
   const readWords = (_) => ['hello', 'world']
   const isWord = Dictionary.isWordFromFile(readWords)
 
