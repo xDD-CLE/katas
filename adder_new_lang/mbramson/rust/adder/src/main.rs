@@ -38,14 +38,15 @@ fn sum_string_vector(numbers: &Vec<&str>) -> i32 {
             Ok(n) => {
                 if n < 0 {
                     errors.push(n);
+                } else if n < 1001 {
+                    sum += n;
                 }
-                sum += n;
             },
             _ => continue
         }
     }
     if !errors.is_empty() {
-        panic!("negatives: {:?}", errors);
+        panic!("negatives not allowed: {:?}", errors);
     }
     sum
 }
@@ -123,9 +124,14 @@ fn add_panics_when_negative_is_used() {
 }
 
 #[test]
-#[should_panic(expected = "negatives: [-1, -2]")]
+#[should_panic(expected = "negatives not allowed: [-1, -2]")]
 fn add_panics_with_correct_panic_message() {
     assert_eq!(-3, add("-1,-2"));
+}
+
+#[test]
+fn add_ignores_numbers_greater_than_1000() {
+    assert_eq!(2, add("2,1001"));
 }
 
 // sum_string_vector tests
