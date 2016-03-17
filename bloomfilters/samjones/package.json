@@ -10,6 +10,7 @@
   "license": "ISC",
   "devDependencies": {
     "jasmine-es6": "^0.1.6",
+    "jasmine-expect": "^2.0.2",
     "jasmine-spec-reporter": "^2.4.0"
   },
   "dependencies": {

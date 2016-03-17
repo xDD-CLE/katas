@@ -2,7 +2,8 @@ import * as Dictionary from './BloomDictionary.js'
 
 describe('BloomDictionary', () => {
   const readWords = (_) => ['hello', 'world']
-  const isWord = Dictionary.isWordFromFile(readWords)
+  const wordHashes = (w) => [w]
+  const isWord = Dictionary.isWordWithReaderAndHasher(readWords, wordHashes)
 
   it('should contain a real word', () => {
     expect(isWord('hello')).toEqual(true)

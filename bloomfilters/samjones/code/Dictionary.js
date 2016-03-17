@@ -2,11 +2,11 @@ import R from 'ramda'
 
 import * as FileReader from './FileReader'
 
-export const isWordFromFile = (readWords, dictionaryPath = '/usr/share/dict/words') => (word) => {
-  let words = readWords(dictionaryPath)
-  return contains(words)(word)
+const dictionaryPath = '/usr/share/dict/words'
+export const isWordWithReader = (readWords) => {
+  const words = readWords(dictionaryPath)
+  return R.contains(R.__, words)
 }
 
-export const  isWord = isWordFromFile(FileReader.readWords)
+export const  isWord = isWordWithReader(FileReader.readWords)
 
-const contains = R.flip(R.contains)
