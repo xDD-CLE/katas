@@ -6,7 +6,6 @@
 #include <string>
 #include <vector>
 #include <bitset>
-#include <limits.h>
 
 using std::string;
 using std::vector;
@@ -20,7 +19,7 @@ class BloomFilter{
   bool validate_word(string word);
 
  private:
-  bitset<UINT_MAX + 1ul>* bloom;
+  bitset<M_CONSTANT>* bloom;
   HashCalculator* hash_calculator;
 };
 

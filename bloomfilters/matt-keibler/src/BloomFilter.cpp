@@ -1,7 +1,7 @@
 #include "BloomFilter.h"
 
 BloomFilter::BloomFilter(HashCalculator* hash_calculator_, vector<string> initial_words) : hash_calculator(hash_calculator_) {
-  bloom = new bitset<UINT_MAX + 1ul>();
+  bloom = new bitset<M_CONSTANT>();
   if(hash_calculator){
     for(string word : initial_words){
       Hash calculated_hash = hash_calculator->calculate(word);
