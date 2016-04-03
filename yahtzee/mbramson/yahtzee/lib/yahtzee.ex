@@ -13,10 +13,8 @@ defmodule Yahtzee do
   def sixes(rolls), do: upper(rolls, 6)
 
   def pairs(rolls) do
-    rolls = Enum.sort(rolls)
-    rolls = Enum.reverse(rolls)
-    rolls_unique = Enum.uniq(rolls)
-    Enum.reduce_while(rolls_unique, 0,
+    rolls = Enum.sort(rolls) |> Enum.reverse
+    Enum.reduce_while(Enum.uniq(rolls), 0,
       fn x, acc ->
         if match_exists(rolls, x, 2),
         do: {:halt, acc + match_sum(rolls, x, 2)},
@@ -27,8 +25,7 @@ defmodule Yahtzee do
 
   def two_pairs(rolls) do
     rolls = Enum.sort(rolls) |> Enum.reverse
-    rolls_unique = Enum.uniq(rolls)
-    Enum.reduce(rolls_unique, 0,
+    Enum.reduce(Enum.uniq(rolls), 0,
       fn x, acc ->
         if match_exists(rolls, x, 2),
         do: acc + match_sum(rolls, x, 2),
