@@ -34,6 +34,17 @@ defmodule Yahtzee do
     )
   end
 
+  def three_of_a_kind(rolls) do
+    rolls = Enum.sort(rolls) |> Enum.reverse
+    Enum.reduce_while(Enum.uniq(rolls), 0,
+      fn x, acc ->
+        if match_exists(rolls, x, 3),
+        do: {:halt, acc + match_sum(rolls, x, 3)},
+        else: {:cont, acc}
+      end
+    )
+  end
+
   def match_sum(rolls, match_num, counts) do
     if match_exists(rolls, match_num, counts) do
       match_num * counts

@@ -34,6 +34,10 @@ defmodule YahtzeeTest do
 
   # pairs tests
 
+  test "pairs returns 0 when no pair exists" do
+    assert pairs([1,2,3,4,5]) == 0
+  end
+
   test "pairs scores when one pair exists" do
     assert pairs([1,1,2,3,4]) == 2
   end
@@ -44,12 +48,30 @@ defmodule YahtzeeTest do
 
   # two pairs tests
 
+  test "two_pairs returns 0 when only one pair is present" do
+    assert two_pairs([4, 4, 5, 6, 3]) == 0
+  end
+
   test "two_pairs scores when two pairs exist" do
     assert two_pairs([1,1,2,2,3]) == 6
   end
 
   test "two_pairs doesn't over score for full house" do
     assert two_pairs([2,2,4,4,4]) == 12
+  end
+
+  # three_of_a_kind tests
+
+  test "three_of_a_kind returns 0 when no three of a kind exists" do
+    assert three_of_a_kind([1,1,2,3,4]) == 0
+  end
+
+  test "three_of_a_kind scores when three of a kind exists" do
+    assert three_of_a_kind([2,2,2,4,5]) == 6
+  end
+
+  test "three_of_a_kind doesn't overscore for four of a kind" do
+    assert three_of_a_kind([3,3,3,3,5]) == 9
   end
 
   # match_sum tests
