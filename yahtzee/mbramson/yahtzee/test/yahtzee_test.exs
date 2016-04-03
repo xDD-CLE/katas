@@ -42,6 +42,16 @@ defmodule YahtzeeTest do
     assert pairs([1,2,3,3,4]) == 6
   end
 
+  # two pairs tests
+
+  test "two_pairs scores when two pairs exist" do
+    assert two_pairs([1,1,2,2,3]) == 6
+  end
+
+  test "two_pairs doesn't over score for full house" do
+    assert two_pairs([2,2,4,4,4]) == 12
+  end
+
   # match_sum tests
 
   test "match_sum returns 2 when roll has two ones" do

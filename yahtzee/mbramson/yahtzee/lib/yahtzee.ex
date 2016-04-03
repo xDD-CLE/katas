@@ -23,7 +23,18 @@ defmodule Yahtzee do
         else: {:cont, acc}
       end
     )
+  end
 
+  def two_pairs(rolls) do
+    rolls = Enum.sort(rolls) |> Enum.reverse
+    rolls_unique = Enum.uniq(rolls)
+    Enum.reduce(rolls_unique, 0,
+      fn x, acc ->
+        if match_exists(rolls, x, 2),
+        do: acc + match_sum(rolls, x, 2),
+        else: acc
+      end
+    )
   end
 
   def match_sum(rolls, match_num, counts) do
