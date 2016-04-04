@@ -8,20 +8,26 @@ defmodule Katayahtzee do
 
   def two_pairs(dice_roll) do
     dice_roll 
-    |> calculate_for_pairs
+    |> calculate_for_count_value(2)
     |> Enum.sum
   end
 
   def pair(dice_roll) do
     dice_roll 
-    |> calculate_for_pairs
+    |> calculate_for_count_value(2)
     |> Enum.max
   end
 
-  defp calculate_for_pairs(dice_roll) do
+  def three_of_a_kind(dice_roll) do
+    dice_roll 
+    |> calculate_for_count_value(3)
+    |> Enum.sum
+  end
+
+  defp calculate_for_count_value(dice_roll, count_value) do
     dice_roll 
     |> value_in_list_to_count 
-    |> sum_of_the_highest_count_value(2)
+    |> sum_of_the_highest_count_value(count_value)
   end
 
   defp value_in_list_to_count(numbers) do
