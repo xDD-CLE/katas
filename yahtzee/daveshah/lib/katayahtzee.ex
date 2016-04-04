@@ -9,10 +9,10 @@ defmodule Katayahtzee do
   end
 
   def two_pairs(dice_roll) do
-
-
-
-
+    dice_roll 
+    |> value_in_list_to_count 
+    |> Enum.filter_map(fn({k,v}) -> v == 2 end, fn({k,v}) -> k*2 end)
+    |> Enum.sum
   end
 
   def pair(dice_roll) do
