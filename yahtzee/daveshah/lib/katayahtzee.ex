@@ -1,7 +1,9 @@
 defmodule Katayahtzee do
 
-  def placement(dice_roll, placement) do
-    dice_roll
+  defstruct [:roll, :placement]
+
+  def calculate(%Katayahtzee{roll: roll, placement: placement}) when is_integer(placement) do
+    roll
     |> Enum.filter(&(&1 == placement))
     |> Enum.sum
   end

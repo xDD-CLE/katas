@@ -3,7 +3,8 @@ defmodule KatayahtzeeTest do
   doctest Katayahtzee
 
   test "placement" do
-    assert Katayahtzee.placement([1, 1, 2, 4, 4], 4) == 8
+    outcome = %Katayahtzee{roll: [1, 1, 2, 4, 4], placement: 4}
+    assert Katayahtzee.calculate(outcome) == 8
   end
 
   test "pair" do
