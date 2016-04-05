@@ -28,19 +28,17 @@ defmodule Yahtzee do
       |> max_roll
   end
 
+  def two_pairs(rolls) do
+    rolls
+      |> Enum.group_by(fn(x) -> x end)
+      |> Enum.filter(fn({_, v}) -> length(v) > 1 end)
+      |> (fn(x) -> if Enum.count(x) > 1, do: x, else: [] end).()
+      |> Enum.map(fn({_, [v|_]}) -> v * 3 end)
+      |> max_roll
+  end
+
   def max_roll([]), do: 0
   def max_roll(rolls), do: Enum.max(rolls)
-
-  def two_pairs(rolls) do
-    rolls = Enum.sort(rolls) |> Enum.reverse
-    Enum.reduce(Enum.uniq(rolls), 0,
-      fn x, acc ->
-        if match_exists(rolls, x, 2),
-        do: acc + match_sum(rolls, x, 2),
-        else: acc
-      end
-    )
-  end
 
   def match_sum(rolls, match_num, counts) do
     if match_exists(rolls, match_num, counts) do

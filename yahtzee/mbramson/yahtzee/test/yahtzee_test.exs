@@ -50,7 +50,6 @@ defmodule YahtzeeTest do
   end
 
   # two pairs tests
-  @tag :skip
   test "two_pairs returns 0 when only one pair is present" do
     assert two_pairs([4, 4, 5, 6, 3]) == 0
   end
