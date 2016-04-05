@@ -76,28 +76,4 @@ defmodule YahtzeeTest do
     assert three_of_a_kind([3,3,3,3,5]) == 9
   end
 
-  # match_sum tests
-
-  test "match_sum returns 2 when roll has two ones" do
-    assert match_sum([1,1,2,3,4], 1, 2) == 2
-  end
-
-  test "match_sum returns 2 when roll has three ones but counts is 2" do
-    assert match_sum([1,1,1,2,3], 1, 2) == 2
-  end
-
-  # match_exists tests
-  test "match_exists returns false for no match of 2" do
-    assert !match_exists([1,2,3,4,5], 1, 2)
-  end
-
-  test "match_exists returns true for match of 2" do
-    assert match_exists([1,1,2,3,4], 1, 2)
-  end
-
-  test "match_exists returns true for match of 2 when 3 present" do
-    assert match_exists([3,3,3,4,5], 3, 2)
-  end
-
-
 end

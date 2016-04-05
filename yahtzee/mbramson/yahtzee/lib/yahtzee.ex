@@ -40,16 +40,4 @@ defmodule Yahtzee do
   def max_roll([]), do: 0
   def max_roll(rolls), do: Enum.max(rolls)
 
-  def match_sum(rolls, match_num, counts) do
-    if match_exists(rolls, match_num, counts) do
-      match_num * counts
-    else
-      0
-    end
-  end
-
-  def match_exists(rolls, match_num, counts) do
-    Enum.count(rolls, fn n -> n == match_num end) >= counts
-  end
-
 end
