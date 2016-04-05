@@ -13,15 +13,23 @@ defmodule Yahtzee do
   def sixes(rolls), do: upper(rolls, 6)
 
   def pairs(rolls) do
-    rolls = Enum.sort(rolls) |> Enum.reverse
-    Enum.reduce_while(Enum.uniq(rolls), 0,
-      fn x, acc ->
-        if match_exists(rolls, x, 2),
-        do: {:halt, acc + match_sum(rolls, x, 2)},
-        else: {:cont, acc}
-      end
-    )
+    rolls
+      |> Enum.group_by(fn(x) -> x end)
+      |> Enum.filter(fn({_, v}) -> length(v) > 1 end)
+      |> Enum.map(fn({_, [v|_]}) -> v * 2 end)
+      |> max_roll
   end
+
+  def three_of_a_kind(rolls) do
+    rolls
+      |> Enum.group_by(fn(x) -> x end)
+      |> Enum.filter(fn({_, v}) -> length(v) > 2 end)
+      |> Enum.map(fn({_, [v|_]}) -> v * 3 end)
+      |> max_roll
+  end
+
+  def max_roll([]), do: 0
+  def max_roll(rolls), do: Enum.max(rolls)
 
   def two_pairs(rolls) do
     rolls = Enum.sort(rolls) |> Enum.reverse
@@ -30,17 +38,6 @@ defmodule Yahtzee do
         if match_exists(rolls, x, 2),
         do: acc + match_sum(rolls, x, 2),
         else: acc
-      end
-    )
-  end
-
-  def three_of_a_kind(rolls) do
-    rolls = Enum.sort(rolls) |> Enum.reverse
-    Enum.reduce_while(Enum.uniq(rolls), 0,
-      fn x, acc ->
-        if match_exists(rolls, x, 3),
-        do: {:halt, acc + match_sum(rolls, x, 3)},
-        else: {:cont, acc}
       end
     )
   end

@@ -33,21 +33,24 @@ defmodule YahtzeeTest do
   end
 
   # pairs tests
+  test "pairs returns pair when one exact pair exists" do
+    assert pairs([1,1,2,3,4]) == 2
+  end
 
   test "pairs returns 0 when no pair exists" do
     assert pairs([1,2,3,4,5]) == 0
   end
 
-  test "pairs scores when one pair exists" do
-    assert pairs([1,1,2,3,4]) == 2
+  test "pairs scores the highest pair" do
+    assert pairs([1,1,3,3,4]) == 6
   end
 
-  test "pairs scores when pair exists of threes" do
-    assert pairs([1,2,3,3,4]) == 6
+  test "pairs does not overscore for three pair" do
+    assert pairs([2,2,2,3,4]) == 4
   end
 
   # two pairs tests
-
+  @tag :skip
   test "two_pairs returns 0 when only one pair is present" do
     assert two_pairs([4, 4, 5, 6, 3]) == 0
   end
