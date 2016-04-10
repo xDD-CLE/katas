@@ -10,7 +10,7 @@ function sumForNumberRule(number, dice) {
 }
 
 module.exports.score = function(rule, dice) {
-  var score = 0;
+  var score = -1;
 
   switch (rule.toLowerCase()) {
   case 'ones':
@@ -18,6 +18,18 @@ module.exports.score = function(rule, dice) {
     break;
   case 'twos':
     score = sumForNumberRule(2, dice);
+    break;
+  case 'threes':
+    score = sumForNumberRule(3, dice);
+    break;
+  case 'fours':
+    score = sumForNumberRule(4, dice);
+    break;
+  case 'fives':
+    score = sumForNumberRule(5, dice);
+    break;
+  case 'sixes':
+    score = sumForNumberRule(6, dice);
     break;
   }
 
