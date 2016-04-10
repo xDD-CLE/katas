@@ -1,0 +1,26 @@
+{
+  "name": "jdantonio-yahtzee",
+  "version": "0.0.1",
+  "description": "Coding Dojo Wiki: KataYahtzee.",
+  "main": "Gruntfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-nodeunit": "~0.4.1",
+    "grunt-eslint": "^18.0.0",
+    "shelljs": "^0.6.0"
+  },
+  "scripts": {
+    "test": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xDD-CLE/katas.git"
+  },
+  "author": "Jerry D'Antonio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xDD-CLE/katas/issues"
+  },
+  "homepage": "https://github.com/xDD-CLE/katas#readme"
+}
