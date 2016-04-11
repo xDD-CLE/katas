@@ -7,7 +7,18 @@ rules.set('threes', (dice) => { return sumForNumberRule(3, dice); });
 rules.set('fours', (dice) => { return sumForNumberRule(4, dice); });
 rules.set('fives', (dice) => { return sumForNumberRule(5, dice); });
 rules.set('sixes', (dice) => { return sumForNumberRule(6, dice); });
-rules.set('pair', pairRule);
+rules.set('pair', (dice) => { return pairRule(countPips(dice)); });
+
+function countPips(dice) {
+  return dice.reduce(function(previousValue, currentValue/*, currentIndex, array*/) {
+    if (previousValue.has(currentValue)) {
+      previousValue.set(currentValue, previousValue.get(currentValue) + 1);
+    } else {
+      previousValue.set(currentValue, 1);
+    }
+    return previousValue;
+  }, new Map());
+}
 
 function sumForNumberRule(number, dice) {
   return dice.reduce(function(previousValue, currentValue/*, currentIndex, array*/) {
@@ -18,8 +29,16 @@ function sumForNumberRule(number, dice) {
   }, 0);
 }
 
-function pairRule(/*dice*/) {
-  console.log('\nBoom!');
+function pairRule(pips) {
+  var max = 0;
+
+  pips.forEach(function(value, key) {
+    if (value === 2 && key > max) {
+      max = key;
+    }
+  }, pips);
+
+  return max * 2;
 }
 
 module.exports.score = function(rule, dice) {
