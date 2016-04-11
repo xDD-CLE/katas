@@ -1,14 +1,16 @@
 // For building and testing Golang
 var shell = require('shelljs');
-function shellexec(cmd) {
-  var result = shell.exec(cmd);
-  if (result.code != 0) {
-    grunt.fail.warn(result.stderr, result.code)
-  }
-}
 
 /*global module:false*/
 module.exports = function(grunt) {
+
+  // For building and testing Golang
+  function shellexec(cmd) {
+    var result = shell.exec(cmd);
+    if (result.code != 0) {
+      grunt.fail.warn(result.stderr, result.code)
+    }
+  }
 
   // Project configuration
   grunt.initConfig({
