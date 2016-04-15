@@ -76,4 +76,18 @@ defmodule YahtzeeTest do
     assert three_of_a_kind([3,3,3,3,5]) == 9
   end
 
+  # four_f_a_kind tests
+
+  test "four_of_a_kind returns 0 when no four of a kind exists" do
+    assert four_of_a_kind([1,2,3,4,5]) == 0
+  end
+
+  test "four_of_a_kind returns sum of four when possible" do
+    assert four_of_a_kind([1,1,1,1,4]) == 4
+  end
+
+  test "four_of_a_kind doesn't overcount for yahtzee" do
+    assert four_of_a_kind([2,2,2,2,2]) == 8
+  end
+
 end

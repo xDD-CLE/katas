@@ -28,6 +28,14 @@ defmodule Yahtzee do
       |> max_roll
   end
 
+  def four_of_a_kind(rolls) do
+    rolls
+      |> Enum.group_by(fn(x) -> x end)
+      |> Enum.filter(fn({_, v}) -> length(v) > 3 end)
+      |> Enum.map(fn({_, [v|_]}) -> v * 4 end)
+      |> max_roll
+  end
+
   def two_pairs(rolls) do
     rolls
       |> Enum.group_by(fn(x) -> x end)
