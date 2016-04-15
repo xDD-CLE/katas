@@ -48,5 +48,5 @@ defmodule GildedRose do
     end
   end
 
-  defp update_item_sell_in(item), do:%{item | sell_in: item.sell_in -1}
+  defp update_item_sell_in(item), do: %{item | sell_in: item.sell_in - 1}
 end

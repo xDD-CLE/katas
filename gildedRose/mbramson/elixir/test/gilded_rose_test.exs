@@ -8,22 +8,22 @@ defmodule GildedRoseTest do
   end
 
   test "regular item decreases in quality by 1 if sell_in is > 0" do
-    assert update_item(%{quality: 10, sell_in:5, name: "arbitrary item"}).
+    assert update_item(%{quality: 10, sell_in: 5, name: "arbitrary item"}).
                          quality == 9
   end
 
   test "regular item decreases in quality by 1 if sell_in is 0" do
-    assert update_item(%{quality: 10, sell_in:0, name: "arbitrary item"}).
+    assert update_item(%{quality: 10, sell_in: 0, name: "arbitrary item"}).
                          quality == 9
   end
 
   test "regular item decreases in quality by 1 if sell_in is < 0" do
-    assert update_item(%{quality: 10, sell_in:-1, name: "arbitrary item"}).
+    assert update_item(%{quality: 10, sell_in: -1, name: "arbitrary item"}).
                          quality == 8
   end
 
   test "regular item decreases sell_in by 1 if sell_in is > 0" do
-    assert update_item(%{quality: 10, sell_in:8, name: "arbitrary item"}).
+    assert update_item(%{quality: 10, sell_in: 8, name: "arbitrary item"}).
                          sell_in == 7
   end
 
@@ -32,7 +32,7 @@ defmodule GildedRoseTest do
   #TODO: Implement backstage tests for different concerts
 
   test "backstage passes expire when sell_in is less than 0" do
-    assert update_item(%{quality: 10, sell_in: -1 ,
+    assert update_item(%{quality: 10, sell_in: -1,
                          name: "Backstage passes to a TAFKAL80ETC concert"}).
                          quality == 0
   end
@@ -59,5 +59,13 @@ defmodule GildedRoseTest do
     assert update_item(%{quality: 8, sell_in: 5 ,
                          name: "Backstage passes to a TAFKAL80ETC concert"}).
                          quality == 11
+  end
+
+  # sulfuras tests
+
+  test "Sulfuras does not decrease in quality" do
+    assert update_item(%{quality: 80, sell_in: 5 ,
+                         name: "Sulfuras"}).
+                         quality == 80
   end
 end
