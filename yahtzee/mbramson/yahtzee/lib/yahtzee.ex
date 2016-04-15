@@ -14,7 +14,7 @@ defmodule Yahtzee do
 
   def pairs(rolls) do
     rolls
-      |> Enum.group_by(fn(x) -> x end)
+      |> Enum.group_by(&(&1))
       |> Enum.filter(fn({_, v}) -> length(v) > 1 end)
       |> Enum.map(fn({_, [v|_]}) -> v * 2 end)
       |> max_roll
@@ -22,7 +22,7 @@ defmodule Yahtzee do
 
   def three_of_a_kind(rolls) do
     rolls
-      |> Enum.group_by(fn(x) -> x end)
+      |> Enum.group_by(&(&1))
       |> Enum.filter(fn({_, v}) -> length(v) > 2 end)
       |> Enum.map(fn({_, [v|_]}) -> v * 3 end)
       |> max_roll
@@ -30,7 +30,7 @@ defmodule Yahtzee do
 
   def four_of_a_kind(rolls) do
     rolls
-      |> Enum.group_by(fn(x) -> x end)
+      |> Enum.group_by(&(&1))
       |> Enum.filter(fn({_, v}) -> length(v) > 3 end)
       |> Enum.map(fn({_, [v|_]}) -> v * 4 end)
       |> max_roll
@@ -38,7 +38,7 @@ defmodule Yahtzee do
 
   def two_pairs(rolls) do
     rolls
-      |> Enum.group_by(fn(x) -> x end)
+      |> Enum.group_by(&(&1))
       |> Enum.filter(fn({_, v}) -> length(v) > 1 end)
       |> (fn(x) -> if Enum.count(x) > 1, do: x, else: [] end).()
       |> Enum.map(fn({_, [v|_]}) -> v * 3 end)
