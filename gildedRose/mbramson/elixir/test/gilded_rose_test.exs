@@ -3,12 +3,28 @@ import GildedRose
 defmodule GildedRoseTest do
   use ExUnit.Case
 
-  test "begin the journey of refactoring" do
-
+  test "item with value of 0 retains 0 quality" do
+    assert update_item(%{quality: 0, sell_in: 0}).quality == 0
   end
 
-  test "item with value of 0 retains 0 quality" do
-    assert update_item(%{quality: 0}).quality == 0
+  test "regular item decreases in quality by 1 if sell_in is > 0" do
+    assert update_item(%{quality: 10, sell_in:5, name: "arbitrary item"}).
+                         quality == 9
+  end
+
+  test "regular item decreases in quality by 1 if sell_in is 0" do
+    assert update_item(%{quality: 10, sell_in:0, name: "arbitrary item"}).
+                         quality == 9
+  end
+
+  test "regular item decreases in quality by 1 if sell_in is < 0" do
+    assert update_item(%{quality: 10, sell_in:-1, name: "arbitrary item"}).
+                         quality == 8
+  end
+
+  test "regular item decreases sell_in by 1 if sell_in is > 0" do
+    assert update_item(%{quality: 10, sell_in:8, name: "arbitrary item"}).
+                         sell_in == 7
   end
 
   # back stage pass tests

@@ -8,6 +8,12 @@ defmodule GildedRose do
   end
 
   def update_item(item) do
+    item
+    |> update_item_quality
+    |> update_item_sell_in
+  end
+
+  defp update_item_quality(item) do
     cond do
       item.quality == 0 ->
         item
@@ -31,18 +37,16 @@ defmodule GildedRose do
         if item.name == "Backstage passes to a TAFKAL80ETC concert" do
           %{item | quality: 0}
         else
-          if item.name == "+5 Dexterity Vest" || item.name == "Elixir of the Mongoose" do
-            %{item | quality: item.quality - 2}
-          else
-            item
-          end
+          %{item | quality: item.quality - 2}
         end
       item.name == "+5 Dexterity Vest" || item.name == "Elixir of the Mongoose" ->
         %{item | quality: item.quality - 1}
-      item.name != "Sulfuras, Hand of Ragnaros" ->
+      item.name != "Sulfuras" ->
         %{item | quality: item.quality - 1}
       true ->
         item
     end
   end
+
+  defp update_item_sell_in(item), do:%{item | sell_in: item.sell_in -1}
 end
