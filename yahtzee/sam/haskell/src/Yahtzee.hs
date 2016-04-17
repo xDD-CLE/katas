@@ -7,7 +7,11 @@ module Yahtzee (
               , scoreSixes
               , scoreThreeOfAKind
               , scoreFourOfAKind
-              , scoreFullHouse) where
+              , scoreFullHouse
+              , scoreSmallStraight
+              , scoreLargeStraight
+              , scoreYahtzee
+              , scoreChance) where
 
 import Data.List
 
@@ -58,7 +62,23 @@ scoreFourOfAKind = sumOrZero (hasKind 4)
 
 
 
+always val = (\_ -> val)
 hasPairAndTriple = (isInfixOf [2,3]).(map snd)
 
 scoreFullHouse :: Score
-scoreFullHouse = scoreOrZero (\_ -> 25) (hasPairAndTriple.diceCounts)
+scoreFullHouse = scoreOrZero (always 25) (hasPairAndTriple.diceCounts)
+
+
+scoreSmallStraight :: Score
+scoreSmallStraight = scoreOrZero (always 30) (== [1..5])
+
+scoreLargeStraight :: Score
+scoreLargeStraight = scoreOrZero (always 40) (== [2..6])
+
+allEqual dice = all (== head dice) dice
+scoreYahtzee :: Score
+scoreYahtzee = scoreOrZero (always 50) allEqual
+
+
+scoreChance :: Score
+scoreChance = sum
