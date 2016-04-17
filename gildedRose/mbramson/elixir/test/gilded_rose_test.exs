@@ -17,9 +17,24 @@ defmodule GildedRoseTest do
                          quality == 9
   end
 
-  test "regular item decreases in quality by 1 if sell_in is < 0" do
+  test "regular item decreases in quality by 2 if sell_in is < 0" do
     assert update_item(%{quality: 10, sell_in: -1, name: "arbitrary item"}).
                          quality == 8
+  end
+
+  test "regular item cannot decrease to negative quality before sell date" do
+    assert update_item(%{quality: 0, sell_in: 1, name: "arbitrary item"}).
+                         quality == 0
+  end
+
+  test "regular item cannot decrease to negative quality after sell date" do
+    assert update_item(%{quality: 0, sell_in: -2, name: "arbitrary item"}).
+                         quality == 0
+  end
+
+  test "regular item decreases to 0 when it should decrease by 2 and it is 1" do
+    assert update_item(%{quality: 1, sell_in: -2, name: "arbitrary item"}).
+                         quality == 0
   end
 
   test "regular item decreases sell_in by 1 if sell_in is > 0" do

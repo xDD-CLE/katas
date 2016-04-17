@@ -37,7 +37,7 @@ defmodule GildedRose do
         if item.name == "Backstage passes to a TAFKAL80ETC concert" do
           %{item | quality: 0}
         else
-          %{item | quality: item.quality - 2}
+          %{item | quality: Enum.max([item.quality - 2, 0]) }
         end
       item.name == "+5 Dexterity Vest" || item.name == "Elixir of the Mongoose" ->
         %{item | quality: item.quality - 1}
