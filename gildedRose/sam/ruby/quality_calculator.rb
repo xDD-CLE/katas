@@ -5,8 +5,7 @@ class QualityCalculator
 
   private
   def quality_delta(item)
-    case item.sell_in
-    when 0..
+    if item.sell_in > 0
       1
     else
       2
