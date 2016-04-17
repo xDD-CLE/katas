@@ -1,5 +1,5 @@
-require_relative 'quality_calculator_factory'
-require_relative 'sell_in_calculator_factory'
+require_relative 'quality/quality_calculator_factory'
+require_relative 'sell_in/sell_in_calculator_factory'
 
 class Item
   attr_accessor :name, :sell_in, :quality
