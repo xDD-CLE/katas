@@ -74,4 +74,14 @@ class TestUntitled < Test::Unit::TestCase
     item_tester(item: item, new_sell_in: 10, new_quality: 50)
   end
 
+  def test_conjured
+    item = Item.new(name: "Conjured Thingamabob", sell_in: 10, quality: 10)
+    item_tester(item: item, new_sell_in: 9, new_quality: 8)
+  end
+
+  def test_conjured_0_days
+    item = Item.new(name: "Conjured Thingamabob", sell_in: 0, quality: 10)
+    item_tester(item: item, new_sell_in: -1, new_quality: 6)
+  end
+
 end
