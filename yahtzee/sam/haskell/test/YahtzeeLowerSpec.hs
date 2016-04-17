@@ -5,7 +5,8 @@ import Test.Hspec
 
 import Yahtzee (
                 scoreThreeOfAKind
-              , scoreFourOfAKind)
+              , scoreFourOfAKind
+              , scoreFullHouse)
 
 spec :: Spec
 spec = do
@@ -19,3 +20,8 @@ spec = do
       scoreFourOfAKind [2,2,2,2,4] `shouldBe` 12
     it "should score no 4 of a kind" $ do
       scoreFourOfAKind [2,2,2,3,4] `shouldBe` 0
+
+    it "should score full house" $ do
+      scoreFullHouse [2,2,3,3,3] `shouldBe` 25
+    it "should score no full house" $ do
+      scoreFullHouse [2,2,3,3,4] `shouldBe` 0

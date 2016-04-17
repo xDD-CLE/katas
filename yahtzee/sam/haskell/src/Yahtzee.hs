@@ -6,7 +6,8 @@ module Yahtzee (
               , scoreFives
               , scoreSixes
               , scoreThreeOfAKind
-              , scoreFourOfAKind) where
+              , scoreFourOfAKind
+              , scoreFullHouse) where
 
 import Data.List
 
@@ -37,16 +38,17 @@ scoreSixes = scoreUpper 6
 
 
 diceCounts dice = [(head g, length g) | g <- groupBy (==) dice]
+
+scoreOrZero :: Score -> ([Int] -> Bool) -> Score
+scoreOrZero scoreFun predicate dice = if predicate dice
+                                      then scoreFun dice
+                                      else 0
+
+sumOrZero = scoreOrZero sum
+
+
 diceCountGt kind = any ((>= kind).snd)
-
-hasKind :: Int -> [Int] -> Bool
 hasKind kind = (diceCountGt kind).diceCounts
-
-
-sumOrZero :: ([Int] -> Bool) -> Score
-sumOrZero predicate dice = if predicate dice
-                           then sum dice
-                           else 0
 
 scoreThreeOfAKind :: Score
 scoreThreeOfAKind = sumOrZero (hasKind 3)
@@ -54,7 +56,9 @@ scoreThreeOfAKind = sumOrZero (hasKind 3)
 scoreFourOfAKind :: Score
 scoreFourOfAKind = sumOrZero (hasKind 4)
 
+
+
 hasPairAndTriple = (isInfixOf [2,3]).(map snd)
 
 scoreFullHouse :: Score
-scoreFullHouse = sumOrZero (hasPairAndTriple.diceCounts)
+scoreFullHouse = scoreOrZero (\_ -> 25) (hasPairAndTriple.diceCounts)
