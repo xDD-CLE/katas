@@ -1,6 +1,7 @@
 require_relative 'quality_calculator'
 require_relative 'sulfuras_quality_calculator'
 require_relative 'brie_quality_calculator'
+require_relative 'concert_quality_calculator'
 
 class QualityCalculatorFactory
   def self.for_item(item)
@@ -9,6 +10,8 @@ class QualityCalculatorFactory
       SulfurasQualityCalculator.new
     when /aged brie/i
       BrieQualityCalculator.new
+    when /concert.*/i
+      ConcertQualityCalculator.new
     else
       QualityCalculator.new
     end
