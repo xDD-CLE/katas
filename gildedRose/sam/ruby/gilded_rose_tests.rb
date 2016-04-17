@@ -3,11 +3,14 @@ require 'test/unit'
 
 class TestUntitled < Test::Unit::TestCase
 
+  def setup
+    @subject = GildedRose.new
+  end
+
   def item_tester(item:, new_sell_in:, new_quality:)
-    items = [item]
-    GildedRose.new(items).update_quality()
-    assert_equal(new_sell_in, items.first.sell_in)
-    assert_equal(new_quality, items.first.quality)
+    actual = @subject.update_quality([item]).first
+    assert_equal(new_sell_in, actual.sell_in)
+    assert_equal(new_quality, actual.quality)
   end
 
   def test_foo
