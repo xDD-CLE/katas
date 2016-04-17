@@ -5,7 +5,8 @@ module Yahtzee (
               , scoreFours
               , scoreFives
               , scoreSixes
-              , scoreThreeOfAKind) where
+              , scoreThreeOfAKind
+              , scoreFourOfAKind) where
 
 import Data.List
 
@@ -41,7 +42,19 @@ diceCountGt kind = any ((>= kind).snd)
 hasKind :: Int -> [Int] -> Bool
 hasKind kind = (diceCountGt kind).diceCounts
 
+
+sumOrZero :: ([Int] -> Bool) -> Score
+sumOrZero predicate dice = if predicate dice
+                           then sum dice
+                           else 0
+
 scoreThreeOfAKind :: Score
-scoreThreeOfAKind dice = if hasKind 3 dice
-                    then sum dice
-                    else 0
+scoreThreeOfAKind = sumOrZero (hasKind 3)
+
+scoreFourOfAKind :: Score
+scoreFourOfAKind = sumOrZero (hasKind 4)
+
+hasPairAndTriple = (isInfixOf [2,3]).(map snd)
+
+scoreFullHouse :: Score
+scoreFullHouse = sumOrZero (hasPairAndTriple.diceCounts)
