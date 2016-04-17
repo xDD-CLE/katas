@@ -9,8 +9,8 @@ class Item
     @sell_in = sell_in
     @quality = quality
 
-    @quality_calculator = QualityCalculatorFactory.for_name(name)
-    @sell_in_calculator = SellInCalculatorFactory.for_name(name)
+    @quality_calculator = QualityCalculatorFactory.for_item(self)
+    @sell_in_calculator = SellInCalculatorFactory.for_item(self)
   end
 
   def update_quality
