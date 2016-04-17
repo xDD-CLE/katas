@@ -1,4 +1,5 @@
-require File.join(File.dirname(__FILE__), 'gilded_rose')
+require_relative 'gilded_rose'
+require_relative 'item'
 require 'test/unit'
 
 class TestUntitled < Test::Unit::TestCase
