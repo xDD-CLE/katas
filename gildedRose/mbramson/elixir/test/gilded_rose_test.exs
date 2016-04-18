@@ -44,8 +44,6 @@ defmodule GildedRoseTest do
 
   # back stage pass tests
 
-  #TODO: Implement backstage tests for different concerts
-
   test "backstage passes expire when sell_in is less than 0" do
     assert update_item(%{quality: 10, sell_in: -1,
                          name: "Backstage passes to a TAFKAL80ETC concert"}).
@@ -73,6 +71,12 @@ defmodule GildedRoseTest do
   test "backstage passes increase in quality by 3 when sell_in is 5" do
     assert update_item(%{quality: 8, sell_in: 5,
                          name: "Backstage passes to a TAFKAL80ETC concert"}).
+                         quality == 11
+  end
+
+  test "backstage passes handled when concert not specified" do
+    assert update_item(%{quality: 8, sell_in: 5,
+                         name: "Backstage passes"}).
                          quality == 11
   end
 
