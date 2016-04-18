@@ -15,17 +15,18 @@ defmodule GildedRose do
 
   defp update_item_quality(item) do
     cond do
-      item.quality == 0 ->
-        item
-      String.contains?(item.name, "Sulfuras") -> item
+      String.contains?(item.name, "Sulfuras") -> %{item | quality: 80}
+
       item.name == "Aged Brie" ->
         %{item | quality: Enum.min([item.quality + 1, 50]) }
+
       String.contains?(item.name, "Backstage passes") ->
         update_backstage_pass_quality(item)
+
       item.sell_in < 0 ->
         %{item | quality: Enum.max([item.quality - 2, 0]) }
-      true ->
-        %{item | quality: item.quality - 1}
+
+      true -> %{item | quality: Enum.max([item.quality - 1, 0])}
     end
   end
 

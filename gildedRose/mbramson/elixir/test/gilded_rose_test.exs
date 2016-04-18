@@ -4,7 +4,7 @@ defmodule GildedRoseTest do
   use ExUnit.Case
 
   test "item with value of 0 retains 0 quality" do
-    assert update_item(%{quality: 0, sell_in: 0}).quality == 0
+    assert update_item(%{quality: 0, sell_in: 0, name: "arbitrary item"}).quality == 0
   end
 
   test "regular item decreases in quality by 1 if sell_in is > 0" do
@@ -104,6 +104,12 @@ defmodule GildedRoseTest do
 
   test "Sulfuras does not decrease in quality when passed sell_in" do
     assert update_item(%{quality: 80, sell_in: -5 ,
+                         name: "Sulfuras"}).
+                         quality == 80
+  end
+
+  test "Sulfuras should always have quality of 80 even if not before update" do
+    assert update_item(%{quality: 10, sell_in: -5 ,
                          name: "Sulfuras"}).
                          quality == 80
   end
