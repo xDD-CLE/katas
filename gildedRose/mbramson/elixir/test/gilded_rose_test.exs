@@ -113,4 +113,19 @@ defmodule GildedRoseTest do
                          name: "Sulfuras"}).
                          quality == 80
   end
+
+  # Conjured Item tests
+
+  test "Conjured Items degrade by 2 before sell_in date" do
+    assert update_item(%{quality: 10, sell_in: 5 ,
+                         name: "Conjured Bread"}).
+                         quality == 8
+  end
+
+  test "Conjured Items degrade by 4 after sell_in date" do
+    assert update_item(%{quality: 10, sell_in: -5 ,
+                         name: "Conjured Bread"}).
+                         quality == 6
+  end
+
 end

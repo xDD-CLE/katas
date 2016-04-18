@@ -17,11 +17,18 @@ defmodule GildedRose do
     cond do
       String.contains?(item.name, "Sulfuras") -> %{item | quality: 80}
 
-      item.name == "Aged Brie" ->
-        %{item | quality: Enum.min([item.quality + 1, 50]) }
-
       String.contains?(item.name, "Backstage passes") ->
         update_backstage_pass_quality(item)
+
+      String.contains?(item.name, "Conjured") ->
+        if item.sell_in < 0 do
+          %{item | quality: Enum.max([item.quality - 4, 0]) }
+        else
+          %{item | quality: Enum.max([item.quality - 2, 0]) }
+        end
+
+      item.name == "Aged Brie" ->
+        %{item | quality: Enum.min([item.quality + 1, 50]) }
 
       item.sell_in < 0 ->
         %{item | quality: Enum.max([item.quality - 2, 0]) }
