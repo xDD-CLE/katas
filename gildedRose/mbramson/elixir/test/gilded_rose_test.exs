@@ -128,4 +128,10 @@ defmodule GildedRoseTest do
                          quality == 6
   end
 
+  test "Conjured items deggrade by 2 on the sell_in date" do
+    assert update_item(%{quality: 10, sell_in: 0 ,
+                         name: "Conjured Bread"}).
+                         quality == 8
+  end
+
 end
