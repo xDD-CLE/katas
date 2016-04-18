@@ -1,9 +1,17 @@
 defmodule GildedRose do
 
+  @doc """
+  updates each item sequentially, adjusting sell_in and quality according to the
+  type, quality, and sell_in value of the object.
+  """
   def update_quality(items) do
     Enum.map(items, &update_item/1)
   end
 
+  @doc """
+  Updates a given item over a day period. Decreases the sell_in value and
+  adjusts the item quality based on its type, age and existing quality
+  """
   def update_item(item) do
     item
     |> update_item_quality
@@ -27,6 +35,7 @@ defmodule GildedRose do
       true -> degrade_by(item, 1)
     end
   end
+
 
   defp update_backstage_pass_quality(item) do
     cond do
