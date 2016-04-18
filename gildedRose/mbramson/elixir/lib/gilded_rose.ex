@@ -18,28 +18,17 @@ defmodule GildedRose do
       item.quality == 0 ->
         item
       String.contains?(item.name, "Sulfuras") -> item
-      item.sell_in < 0 && String.contains?(item.name, "Backstage passes") ->
-        %{item | quality: 0}
-      item.name == "Aged Brie" || String.contains?(item.name, "Backstage passes") ->
-        if String.contains?(item.name, "Backstage passes") && item.sell_in > 5 && item.sell_in <= 10 do
-          %{item | quality: item.quality + 2}
-        else
-          if String.contains?(item.name, "Backstage passes") && item.sell_in >= 0 && item.sell_in <= 5 do
-            %{item | quality: item.quality + 3}
-          else
-            if item.quality < 50 do
-              %{item | quality: item.quality + 1}
-            else
-              item
-            end
-          end
+      item.name == "Aged Brie" ->
+        %{item | quality: Enum.min([item.quality + 1, 50]) }
+      String.contains?(item.name, "Backstage passes") ->
+        cond do
+          item.sell_in < 0 -> %{item | quality: 0}
+          item.sell_in >= 0 && item.sell_in <= 5 -> %{item | quality: item.quality + 3}
+          item.sell_in > 5 && item.sell_in <= 10 -> %{item | quality: item.quality + 2}
+          true -> %{item | quality: Enum.min([item.quality + 1, 50]) }
         end
       item.sell_in < 0 ->
-        if String.contains?(item.name, "Backstage passes") do
-          %{item | quality: 0}
-        else
-          %{item | quality: Enum.max([item.quality - 2, 0]) }
-        end
+        %{item | quality: Enum.max([item.quality - 2, 0]) }
       true ->
         %{item | quality: item.quality - 1}
     end
