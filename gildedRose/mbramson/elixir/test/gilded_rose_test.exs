@@ -101,4 +101,10 @@ defmodule GildedRoseTest do
                          name: "Sulfuras"}).
                          quality == 80
   end
+
+  test "Sulfuras does not decrease in quality when passed sell_in" do
+    assert update_item(%{quality: 80, sell_in: -5 ,
+                         name: "Sulfuras"}).
+                         quality == 80
+  end
 end

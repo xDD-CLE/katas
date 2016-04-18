@@ -17,6 +17,7 @@ defmodule GildedRose do
     cond do
       item.quality == 0 ->
         item
+      String.contains?(item.name, "Sulfuras") -> item
       item.sell_in < 0 && String.contains?(item.name, "Backstage passes") ->
         %{item | quality: 0}
       item.name == "Aged Brie" || String.contains?(item.name, "Backstage passes") ->
@@ -39,10 +40,8 @@ defmodule GildedRose do
         else
           %{item | quality: Enum.max([item.quality - 2, 0]) }
         end
-      item.name != "Sulfuras" ->
-        %{item | quality: item.quality - 1}
       true ->
-        item
+        %{item | quality: item.quality - 1}
     end
   end
 
