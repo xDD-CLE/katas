@@ -21,16 +21,20 @@ defmodule GildedRose do
       item.name == "Aged Brie" ->
         %{item | quality: Enum.min([item.quality + 1, 50]) }
       String.contains?(item.name, "Backstage passes") ->
-        cond do
-          item.sell_in < 0 -> %{item | quality: 0}
-          item.sell_in >= 0 && item.sell_in <= 5 -> %{item | quality: item.quality + 3}
-          item.sell_in > 5 && item.sell_in <= 10 -> %{item | quality: item.quality + 2}
-          true -> %{item | quality: Enum.min([item.quality + 1, 50]) }
-        end
+        update_backstage_pass_quality(item)
       item.sell_in < 0 ->
         %{item | quality: Enum.max([item.quality - 2, 0]) }
       true ->
         %{item | quality: item.quality - 1}
+    end
+  end
+
+  defp update_backstage_pass_quality(item) do
+    cond do
+      item.sell_in < 0 -> %{item | quality: 0}
+      item.sell_in >= 0 && item.sell_in <= 5 -> %{item | quality: item.quality + 3}
+      item.sell_in > 5 && item.sell_in <= 10 -> %{item | quality: item.quality + 2}
+      true -> %{item | quality: Enum.min([item.quality + 1, 50]) }
     end
   end
 
