@@ -11,9 +11,9 @@ class QualityCalculatorFactory
       SulfurasQualityCalculator.new
     when /aged brie/i
       BrieQualityCalculator.new
-    when /concert.*/i
+    when /concert/i
       ConcertQualityCalculator.new
-    when /conjured.*/i
+    when /conjured/i
       ConjuredQualityCalculator.new
     else
       QualityCalculator.new

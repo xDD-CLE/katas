@@ -4,13 +4,15 @@ require_relative 'sell_in/sell_in_calculator_factory'
 class Item
   attr_accessor :name, :sell_in, :quality
 
-  def initialize(name:, sell_in:, quality:)
+  def initialize(name:, sell_in:, quality:,
+                 quality_calculator_factory: QualityCalculatorFactory,
+                 sell_in_calculator_factory: SellInCalculatorFactory)
     @name = name
     @sell_in = sell_in
     @quality = quality
 
-    @quality_calculator = QualityCalculatorFactory.for_item(self)
-    @sell_in_calculator = SellInCalculatorFactory.for_item(self)
+    @quality_calculator = quality_calculator_factory.for_item(self)
+    @sell_in_calculator = sell_in_calculator_factory.for_item(self)
   end
 
   def update_quality
