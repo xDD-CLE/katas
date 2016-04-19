@@ -1,4 +1,4 @@
-require_relative '../lib/item'
+require 'item'
 require_relative 'item_contract'
 require_relative 'quality/quality_factory_contract'
 require_relative 'quality/quality_calculator_contract'

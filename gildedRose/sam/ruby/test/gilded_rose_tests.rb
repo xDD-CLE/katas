@@ -1,5 +1,5 @@
-require_relative '../lib/gilded_rose'
-require_relative '../lib/item'
+require 'gilded_rose'
+require 'item'
 require_relative 'item_contract'
 require 'test/unit'
 

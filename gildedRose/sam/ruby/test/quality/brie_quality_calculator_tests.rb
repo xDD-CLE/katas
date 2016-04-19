@@ -1,5 +1,5 @@
 require 'test/unit'
-require_relative '../../lib/quality/brie_quality_calculator'
+require 'quality/brie_quality_calculator'
 require_relative 'quality_calculator_contract'
 
 class TestBrieQualityCalculator < Test::Unit::TestCase

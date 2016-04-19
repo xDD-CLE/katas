@@ -1,5 +1,5 @@
 require 'test/unit'
-require_relative '../../lib/sell_in/sell_in_calculator'
+require 'sell_in/sell_in_calculator'
 require_relative 'sell_in_calculator_contract'
 
 class TestSellInCalculator < Test::Unit::TestCase
