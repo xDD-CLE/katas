@@ -1,5 +1,5 @@
 require 'test/unit'
-require_relative '../../quality/concert_quality_calculator'
+require_relative '../../lib/quality/concert_quality_calculator'
 require_relative 'quality_calculator_contract'
 
 class TestConcertQualityCalculator < Test::Unit::TestCase

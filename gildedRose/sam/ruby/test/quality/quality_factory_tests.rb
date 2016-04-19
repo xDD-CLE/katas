@@ -1,11 +1,11 @@
 require 'test/unit'
 require_relative 'quality_factory_contract'
-require_relative '../../quality/quality_calculator_factory'
-require_relative '../../quality/quality_calculator'
-require_relative '../../quality/sulfuras_quality_calculator'
-require_relative '../../quality/brie_quality_calculator'
-require_relative '../../quality/concert_quality_calculator'
-require_relative '../../quality/conjured_quality_calculator'
+require_relative '../../lib/quality/quality_calculator_factory'
+require_relative '../../lib/quality/quality_calculator'
+require_relative '../../lib/quality/sulfuras_quality_calculator'
+require_relative '../../lib/quality/brie_quality_calculator'
+require_relative '../../lib/quality/concert_quality_calculator'
+require_relative '../../lib/quality/conjured_quality_calculator'
 
 class TestQualityCalculatorFactory < Test::Unit::TestCase
   include QualityCalculatorFactoryContract

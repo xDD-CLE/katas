@@ -1,6 +1,6 @@
 require 'test/unit'
-require_relative '../../sell_in/sell_in_calculator_factory'
-require_relative '../../sell_in/sulfuras_sell_in_calculator'
+require_relative '../../lib/sell_in/sell_in_calculator_factory'
+require_relative '../../lib/sell_in/sulfuras_sell_in_calculator'
 require_relative 'sell_in_factory_contract'
 
 class TestSellInFactory < Test::Unit::TestCase

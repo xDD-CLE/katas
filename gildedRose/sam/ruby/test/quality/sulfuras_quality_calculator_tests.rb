@@ -1,5 +1,5 @@
 require 'test/unit'
-require_relative '../../quality/sulfuras_quality_calculator'
+require_relative '../../lib/quality/sulfuras_quality_calculator'
 require_relative 'quality_calculator_contract'
 
 class TestSulfurasQualityCalculator < Test::Unit::TestCase
