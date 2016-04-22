@@ -90,4 +90,18 @@ defmodule YahtzeeTest do
     assert four_of_a_kind([2,2,2,2,2]) == 8
   end
 
+  #yahtzee tests
+
+  test "yahtzee returns 0 when no yahtzee exists" do
+    assert yahtzee([1,2,3,4,5]) == 0
+  end
+
+  test "yahtzee returns sum of all when yahtzee conditions met" do
+    assert yahtzee([3,3,3,3,3]) == 15
+  end
+
+  test "yahtzee doesn't count partial sum when 4 matching dice" do
+    assert yahtzee([1,1,1,1,2]) == 0
+  end
+
 end
