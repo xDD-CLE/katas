@@ -1,7 +1,10 @@
 require 'item'
 require 'quality/quality_calculator'
+require_relative 'quality_calculator_interface'
 
 describe QualityCalculator do
+
+  it_behaves_like "QualityCalculator"
 
   let(:item) { instance_double(Item, sell_in: sell_in, quality: 20) }
 

@@ -1,7 +1,10 @@
 require 'item'
 require 'sell_in/sell_in_calculator'
+require_relative 'sell_in_calculator_interface'
 
 describe SellInCalculator do
+
+  it_behaves_like "SellInCalculator"
 
   let(:item) { instance_double(Item, sell_in: 10, quality: 20) }
 
