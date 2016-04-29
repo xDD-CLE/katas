@@ -53,6 +53,11 @@ defmodule Yahtzee do
       |> max_roll
   end
 
+  def chance(rolls) do
+    rolls
+    |> Enum.sum
+  end
+
   def max_roll([]), do: 0
   def max_roll(rolls), do: Enum.max(rolls)
 
