@@ -60,7 +60,15 @@ defmodule Yahtzee do
       Enum.any?(grouped_rolls, fn({_, v}) -> length(v) == 1 end) -> 0
       true -> Enum.sum(rolls)
     end
+  end
 
+  def small_straight(rolls) do
+    grouped_rolls = Enum.group_by(rolls, &(&1))
+    cond do
+      Enum.count(grouped_rolls) != 5 -> 0
+      Enum.any?(grouped_rolls, fn({k, _}) -> k == 6 end) -> 0
+      true -> 15
+    end
   end
 
   def chance(rolls) do

@@ -105,6 +105,7 @@ defmodule YahtzeeTest do
   end
 
   # full house tests
+
   test "full_house returns 0 when no full house exists" do
     assert full_house([1,1,2,2,3]) == 0
   end
@@ -115,6 +116,20 @@ defmodule YahtzeeTest do
 
   test "full house does not return sum for five of a kind" do
     assert full_house([5,5,5,5,5]) == 0
+  end
+
+  # small straight tests
+
+  test "small_straight returns 0 when no straight exists" do
+    assert small_straight([1,2,4,5,6]) == 0
+  end
+
+  test "small_straight returns 15 for correct straight" do
+    assert small_straight([1,2,3,4,5]) == 15
+  end
+
+  test "small straight is 0 for large straight" do
+    assert small_straight([2,5,4,3,6]) == 0
   end
 
   # chance tests
