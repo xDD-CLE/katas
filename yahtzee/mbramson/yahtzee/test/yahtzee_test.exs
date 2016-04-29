@@ -128,8 +128,22 @@ defmodule YahtzeeTest do
     assert small_straight([1,2,3,4,5]) == 15
   end
 
-  test "small straight is 0 for large straight" do
+  test "small_straight is 0 for large straight" do
     assert small_straight([2,5,4,3,6]) == 0
+  end
+
+  # large straight tests
+
+  test "large_straight returns 0 when no straight exists" do
+    assert large_straight([3,6,5,1,2]) == 0
+  end
+
+  test "large_straight returns 20 for correct straight" do
+    assert large_straight([6,5,4,3,2]) == 20
+  end
+
+  test "large_straight is 0 for small straight" do
+    assert large_straight([1,2,3,4,5]) == 0
   end
 
   # chance tests

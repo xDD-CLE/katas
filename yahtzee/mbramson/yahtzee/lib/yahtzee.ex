@@ -71,6 +71,15 @@ defmodule Yahtzee do
     end
   end
 
+  def large_straight(rolls) do
+    grouped_rolls = Enum.group_by(rolls, &(&1))
+    cond do
+      Enum.count(grouped_rolls) != 5 -> 0
+      Enum.any?(grouped_rolls, fn({k, _}) -> k == 1 end) -> 0
+      true -> 20
+    end
+  end
+
   def chance(rolls) do
     rolls
     |> Enum.sum
