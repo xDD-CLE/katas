@@ -53,6 +53,16 @@ defmodule Yahtzee do
       |> max_roll
   end
 
+  def full_house(rolls) do
+    grouped_rolls = Enum.group_by(rolls, &(&1))
+    cond do
+      Enum.count(grouped_rolls) == 1 -> 0
+      Enum.any?(grouped_rolls, fn({_, v}) -> length(v) == 1 end) -> 0
+      true -> Enum.sum(rolls)
+    end
+
+  end
+
   def chance(rolls) do
     rolls
     |> Enum.sum

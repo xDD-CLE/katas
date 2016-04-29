@@ -104,6 +104,19 @@ defmodule YahtzeeTest do
     assert yahtzee([1,1,1,1,2]) == 0
   end
 
+  # full house tests
+  test "full_house returns 0 when no full house exists" do
+    assert full_house([1,1,2,2,3]) == 0
+  end
+
+  test "full_house returns correctly when full house exists" do
+    assert full_house([2,2,3,3,3]) == 13
+  end
+
+  test "full house does not return sum for five of a kind" do
+    assert full_house([5,5,5,5,5]) == 0
+  end
+
   # chance tests
   test "chance sums all dice" do
     assert chance([1,2,3,4,5]) == 15
