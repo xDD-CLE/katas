@@ -13,7 +13,7 @@ defmodule Yahtzee do
 
   def best_category(rolls) do
     @categories
-    |> Enum.map(fn cat -> {cat, apply(Yahtzee, cat, [rolls]) } end )
+    |> Enum.map(&({&1, apply(Yahtzee, &1, [rolls] ) } ) )
     |> Enum.max_by(fn {_k, v} -> v end)
   end
 
@@ -38,8 +38,8 @@ defmodule Yahtzee do
     fn(rolls) ->
       rolls
       |> Enum.group_by(&(&1))
-      |> Enum.filter(fn({_, v}) -> length(v) > n - 1 end)
-      |> Enum.map(fn({_, [v|_]}) -> v * n end)
+      |> Enum.filter(fn({_k, v}) -> length(v) > n - 1 end)
+      |> Enum.map(fn({_k, [v|_v]}) -> v * n end)
       |> max_roll
     end
   end
@@ -47,9 +47,9 @@ defmodule Yahtzee do
   def two_pairs(rolls) do
     rolls
     |> Enum.group_by(&(&1))
-    |> Enum.filter(fn({_, v}) -> length(v) > 1 end)
+    |> Enum.filter(fn({_k, v}) -> length(v) > 1 end)
     |> (fn(x) -> if Enum.count(x) > 1, do: x, else: [] end).()
-    |> Enum.map(fn({_, [v|_]}) -> v * 3 end)
+    |> Enum.map(fn({_k, [v|_v]}) -> v * 3 end)
     |> max_roll
   end
 
@@ -57,7 +57,7 @@ defmodule Yahtzee do
     grouped_rolls = Enum.group_by(rolls, &(&1))
     cond do
       Enum.count(grouped_rolls) == 1 -> 0
-      Enum.any?(grouped_rolls, fn({_, v}) -> length(v) == 1 end) -> 0
+      Enum.any?(grouped_rolls, fn({_k, v}) -> length(v) == 1 end) -> 0
       true -> Enum.sum(rolls)
     end
   end
@@ -69,10 +69,10 @@ defmodule Yahtzee do
     fn(rolls) ->
       grouped_rolls = Enum.group_by(rolls, &(&1))
         cond do
-        Enum.count(grouped_rolls) != 5 -> 0
-        Enum.any?(grouped_rolls, fn({k, _}) -> k == n end) -> 0
-        true -> Enum.sum(rolls)
-      end
+          Enum.count(grouped_rolls) != 5 -> 0
+          Enum.any?(grouped_rolls, fn({k, _v}) -> k == n end) -> 0
+          true -> Enum.sum(rolls)
+        end
     end
   end
 
