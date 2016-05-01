@@ -1,4 +1,21 @@
 defmodule Yahtzee do
+  
+  @categories [:pairs, 
+               :three_of_a_kind,
+               :four_of_a_kind,
+               :yahtzee,
+               :two_pairs,
+               :full_house,
+               :small_straight,
+               :large_straight
+              ]
+
+
+  def best_category(rolls) do
+    @categories
+    |> Enum.map(fn cat -> {cat, apply(Yahtzee, cat, [rolls]) } end )
+    |> Enum.max_by(fn {_k, v} -> v end)
+  end
 
   def ones(rolls), do: upper(rolls, 1)
   def twos(rolls), do: upper(rolls, 2)

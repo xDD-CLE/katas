@@ -4,8 +4,26 @@ defmodule YahtzeeTest do
   use ExUnit.Case
   doctest Yahtzee
 
-  test "the truth" do
-    assert 1 + 1 == 2
+  # best_category tests
+
+  test "best category is pair for single pair" do
+    assert best_category([5,5,3,2,1]) == {:pairs, 10}
+  end
+
+  test "best category is three of a kind for 3-kind" do
+    assert best_category([4,4,4,2,1]) == {:three_of_a_kind, 12}
+  end
+
+  test "small_straight is greatest for small straight" do
+    assert best_category([1,2,3,4,5]) == {:small_straight, 15}
+  end
+
+  test "large_straight is greatest for large straight" do
+    assert best_category([6,2,3,4,5]) == {:large_straight, 20}
+  end
+
+  test "_full_house is greatest for full house" do
+    assert best_category([5,5,5,4,4]) == {:full_house, 23}
   end
 
   test "we can score ones for all ones" do
