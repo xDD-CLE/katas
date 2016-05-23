@@ -2,6 +2,9 @@ module TrigramSpec (main, spec) where
 
 import Test.Hspec
 
+import qualified Data.Map as Map
+
+
 import Trigrams
 
 main :: IO ()
@@ -11,7 +14,7 @@ spec :: Spec
 spec = do
   describe "trigrams" $ do
     it "should calculate the trigrams for 'I wish I may I wish I might'" $ do
-      trigrams "I wish I may I wish I might" `shouldBe` [("I wish", ["I", "I"]),
+      trigrams "I wish I may I wish I might" `shouldBe` Map.fromList [("I wish", ["I", "I"]),
                                                         ("wish I", ["may", "might"]),
                                                         ("may I", ["wish"]),
                                                         ("I may", ["I"])]
